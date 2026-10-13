@@ -5,150 +5,138 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Léon Hotel Brazzaville — Hôtel au cœur de la ville</title>
 <meta name="description" content="Léon Hotel, petit hôtel familial au centre-ville de Brazzaville : chambres climatisées, restaurant, bar, piscine et Wi-Fi gratuit.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314524c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1d9a3'%3EL%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Léon Hotel Brazzaville">
+<meta property="og:title" content="Léon Hotel Brazzaville — Hôtel au cœur de la ville">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo-bar"><strong>Maquette de démonstration</strong> réalisée par l'Atelier KPM — contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="wrap">
+<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
+<header class="site"><div class="bar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
   <a class="brand" href="index.html">Léon Hotel<small>Brazzaville</small></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-  <nav class="main" id="menu" aria-label="Navigation principale">
-    <a href="chambres.html">Chambres &amp; Suites</a>
-    <a href="restaurant-piscine.html">Restaurant &amp; Piscine</a>
-    <a href="galerie.html">Galerie</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn" href="contact.html#reserver">Réserver</a>
-  </nav>
+  <a class="btn sm" href="contact.html#reserver">Réserver</a>
 </div></header>
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
+  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
+  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav>
+  <div class="ov-sub">
+    <div><p class="mono">L'hôtel</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a></div>
+    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
+  </div>
+</div>
+<section class="hero has-video">
+  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1600&amp;h=-1&amp;s=1" alt="">
+  <video class="bg vid" muted loop playsinline preload="metadata" poster="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1600&amp;h=-1&amp;s=1" aria-hidden="true"><source src="videos/hero.webm" type="video/webm"><source src="videos/hero.mp4" type="video/mp4"></video>
+  <button class="vid-ctl mono" id="vidCtl" type="button" hidden>Pause</button>
+  <div class="inner">
+    <p class="mono">Brazzaville · Avenue du Colonel Bisset</p>
+    <h1>Léon Hotel</h1>
+    <p class="lead">Piscine, table et chambres climatisées au centre-ville.</p>
+    <p><a class="btn inv" href="chambres.html">Voir les chambres</a></p>
+    <p class="cue mono" aria-hidden="true">Défiler ↓</p>
+  </div>
+</section>
+<main id="main">
 
-<main>
-<section class="hero">
-  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1200&h=-1&s=1" alt="La piscine de l'hôtel">
-  <div class="wrap">
-    <p class="eyebrow">Léon Hotel</p>
-    <h1>Piscine, table et chambres climatisées</h1>
-    <p class="lead">Wi-Fi gratuit, service en chambre et une équipe à votre écoute.</p>
-    <div class="cta-row">
-      <a class="btn" href="contact.html#reserver">Demander une réservation</a>
-      <a class="btn ghost" href="chambres.html">Voir les chambres</a>
-    </div>
+<section class="sec intro">
+  <div class="wrap narrow center">
+    <p class="mono">Bienvenue</p>
+    <h2>Un hôtel à taille humaine, au centre de Brazzaville</h2>
+    <p>Le Léon Hotel accueille voyageurs d'affaires et familles dans un quartier calme du centre-ville, à deux pas des commerces et des administrations. Chambres climatisées, restaurant, bar-lounge et piscine : l'essentiel, bien tenu.</p>
+  </div>
+  <div class="wrap strip">
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/4c/82/a8/reception.jpg?w=800&amp;h=-1&amp;s=1" alt="La réception" loading="lazy"><figcaption class="mono">La réception</figcaption></figure>
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=800&amp;h=-1&amp;s=1" alt="Le restaurant" loading="lazy"><figcaption class="mono">Le restaurant</figcaption></figure>
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=800&amp;h=-1&amp;s=1" alt="Une chambre" loading="lazy"><figcaption class="mono">Une chambre</figcaption></figure>
   </div>
 </section>
 
-<section class="facts"><div class="wrap"><ul>
-  <li><b>30</b><span>chambres et suites</span></li>
-  <li><b>Centre-ville</b><span>commerces et administrations à proximité</span></li>
-  <li><b>3,3 km</b><span>de l'aéroport Maya-Maya</span></li>
-  <li><b>Wi-Fi</b><span>gratuit</span></li>
-</ul></div></section>
-
-<section class="block">
-  <div class="wrap intro">
-    <p class="label">Brazzaville · Avenue du Colonel Bisset</p>
-    <h2>Un séjour simple et soigné au cœur de la ville</h2>
-    <p>Petit hôtel familial, le Léon Hotel accueille voyageurs d'affaires et familles à deux pas des commerces et des administrations.</p>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap">
-    <div class="section-head"><p class="label">Découvrir</p><h2>L'hôtel en trois temps</h2></div>
-    <div class="cards">
-      <a class="card" href="chambres.html">
-        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=800&h=-1&s=1" alt="Une chambre du Léon Hotel" loading="lazy">
-        <h3>Chambres &amp; Suites</h3>
-        <p>Climatisation, réfrigérateur, minibar et service en chambre.</p>
-        <span class="more">Découvrez</span>
-      </a>
-      <a class="card" href="restaurant-piscine.html">
-        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=800&h=-1&s=1" alt="Le restaurant au petit-déjeuner" loading="lazy">
-        <h3>Restaurant &amp; Piscine</h3>
-        <p>Restaurant, bar-lounge et piscine pour se détendre.</p>
-        <span class="more">Découvrez</span>
-      </a>
-      <a class="card" href="galerie.html">
-        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/4c/82/a8/reception.jpg?w=800&h=-1&s=1" alt="La réception" loading="lazy">
-        <h3>Galerie</h3>
-        <p>L'hôtel en images : réception, chambres, table et piscine.</p>
-        <span class="more">Découvrez</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap" style="padding-block:clamp(2.5rem,6vw,4.5rem)">
-    <div>
-      <p class="eyebrow">Séjour sur mesure</p>
-      <h2>Un tarif pour vos dates</h2>
-      <p>Les tarifs varient selon le type de chambre et la période. Indiquez-nous vos dates : nous vous répondons avec les disponibilités.</p>
-      <p><a class="btn" href="contact.html#reserver">Demander un tarif</a></p>
-    </div>
-    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=1000&h=-1&s=1" alt="Le bar et la piscine" loading="lazy">
-  </div>
-</section>
-
-<section class="block">
+<section class="sec ruled">
   <div class="wrap split">
+    <figure><img class="ph" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1100&amp;h=-1&amp;s=1" alt="Une suite du Léon Hotel" loading="lazy"></figure>
     <div>
-      <p class="label">Notre maison</p>
-      <h2>Un petit hôtel à taille humaine</h2>
-      <p>Situé dans un quartier calme du centre-ville, le Léon Hotel propose des chambres climatisées équipées d'un réfrigérateur et d'un minibar, un restaurant, un bar-lounge et une piscine.</p>
-      <p><a href="chambres.html">En savoir plus →</a></p>
+      <p class="mono">Hébergement</p>
+      <h2>Chambres et suites</h2>
+      <p>Des chambres calmes et climatisées, avec réfrigérateur et minibar, et des suites plus spacieuses pour les séjours de plusieurs nuits. Wi-Fi gratuit et service en chambre.</p>
+      <p><a class="link" href="chambres.html">Voir les chambres</a></p>
     </div>
-    <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/e9/leon-hotel.jpg?w=1000&h=-1&s=1" alt="L'entrée du Léon Hotel" loading="lazy"><figcaption>L'entrée de l'hôtel</figcaption></figure>
   </div>
 </section>
 
-<section class="block alt" id="avis">
+<section class="sec ruled">
   <div class="wrap">
-    <div class="section-head"><p class="label">Avis voyageurs</p><h2>Ce que disent nos clients</h2></div>
-    <div class="quotes">
-      <blockquote class="quote"><p>Une réception très accueillante, une piscine agréable et des chambres spacieuses et propres.</p><cite>Voyageur d'affaires, sept. 2018</cite></blockquote>
-      <blockquote class="quote"><p>Trois jours de séjour professionnel : personnel et cuisine au rendez-vous.</p><cite>Voyageur d'affaires, sept. 2019</cite></blockquote>
-      <blockquote class="quote"><p>Très bien situé, en plein centre, près des commerces et des bâtiments administratifs.</p><cite>Voyageur, févr. 2018</cite></blockquote>
+    <div class="head"><p class="mono">Table &amp; détente</p><h2>Sur place</h2></div>
+    <div class="cards">
+      <a class="card" href="restaurant-piscine.html#restaurant"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=800&amp;h=-1&amp;s=1" alt="Le restaurant" loading="lazy"><p class="mono">restaurant</p><h3>Petit-déjeuner et repas</h3></a>
+      <a class="card" href="restaurant-piscine.html#bar"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=800&amp;h=-1&amp;s=1" alt="Le bar-lounge" loading="lazy"><p class="mono">bar &amp; lounge</p><h3>Au bord de la piscine</h3></a>
+      <a class="card" href="restaurant-piscine.html#piscine"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=800&amp;h=-1&amp;s=1" alt="La piscine" loading="lazy"><p class="mono">piscine</p><h3>Un bassin extérieur</h3></a>
     </div>
-    <p class="note">Avis de voyageurs publiés sur Tripadvisor, reformulés.</p>
   </div>
 </section>
 
-<section class="newsletter block">
-  <div class="wrap inner">
+<section class="sec dark" id="avis">
+  <div class="wrap narrow center">
+    <p class="mono">Avis voyageurs</p>
+    <blockquote class="big">« La réception était incroyable, très sympathique et serviable. »</blockquote>
+    <p class="mono src">Brett H., Johannesburg · Tripadvisor, sept. 2018</p>
+    <blockquote class="med">« Très bien situé, en plein cœur de la ville, à proximité des centres commerciaux et des bâtiments administratifs. »</blockquote>
+    <p class="mono src">Cinzia C., Brazzaville · Tripadvisor, févr. 2018</p>
+  </div>
+</section>
+
+<section class="sec" id="autour">
+  <div class="wrap split top">
     <div>
-      <p class="label">Restons en contact</p>
-      <h2>Recevez les nouvelles de l'hôtel</h2>
-      <p style="color:var(--muted)">Inscrivez-vous pour être informé de nos offres et de nos actualités.</p>
+      <p class="mono">Le quartier</p>
+      <h2>Autour de l'hôtel</h2>
+      <p>Le Léon Hotel est situé avenue du Colonel Bisset, dans le centre-ville. Une voiture est recommandée pour vos déplacements.</p>
     </div>
+    <ul class="around">
+      <li><span>Aéroport Maya-Maya</span><b class="mono">3,3 km</b></li>
+      <li><span>Basilique Sainte-Anne</span><b class="mono">1,5 km</b></li>
+      <li><span>Radisson Blu M'Bamou · restaurant</span><b class="mono">1,9 km</b></li>
+      <li><span>O Sympathic · cuisine française</span><b class="mono">2,1 km</b></li>
+      <li><span>Cathédrale du Sacré-Cœur</span><b class="mono">13 min</b></li>
+      <li><span>La Mandarine · cuisine française</span><b class="mono">12 min</b></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec ruled news">
+  <div class="wrap split top">
+    <div><p class="mono">Restons en contact</p><h2>Les nouvelles de l'hôtel</h2><p>Inscrivez-vous pour être informé de nos offres et actualités.</p></div>
     <form id="nl" novalidate>
       <div class="row">
         <label for="nl-nom">Nom<input id="nl-nom" name="nom" autocomplete="name" required></label>
         <label for="nl-mail">E-mail<input id="nl-mail" name="email" type="email" autocomplete="email" required></label>
       </div>
       <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les communications du Léon Hotel et je peux me désinscrire à tout moment.</label>
-      <div><button class="btn dark" type="submit">S'inscrire</button></div>
+      <div><button class="btn" type="submit">S'inscrire</button></div>
       <p id="nl-msg" class="sent" hidden>Démo : l'inscription n'est pas encore connectée.</p>
     </form>
   </div>
 </section>
-</main>
 
+</main>
+<aside class="rate" id="rate" aria-label="Réservation directe">
+  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
+  <p class="mono">Réservation directe</p>
+  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
+  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
+</aside>
 <footer class="site"><div class="wrap">
-  <div><b>Léon Hotel</b><br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</div>
-  <div><h4>L'hôtel</h4><a href="chambres.html">Chambres &amp; Suites</a><br><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a></div>
-  <div><h4>Inspiration</h4><a href="galerie.html">Galerie</a><br><a href="index.html#avis">Avis voyageurs</a></div>
-  <div><h4>Contact</h4><a href="contact.html#reserver">Réservations</a><br>contact@leon-hotel-brazzaville.com<br>Téléphone <span class="tbc">à confirmer</span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée.</p>
+  <div><b class="brand-f">Léon Hotel</b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
+  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
+  <div><p class="mono">Séjour</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
+  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
+  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
-<script>
-document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});
-</script>
 <script src="script.js" defer></script>
+<script>document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});</script>
 </body>
 </html>

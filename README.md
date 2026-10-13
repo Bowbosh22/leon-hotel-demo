@@ -15,3 +15,6 @@ Settings > Pages > Source : branche `main`, dossier `/ (root)`.
 ## À compléter avec l'hôtel
 Les éléments marqués « à confirmer » : téléphone, horaires, surfaces et compositions des chambres, tarifs.
 Les photos proviennent de Tripadvisor (démo privée) : à remplacer par celles de l'hôtel avant mise en ligne publique.
+
+## Vidéo d'en-tête
+Fichiers `videos/hero.mp4` et `videos/hero.webm` (illustration provisoire, lecture aller-retour). À remplacer par une vidéo de l'hôtel : garder les mêmes noms de fichiers, 1080p, sans audio, moins de 8 Mo.

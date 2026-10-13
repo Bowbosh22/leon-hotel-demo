@@ -5,53 +5,59 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contact et réservation — Léon Hotel Brazzaville</title>
 <meta name="description" content="Contacter le Léon Hotel à Brazzaville et demander une réservation : adresse, accès, e-mail.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314524c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1d9a3'%3EL%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Léon Hotel Brazzaville">
+<meta property="og:title" content="Contact et réservation — Léon Hotel Brazzaville">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo-bar"><strong>Maquette de démonstration</strong> réalisée par l'Atelier KPM — contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="wrap">
+<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
+<header class="site"><div class="bar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
   <a class="brand" href="index.html">Léon Hotel<small>Brazzaville</small></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-  <nav class="main" id="menu" aria-label="Navigation principale">
-    <a href="chambres.html">Chambres &amp; Suites</a>
-    <a href="restaurant-piscine.html">Restaurant &amp; Piscine</a>
-    <a href="galerie.html">Galerie</a>
-    <a href="contact.html" aria-current="page">Contact</a>
-    <a class="btn" href="contact.html#reserver">Réserver</a>
-  </nav>
+  <a class="btn sm" href="contact.html#reserver">Réserver</a>
 </div></header>
-
-<main>
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
+  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
+  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html" aria-current="page">Contact</a></nav>
+  <div class="ov-sub">
+    <div><p class="mono">L'hôtel</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a></div>
+    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
+  </div>
+</div>
 <section class="hero small">
-  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/e9/leon-hotel.jpg?w=1200&h=-1&s=1" alt="L'entrée du Léon Hotel">
-  <div class="wrap">
-    <p class="eyebrow">Contact</p>
+  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/e9/leon-hotel.jpg?w=1600&amp;h=-1&amp;s=1" alt="">
+  
+  <div class="inner">
+    <p class="mono">Contact</p>
     <h1>Réserver ou nous écrire</h1>
-    <p class="lead">Indiquez vos dates, nous revenons vers vous avec les disponibilités et les tarifs.</p>
+    
+    
+    
   </div>
 </section>
+<main id="main">
 
-<section class="block" id="reserver">
-  <div class="wrap contact-grid">
+<section class="sec" id="reserver">
+  <div class="wrap split top">
     <div>
-      <h2 style="margin-bottom:1.5rem">Coordonnées</h2>
+      <p class="mono">Coordonnées</p>
+      <h2>Nous trouver</h2>
       <dl class="info">
-        <div><dt>Adresse</dt><dd>Léon Hotel<br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</dd></div>
-        <div><dt>E-mail</dt><dd>contact@leon-hotel-brazzaville.com</dd></div>
-        <div><dt>Site</dt><dd>www.leon-hotel-brazzaville.com</dd></div>
-        <div><dt>Téléphone</dt><dd><span class="tbc">à confirmer avec l'hôtel</span></dd></div>
-        <div><dt>Accès</dt><dd>À 3,3 km de l'aéroport Maya-Maya. Basilique Sainte-Anne à environ 1,5 km. Voiture recommandée pour vos déplacements.</dd></div>
-        <div><dt>Plan</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=Leon+Hotel+Avenue+du+Colonel+Bisset+Brazzaville" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></dd></div>
+        <div><dt class="mono">Adresse</dt><dd>Léon Hotel<br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</dd></div>
+        <div><dt class="mono">E-mail</dt><dd>contact@leon-hotel-brazzaville.com</dd></div>
+        <div><dt class="mono">Site</dt><dd>www.leon-hotel-brazzaville.com</dd></div>
+        <div><dt class="mono">Téléphone</dt><dd><span class="tbc">à confirmer avec l'hôtel</span></dd></div>
+        <div><dt class="mono">Accès</dt><dd>À 3,3 km de l'aéroport Maya-Maya. Basilique Sainte-Anne à environ 1,5 km. Voiture recommandée pour vos déplacements.</dd></div>
+        <div><dt class="mono">Plan</dt><dd><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Leon+Hotel+Avenue+du+Colonel+Bisset+Brazzaville" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></dd></div>
       </dl>
     </div>
     <form class="book" id="bk" novalidate>
+      <p class="mono">Réservation</p>
       <h2>Demande de réservation</h2>
       <div class="row">
         <label for="b-nom">Nom<input id="b-nom" name="nom" autocomplete="name" required></label>
@@ -62,37 +68,34 @@
         <label for="b-dep">Départ<input id="b-dep" name="depart" type="date" required></label>
       </div>
       <div class="row">
-        <label for="b-type">Type de chambre
-          <select id="b-type" name="type"><option>Chambre</option><option>Suite</option><option>Je ne sais pas encore</option></select>
-        </label>
+        <label for="b-type">Type de chambre<select id="b-type" name="type"><option>Chambre</option><option>Suite</option><option>Je ne sais pas encore</option></select></label>
         <label for="b-pers">Personnes<input id="b-pers" name="personnes" type="number" min="1" max="6" value="2"></label>
       </div>
       <label for="b-msg">Message<textarea id="b-msg" name="message"></textarea></label>
-      <div><button class="btn dark" type="submit">Envoyer la demande</button></div>
+      <div><button class="btn" type="submit">Envoyer la demande</button></div>
       <p id="b-ok" class="sent" hidden>Démo : le formulaire n'est pas encore connecté à la messagerie de l'hôtel.</p>
     </form>
   </div>
 </section>
-</main>
 
+</main>
+<aside class="rate" id="rate" aria-label="Réservation directe">
+  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
+  <p class="mono">Réservation directe</p>
+  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
+  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
+</aside>
 <footer class="site"><div class="wrap">
-  <div><b>Léon Hotel</b><br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</div>
-  <div><h4>L'hôtel</h4><a href="chambres.html">Chambres &amp; Suites</a><br><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a></div>
-  <div><h4>Inspiration</h4><a href="galerie.html">Galerie</a><br><a href="index.html#avis">Avis voyageurs</a></div>
-  <div><h4>Contact</h4><a href="contact.html#reserver">Réservations</a><br>contact@leon-hotel-brazzaville.com<br>Téléphone <span class="tbc">à confirmer</span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée.</p>
+  <div><b class="brand-f">Léon Hotel</b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
+  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
+  <div><p class="mono">Séjour</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
+  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
+  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
+<script src="script.js" defer></script>
 <script>
 document.getElementById('bk').addEventListener('submit',function(e){e.preventDefault();document.getElementById('b-ok').hidden=false;});
-(function(){
-  try{
-    var p=new URLSearchParams(location.search);
-    [['arrivee','b-arr'],['depart','b-dep'],['personnes','b-pers']].forEach(function(m){
-      var v=p.get(m[0]);if(v){document.getElementById(m[1]).value=v;}
-    });
-  }catch(e){}
-})();
+(function(){try{var p=new URLSearchParams(location.search);[['arrivee','b-arr'],['depart','b-dep'],['personnes','b-pers']].forEach(function(m){var v=p.get(m[0]);if(v){document.getElementById(m[1]).value=v;}});}catch(e){}})();
 </script>
-<script src="script.js" defer></script>
 </body>
 </html>

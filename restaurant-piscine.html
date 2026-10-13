@@ -5,92 +5,98 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Restaurant et piscine — Léon Hotel Brazzaville</title>
 <meta name="description" content="Restaurant, petit-déjeuner, bar-lounge et piscine du Léon Hotel à Brazzaville.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314524c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1d9a3'%3EL%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Léon Hotel Brazzaville">
+<meta property="og:title" content="Restaurant et piscine — Léon Hotel Brazzaville">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo-bar"><strong>Maquette de démonstration</strong> réalisée par l'Atelier KPM — contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="wrap">
+<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
+<header class="site"><div class="bar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
   <a class="brand" href="index.html">Léon Hotel<small>Brazzaville</small></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-  <nav class="main" id="menu" aria-label="Navigation principale">
-    <a href="chambres.html">Chambres &amp; Suites</a>
-    <a href="restaurant-piscine.html" aria-current="page">Restaurant &amp; Piscine</a>
-    <a href="galerie.html">Galerie</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn" href="contact.html#reserver">Réserver</a>
-  </nav>
+  <a class="btn sm" href="contact.html#reserver">Réserver</a>
 </div></header>
-
-<main>
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
+  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
+  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html" aria-current="page">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav>
+  <div class="ov-sub">
+    <div><p class="mono">L'hôtel</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a></div>
+    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
+  </div>
+</div>
 <section class="hero small">
-  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=1200&h=-1&s=1" alt="Le bar et la piscine">
-  <div class="wrap">
-    <p class="eyebrow">Table &amp; détente</p>
+  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=1600&amp;h=-1&amp;s=1" alt="">
+  
+  <div class="inner">
+    <p class="mono">Table & détente</p>
     <h1>Restaurant et piscine</h1>
-    <p class="lead">Un petit-déjeuner pour bien démarrer, un bar-lounge et une piscine pour se détendre.</p>
+    
+    
+    
   </div>
 </section>
+<main id="main">
 
-<section class="block">
+<section class="sec intro">
+  <div class="wrap narrow center">
+    <p class="mono">Table &amp; détente</p>
+    <h2>Bien démarrer la journée, bien la finir</h2>
+    <p>Un petit-déjeuner pour commencer, un bar-lounge et une piscine pour se détendre en fin de journée.</p>
+  </div>
+</section>
+<section class="sec ruled" id="restaurant">
   <div class="wrap split">
-    <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=1000&h=-1&s=1" alt="Le restaurant au petit-déjeuner" loading="lazy"><figcaption>Le restaurant au petit-déjeuner</figcaption></figure>
-    <div>
-      <p class="label">Restaurant</p>
-      <h2>À table au Léon Hotel</h2>
-      <p>Le restaurant de l'hôtel sert le petit-déjeuner et les repas. Vous pouvez aussi vous faire servir en chambre.</p>
-      <p>Horaires et carte <span class="tbc">à confirmer avec l'hôtel</span></p>
-    </div>
+    <figure><img class="ph" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=1100&amp;h=-1&amp;s=1" alt="Le restaurant au petit-déjeuner" loading="lazy"></figure>
+    <div><p class="mono">Restaurant</p><h2>À table au Léon Hotel</h2>
+    <p>Le restaurant de l'hôtel sert le petit-déjeuner et les repas. Vous pouvez aussi vous faire servir en chambre.</p>
+    <p>Horaires et carte <span class="tbc">à confirmer avec l'hôtel</span></p></div>
+  </div>
+  <div class="wrap strip two">
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=800&amp;h=-1&amp;s=1" alt="Petit-déjeuner" loading="lazy"><figcaption class="mono">Le petit-déjeuner</figcaption></figure>
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/3f/breakfast-room.jpg?w=800&amp;h=-1&amp;s=1" alt="Salle du petit-déjeuner" loading="lazy"><figcaption class="mono">La salle du petit-déjeuner</figcaption></figure>
+    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=800&amp;h=-1&amp;s=1" alt="Petit-déjeuner en chambre" loading="lazy"><figcaption class="mono">Service en chambre</figcaption></figure>
   </div>
 </section>
-
-<section class="block alt">
-  <div class="wrap">
-    <div class="grid3">
-      <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=800&h=-1&s=1" alt="Petit-déjeuner" loading="lazy"><figcaption>Le petit-déjeuner</figcaption></figure>
-      <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/3f/breakfast-room.jpg?w=800&h=-1&s=1" alt="Salle du petit-déjeuner" loading="lazy"><figcaption>La salle du petit-déjeuner</figcaption></figure>
-      <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=800&h=-1&s=1" alt="Petit-déjeuner en chambre" loading="lazy"><figcaption>Service en chambre</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="block">
+<section class="sec ruled" id="bar">
   <div class="wrap split rev">
-    <div>
-      <p class="label">Piscine &amp; bar</p>
-      <h2>Un moment au bord de l'eau</h2>
-      <p>La piscine extérieure, entretenue avec soin, est complétée par un bar-lounge pour se retrouver en fin de journée.</p>
-      <ul class="checks"><li>Piscine extérieure</li><li>Bar / lounge</li><li>Activités enfants</li></ul>
-      <p style="margin-top:1.25rem">Horaires d'ouverture <span class="tbc">à confirmer avec l'hôtel</span></p>
-    </div>
-    <figure><img class="photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1000&h=-1&s=1" alt="La piscine" loading="lazy"><figcaption>La piscine</figcaption></figure>
+    <figure><img class="ph" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=1100&amp;h=-1&amp;s=1" alt="Le bar et la piscine" loading="lazy"></figure>
+    <div><p class="mono">Bar &amp; lounge</p><h2>Un verre au bord de l'eau</h2>
+    <p>Le bar-lounge est installé à côté de la piscine, pour se retrouver en fin de journée.</p>
+    <p>Horaires d'ouverture <span class="tbc">à confirmer avec l'hôtel</span></p></div>
   </div>
+</section>
+<section class="sec ruled" id="piscine">
+  <div class="wrap split">
+    <figure><img class="ph" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1100&amp;h=-1&amp;s=1" alt="La piscine" loading="lazy"></figure>
+    <div><p class="mono">Piscine</p><h2>Un bassin extérieur, entretenu</h2>
+    <p>La piscine extérieure est appréciée des voyageurs pour sa propreté. Des activités pour enfants sont proposées aux familles.</p>
+    <ul class="plain"><li>Piscine extérieure</li><li>Bar / lounge</li><li>Activités enfants</li></ul></div>
+  </div>
+</section>
+<section class="sec dark">
+  <div class="wrap narrow center"><p class="mono">Réservation</p><h2>Réservez votre séjour</h2><p>Chambre, repas, détente : dites-nous ce qu'il vous faut.</p><p><a class="btn inv" href="contact.html#reserver">Réserver</a></p></div>
 </section>
 
-<section class="band">
-  <div class="wrap" style="padding-block:clamp(2.5rem,6vw,4rem);grid-template-columns:1fr">
-    <div>
-      <h2>Réservez votre séjour</h2>
-      <p>Chambre, repas, détente : dites-nous ce qu'il vous faut.</p>
-      <p><a class="btn" href="contact.html#reserver">Réserver</a></p>
-    </div>
-  </div>
-</section>
 </main>
-
+<aside class="rate" id="rate" aria-label="Réservation directe">
+  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
+  <p class="mono">Réservation directe</p>
+  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
+  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
+</aside>
 <footer class="site"><div class="wrap">
-  <div><b>Léon Hotel</b><br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</div>
-  <div><h4>L'hôtel</h4><a href="chambres.html">Chambres &amp; Suites</a><br><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a></div>
-  <div><h4>Inspiration</h4><a href="galerie.html">Galerie</a><br><a href="index.html#avis">Avis voyageurs</a></div>
-  <div><h4>Contact</h4><a href="contact.html#reserver">Réservations</a><br>contact@leon-hotel-brazzaville.com<br>Téléphone <span class="tbc">à confirmer</span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée.</p>
+  <div><b class="brand-f">Léon Hotel</b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
+  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
+  <div><p class="mono">Séjour</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
+  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
+  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
 <script src="script.js" defer></script>
+
 </body>
 </html>

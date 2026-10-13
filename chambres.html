@@ -5,59 +5,51 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Chambres et suites — Léon Hotel Brazzaville</title>
 <meta name="description" content="Chambres et suites climatisées du Léon Hotel à Brazzaville : réfrigérateur, minibar, service en chambre et Wi-Fi gratuit.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314524c'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1d9a3'%3EL%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Léon Hotel Brazzaville">
+<meta property="og:title" content="Chambres et suites — Léon Hotel Brazzaville">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo-bar"><strong>Maquette de démonstration</strong> réalisée par l'Atelier KPM — contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="wrap">
+<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
+<header class="site"><div class="bar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
   <a class="brand" href="index.html">Léon Hotel<small>Brazzaville</small></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-  <nav class="main" id="menu" aria-label="Navigation principale">
-    <a href="chambres.html" aria-current="page">Chambres &amp; Suites</a>
-    <a href="restaurant-piscine.html">Restaurant &amp; Piscine</a>
-    <a href="galerie.html">Galerie</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn" href="contact.html#reserver">Réserver</a>
-  </nav>
+  <a class="btn sm" href="contact.html#reserver">Réserver</a>
 </div></header>
-
-<main>
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
+  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
+  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html" aria-current="page">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav>
+  <div class="ov-sub">
+    <div><p class="mono">L'hôtel</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a></div>
+    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
+  </div>
+</div>
 <section class="hero small">
-  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&h=-1&s=1" alt="Une chambre du Léon Hotel">
-  <div class="wrap">
-    <p class="eyebrow">Hébergement</p>
-    <h1><span class="it">Chambres et suites</span></h1>
+  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1600&amp;h=-1&amp;s=1" alt="">
+  
+  <div class="inner">
+    <p class="mono">Hébergement</p>
+    <h1>Chambres et suites</h1>
+    
+    
+    
   </div>
 </section>
+<main id="main">
 
-<section class="bookbar">
-  <div class="wrap">
-    <h2>Réserver son séjour</h2>
-    <form action="contact.html" method="get">
-      <label for="q-arr">Arrivée<input id="q-arr" name="arrivee" type="date"></label>
-      <label for="q-dep">Départ<input id="q-dep" name="depart" type="date"></label>
-      <label for="q-pers">Hôtes
-        <select id="q-pers" name="personnes"><option value="1">1 personne</option><option value="2" selected>2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option></select>
-      </label>
-      <button class="btn dark" type="submit">Disponibilités</button>
-    </form>
+<section class="sec intro">
+  <div class="wrap narrow center">
+    <p class="mono">Hébergement</p>
+    <h2>Calme, climatisé, au centre-ville</h2>
+    <p>Chambres et suites du Léon Hotel, pour les séjours d'affaires comme pour les voyages en famille.</p>
   </div>
 </section>
-
-<section class="block">
-  <div class="wrap rooms-intro">
-    <p>Au cœur de Brazzaville, le Léon Hotel propose des chambres calmes et climatisées, ainsi que des suites plus spacieuses, pour les séjours d'affaires comme pour les voyages en famille.</p>
-  </div>
-</section>
-
-<section class="block" style="padding-top:0">
+<section class="sec ruled">
   <div class="wrap">
     <div class="carousel" role="region" aria-roledescription="carrousel" aria-label="Nos chambres">
       <div class="car-head">
@@ -67,162 +59,71 @@
           <button type="button" role="tab" aria-selected="false" data-go="2">Service en chambre</button>
         </div>
         <div class="car-ctl">
-          <button type="button" id="prev" aria-label="Chambre précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <span class="car-count" id="count" aria-live="polite">1 / 3</span>
-          <button type="button" id="next" aria-label="Chambre suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button type="button" id="prev" aria-label="Précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="car-count mono" id="count" aria-live="polite">1 / 3</span>
+          <button type="button" id="next" aria-label="Suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-
       <div class="track" id="track" tabindex="0" aria-label="Défilement horizontal des chambres">
-
-        <!-- Slide 1 : Chambres -->
-        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3 : Chambres">
-          <div class="stage">
-            <img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&h=-1&s=1" alt="Chambre du Léon Hotel">
-            <div class="thumbs">
-              <button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&h=-1&s=1" aria-label="Photo 1 de la chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=300&h=-1&s=1" alt=""></button>
-              <button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/51/leon-hotel.jpg?w=1200&h=-1&s=1" aria-label="Photo 2 de la chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/51/leon-hotel.jpg?w=300&h=-1&s=1" alt="" loading="lazy"></button>
-              <button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/77/27/leon-hotel.jpg?w=1200&h=-1&s=1" aria-label="Couloir des chambres"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/77/27/leon-hotel.jpg?w=300&h=-1&s=1" alt="" loading="lazy"></button>
-            </div>
-          </div>
-          <div>
-            <p class="label">Léon Hotel</p>
-            <h3>Chambres</h3>
-            <p class="desc">Des chambres calmes, avec bureau et télévision, pensées pour se reposer comme pour travailler. Surface et literie <span class="tbc">à confirmer</span></p>
-            <ul class="amen">
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h24M7 16V9h18v7M4 16v6M28 16v6M4 22h24"/><path d="M16 4v3M10 5l1 2M22 5l-1 2"/></svg>Climatisation</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="1.5"/><path d="M9 13h14M12 7v3M12 16v5"/></svg>Réfrigérateur</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="1.5"/><path d="M6 14h20M13 18h6"/></svg>Minibar</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12a16 16 0 0 1 22 0M9 16a10 10 0 0 1 14 0M13 20a4 4 0 0 1 6 0"/><circle cx="16" cy="24" r="1"/></svg>Wi-Fi gratuit</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="16" rx="1.5"/><path d="M11 27h10M16 23v4"/></svg>Télévision</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0M3 22h26M16 8V5M14 5h4"/></svg>Service en chambre</li>
-            </ul>
-            <a class="btn dark" href="contact.html#reserver">Réserver une chambre</a>
-          </div>
-        </article>
-
-        <!-- Slide 2 : Suites -->
-        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="2 sur 3 : Suites">
-          <div class="stage">
-            <img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1200&h=-1&s=1" alt="Suite du Léon Hotel" loading="lazy">
-            <div class="thumbs">
-              <button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1200&h=-1&s=1" aria-label="Photo de la suite"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=300&h=-1&s=1" alt="" loading="lazy"></button>
-            </div>
-          </div>
-          <div>
-            <p class="label">Léon Hotel</p>
-            <h3>Suites</h3>
-            <p class="desc">Plus d'espace pour les séjours de plusieurs nuits : des suites confortables, appréciées des voyageurs d'affaires et des familles. Composition et surface <span class="tbc">à confirmer</span></p>
-            <ul class="amen">
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h24M7 16V9h18v7M4 16v6M28 16v6M4 22h24"/><path d="M16 4v3M10 5l1 2M22 5l-1 2"/></svg>Climatisation</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="1.5"/><path d="M9 13h14M12 7v3M12 16v5"/></svg>Réfrigérateur</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="1.5"/><path d="M6 14h20M13 18h6"/></svg>Minibar</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12a16 16 0 0 1 22 0M9 16a10 10 0 0 1 14 0M13 20a4 4 0 0 1 6 0"/><circle cx="16" cy="24" r="1"/></svg>Wi-Fi gratuit</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="16" rx="1.5"/><path d="M11 27h10M16 23v4"/></svg>Chaînes internationales</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5h16l-2 22H10zM11 12h10"/></svg>Blanchisserie</li>
-            </ul>
-            <a class="btn dark" href="contact.html#reserver">Réserver une suite</a>
-          </div>
-        </article>
-
-        <!-- Slide 3 : Service en chambre -->
-        <article class="slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3 : Service en chambre">
-          <div class="stage">
-            <img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=1200&h=-1&s=1" alt="Petit-déjeuner servi en chambre" loading="lazy">
-            <div class="thumbs">
-              <button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=1200&h=-1&s=1" aria-label="Petit-déjeuner en chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=300&h=-1&s=1" alt="" loading="lazy"></button>
-              <button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=1200&h=-1&s=1" aria-label="Petit-déjeuner"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=300&h=-1&s=1" alt="" loading="lazy"></button>
-            </div>
-          </div>
-          <div>
-            <p class="label">Léon Hotel</p>
-            <h3>Service en chambre</h3>
-            <p class="desc">Petit-déjeuner et repas peuvent être servis dans votre chambre. Horaires et carte <span class="tbc">à confirmer</span></p>
-            <ul class="amen">
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0M3 22h26M16 8V5M14 5h4"/></svg>Service en chambre</li>
-              <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 12h18v8a6 6 0 0 1-6 6h-6a6 6 0 0 1-6-6zM24 14h2a3 3 0 0 1 0 6h-2M11 4v4M16 4v4"/></svg>Petit-déjeuner</li>
-            </ul>
-            <a class="btn dark" href="contact.html#reserver">Réserver</a>
-          </div>
-        </article>
+<article class="slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3 : Chambres">
+  <div class="stage"><img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" alt="Chambres"><div class="thumbs"><button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Photo 1 de la chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button><button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/51/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Photo 2 de la chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/51/leon-hotel.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button><button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/77/27/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Couloir des chambres"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/77/27/leon-hotel.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button></div></div>
+  <div><p class="mono">Léon Hotel</p><h3>Chambres</h3><p class="desc">Des chambres calmes, avec bureau et télévision, pensées pour se reposer comme pour travailler. Surface et literie <span class="tbc">à confirmer</span></p><ul class="amen"><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h24M7 16V9h18v7M4 16v6M28 16v6M4 22h24"/><path d="M16 4v3M10 5l1 2M22 5l-1 2"/></svg>Climatisation</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="1.5"/><path d="M9 13h14M12 7v3M12 16v5"/></svg>Réfrigérateur</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="1.5"/><path d="M6 14h20M13 18h6"/></svg>Minibar</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12a16 16 0 0 1 22 0M9 16a10 10 0 0 1 14 0M13 20a4 4 0 0 1 6 0"/><circle cx="16" cy="24" r="1"/></svg>Wi-Fi gratuit</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="16" rx="1.5"/><path d="M11 27h10M16 23v4"/></svg>Télévision</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0M3 22h26M16 8V5M14 5h4"/></svg>Service en chambre</li></ul><a class="btn" href="contact.html#reserver">Réserver une chambre</a></div>
+</article>
+<article class="slide" role="group" aria-roledescription="diapositive" aria-label="2 sur 3 : Suites">
+  <div class="stage"><img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1200&amp;h=-1&amp;s=1" alt="Suites" loading="lazy"><div class="thumbs"><button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Photo de la suite"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button></div></div>
+  <div><p class="mono">Léon Hotel</p><h3>Suites</h3><p class="desc">Plus d'espace pour les séjours de plusieurs nuits : des suites confortables, appréciées des voyageurs d'affaires et des familles. Composition et surface <span class="tbc">à confirmer</span></p><ul class="amen"><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h24M7 16V9h18v7M4 16v6M28 16v6M4 22h24"/><path d="M16 4v3M10 5l1 2M22 5l-1 2"/></svg>Climatisation</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="1.5"/><path d="M9 13h14M12 7v3M12 16v5"/></svg>Réfrigérateur</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="20" height="20" rx="1.5"/><path d="M6 14h20M13 18h6"/></svg>Minibar</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12a16 16 0 0 1 22 0M9 16a10 10 0 0 1 14 0M13 20a4 4 0 0 1 6 0"/><circle cx="16" cy="24" r="1"/></svg>Wi-Fi gratuit</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="16" rx="1.5"/><path d="M11 27h10M16 23v4"/></svg>Chaînes internationales</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5h16l-2 22H10zM11 12h10"/></svg>Blanchisserie</li></ul><a class="btn" href="contact.html#reserver">Réserver une suite</a></div>
+</article>
+<article class="slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3 : Service en chambre">
+  <div class="stage"><img class="main" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" alt="Service en chambre" loading="lazy"><div class="thumbs"><button type="button" aria-current="true" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Petit-déjeuner en chambre"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button><button type="button" data-src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=1200&amp;h=-1&amp;s=1" aria-label="Petit-déjeuner"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/6a/a-simple-but-fresh-breakfast.jpg?w=300&amp;h=-1&amp;s=1" alt="" loading="lazy"></button></div></div>
+  <div><p class="mono">Léon Hotel</p><h3>Service en chambre</h3><p class="desc">Petit-déjeuner et repas peuvent être servis dans votre chambre. Horaires et carte <span class="tbc">à confirmer</span></p><ul class="amen"><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0M3 22h26M16 8V5M14 5h4"/></svg>Service en chambre</li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 12h18v8a6 6 0 0 1-6 6h-6a6 6 0 0 1-6-6zM24 14h2a3 3 0 0 1 0 6h-2M11 4v4M16 4v4"/></svg>Petit-déjeuner</li></ul><a class="btn" href="contact.html#reserver">Réserver</a></div>
+</article>
       </div>
-
       <div class="dots" id="dots" role="group" aria-label="Choisir une diapositive"></div>
     </div>
   </div>
 </section>
-
-<section class="block alt">
-  <div class="wrap">
-    <div class="section-head"><h2 class="it">Tarifs</h2><p>Les tarifs varient selon le type de chambre et la période. Indiquez vos dates : nous vous répondons avec les disponibilités.</p></div>
-    <a class="btn dark" href="contact.html#reserver">Demander un tarif</a>
+<section class="sec ruled">
+  <div class="wrap split top">
+    <div><p class="mono">Tarifs</p><h2>Un tarif pour vos dates</h2></div>
+    <div><p>Les tarifs varient selon le type de chambre et la période. Indiquez vos dates : nous vous répondons avec les disponibilités.</p><p><a class="btn" href="contact.html#reserver">Demander un tarif</a></p></div>
   </div>
 </section>
+
 </main>
-
+<aside class="rate" id="rate" aria-label="Réservation directe">
+  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
+  <p class="mono">Réservation directe</p>
+  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
+  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
+</aside>
 <footer class="site"><div class="wrap">
-  <div><b>Léon Hotel</b><br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</div>
-  <div><h4>L'hôtel</h4><a href="chambres.html">Chambres &amp; Suites</a><br><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a></div>
-  <div><h4>Inspiration</h4><a href="galerie.html">Galerie</a><br><a href="index.html#avis">Avis voyageurs</a></div>
-  <div><h4>Contact</h4><a href="contact.html#reserver">Réservations</a><br>contact@leon-hotel-brazzaville.com<br>Téléphone <span class="tbc">à confirmer</span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée.</p>
+  <div><b class="brand-f">Léon Hotel</b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
+  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
+  <div><p class="mono">Séjour</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
+  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
+  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
-
+<script src="script.js" defer></script>
 <script>
 (function(){
   var track=document.getElementById('track'),slides=[].slice.call(track.children),
       prev=document.getElementById('prev'),next=document.getElementById('next'),
       count=document.getElementById('count'),dotsBox=document.getElementById('dots'),
       tabs=[].slice.call(document.querySelectorAll('.car-tabs [data-go]')),n=slides.length,cur=0;
-
-  var dots=slides.map(function(s,i){
-    var b=document.createElement('button');b.type='button';
-    b.setAttribute('aria-label','Diapositive '+(i+1));
-    b.addEventListener('click',function(){go(i);});
-    dotsBox.appendChild(b);return b;
-  });
-
-  function go(i){
-    i=Math.max(0,Math.min(n-1,i));
-    track.scrollTo({left:slides[i].offsetLeft-track.offsetLeft,behavior:'smooth'});
-    setCur(i);
-  }
-  function setCur(i){
-    cur=i;
-    count.textContent=(i+1)+' / '+n;
-    prev.disabled=i===0;next.disabled=i===n-1;
+  var dots=slides.map(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Diapositive '+(i+1));b.addEventListener('click',function(){go(i);});dotsBox.appendChild(b);return b;});
+  function go(i){i=Math.max(0,Math.min(n-1,i));track.scrollTo({left:slides[i].offsetLeft-track.offsetLeft,behavior:'smooth'});setCur(i);}
+  function setCur(i){cur=i;count.textContent=(i+1)+' / '+n;prev.disabled=i===0;next.disabled=i===n-1;
     dots.forEach(function(d,k){d.setAttribute('aria-current',k===i?'true':'false');});
-    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');});
-  }
-  prev.addEventListener('click',function(){go(cur-1);});
-  next.addEventListener('click',function(){go(cur+1);});
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');});}
+  prev.addEventListener('click',function(){go(cur-1);});next.addEventListener('click',function(){go(cur+1);});
   tabs.forEach(function(t){t.addEventListener('click',function(){go(+t.dataset.go);});});
-
-  var raf;
-  track.addEventListener('scroll',function(){
-    cancelAnimationFrame(raf);
-    raf=requestAnimationFrame(function(){
-      var i=Math.round(track.scrollLeft/slides[0].getBoundingClientRect().width);
-      if(i!==cur)setCur(Math.max(0,Math.min(n-1,i)));
-    });
-  },{passive:true});
-  track.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'){e.preventDefault();go(cur+1);}
-    if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}
-  });
-
-  slides.forEach(function(s){
-    var main=s.querySelector('img.main');
-    [].forEach.call(s.querySelectorAll('.thumbs button'),function(b){
-      b.addEventListener('click',function(){
-        main.src=b.dataset.src;main.loading='eager';
-        [].forEach.call(s.querySelectorAll('.thumbs button'),function(x){x.setAttribute('aria-current',x===b?'true':'false');});
-      });
-    });
-  });
+  var raf;track.addEventListener('scroll',function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){
+    var i=Math.round(track.scrollLeft/slides[0].getBoundingClientRect().width);if(i!==cur)setCur(Math.max(0,Math.min(n-1,i)));});},{passive:true});
+  track.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}});
+  slides.forEach(function(s){var main=s.querySelector('img.main'),bs=[].slice.call(s.querySelectorAll('.thumbs button'));
+    bs.forEach(function(b){b.addEventListener('click',function(){main.src=b.dataset.src;bs.forEach(function(x){x.setAttribute('aria-current',x===b?'true':'false');});});});});
   setCur(0);
 })();
 </script>
-<script src="script.js" defer></script>
 </body>
 </html>
