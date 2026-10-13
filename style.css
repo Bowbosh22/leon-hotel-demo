@@ -330,3 +330,23 @@ footer.site{--lb:#6aa6f5;--lg:#4cc152}
 .btn:hover{background:var(--lg);border-color:var(--lg)}
 .home .btn:hover{background:#fff;color:#0c1f3a;border-color:#fff}
 .promo{font-family:var(--mono);font-weight:500;letter-spacing:.04em}
+
+/* Accueil : barre de navigation transparente par-dessus la vidéo, pleine hauteur d'écran */
+.home header.site{position:fixed;top:var(--ht,0);left:0;right:0;z-index:40;background:linear-gradient(180deg,rgba(5,14,30,.78) 0%,rgba(5,14,30,.35) 65%,rgba(5,14,30,0) 100%);border-bottom:0;transition:background .35s ease,box-shadow .35s ease}
+.home header.site::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28) 20%,rgba(255,255,255,.28) 80%,transparent);transition:opacity .3s}
+.home header.site.solid{background:rgba(10,26,50,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.28)}
+.home header.site.solid::after{opacity:0}
+.home .bar{padding-block:1rem;transition:padding .3s ease}
+.home header.site.solid .bar{padding-block:.55rem}
+.home .brand .mark{height:3rem;transition:height .3s ease}
+.home header.site.solid .brand .mark{height:2.35rem}
+.home .top-links a{color:#fff;opacity:.88;border-bottom:2px solid transparent;padding-block:.45rem;transition:opacity .2s,border-color .2s}
+.home .top-links a:hover,.home .top-links a[aria-current="page"]{opacity:1;border-bottom-color:var(--lg)}
+.home .menu-btn{color:#fff}
+.home .bar .btn{padding:.8rem 1.4rem}
+.home .hero{min-height:calc(100svh - var(--ph,0px));display:flex;align-items:flex-end}
+.home .hero .inner{width:100%;padding-top:9rem;padding-bottom:clamp(4rem,9vh,6.5rem)}
+.home .hero.has-video::after{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 45%,rgba(3,10,22,.62) 100%)}
+@media (max-width:52rem){.home .brand .mark{height:2.4rem}.home header.site.solid .brand .mark{height:2rem}.home .hero .inner{padding-top:7rem}}
+.home .rate{transition:opacity .35s,transform .35s}
+body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-events:none}

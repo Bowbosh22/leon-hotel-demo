@@ -24,3 +24,15 @@
     v.load();
   }
 })();
+// Accueil : barre transparente sur la vidéo, pleine au défilement
+(function(){
+  if(!document.body.classList.contains('home'))return;
+  var h=document.querySelector('header.site'),p=document.querySelector('.promo'),root=document.documentElement;
+  function upd(){
+    var ph=p?p.offsetHeight:0,y=window.pageYOffset||0;
+    root.style.setProperty('--ph',ph+'px');
+    root.style.setProperty('--ht',Math.max(0,ph-y)+'px');
+    var sc=y>Math.max(40,ph);if(h)h.classList.toggle('solid',sc);document.body.classList.toggle('scrolled',y>window.innerHeight*0.6);
+  }
+  upd();window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);
+})();
