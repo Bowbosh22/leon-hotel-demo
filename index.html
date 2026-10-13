@@ -2,141 +2,459 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Léon Hotel Brazzaville — Hôtel au cœur de la ville</title>
-<meta name="description" content="Léon Hotel, petit hôtel familial au centre-ville de Brazzaville : chambres climatisées, restaurant, bar, piscine et Wi-Fi gratuit.">
-<meta property="og:title" content="Léon Hotel Brazzaville — Hôtel au cœur de la ville">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Le Classico : réservation de terrains de foot à 5 à Brazzaville. Créneaux en ligne, prix en FCFA, confirmation sur WhatsApp.">
+<title>Le Classico</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Oswald:wght@400;500;600&amp;family=Hanken+Grotesk:wght@300;400;500&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html { background: #000; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+img, video { max-width: 100%; }
+/* Concept : hero en split-screen (texte + réservation rapide à gauche, terrain vu du dessus à droite),
+   puis calendrier de créneaux interactif, matchs ouverts, offres en grille bento, tarifs en FCFA. */
+:root {
+  --bg: #000000;
+  --surface: #0C100E;
+  --surface2: #151B18;
+  --line: #26302B;
+  --fg: #EEF3EF;
+  --muted: #9DB5AB;
+  --accent: #F4C430;
+  --accent-ink: #F4C430;
+  --on-accent: #1A1500;
+  --pitch: #1E6B47;
+  --pitch-line: #CFE9D9;
+  --free: #3DBA7A;
+  --busy: #D8604E;
+  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { overflow-x: clip; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-inline: 16px; padding-block: 0;
+}
+h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; line-height: .95; margin: 0; text-wrap: balance; letter-spacing: .01em; }
+p { margin: 0; }
+a { color: inherit; }
+.wrap { max-width: 1320px; margin-inline: auto; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
+.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 900; font-size: 30px; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; display: flex; align-items: baseline; gap: 8px; }
+.brand span { color: var(--accent-ink); }
+.nav { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a.l { text-decoration: none; color: var(--muted); }
+.nav a.l:hover { color: var(--fg); }
+@media (max-width: 720px) { .nav a.l { display: none; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; font: 700 15px var(--font-body); text-decoration: none; padding: 13px 22px; border-radius: 6px; background: var(--accent); color: var(--on-accent); }
+.btn:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1.5px solid var(--line); }
+.btn.ghost:hover { border-color: var(--fg); }
+
+/* hero */
+.hero { position: relative; isolation: isolate; overflow: hidden; border-radius: 0; background: #000; min-height: clamp(640px, calc(100svh - 112px), 980px); display: flex; align-items: center; padding-block: clamp(24px, 6vw, 80px); padding-inline: clamp(24px, 7vw, 120px); margin-inline: calc(50% - 50vw); margin-block: 8px 56px; }
+.hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.7) 55%, rgba(0,0,0,.15) 100%), linear-gradient(0deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 45%); }
+.hero-in { max-width: 880px; min-width: 0; }
+.hero h1 { font-size: clamp(56px, 10vw, 136px); font-weight: 900; margin-block: 14px 20px; }
+.hero h1 em { font-style: normal; color: var(--accent-ink); }
+.hero .lead { font-size: clamp(18px, 2vw, 22px); color: var(--fg); opacity: .85; max-width: 52ch; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.facts { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+.facts div { min-width: 0; }
+.facts b { display: block; font-family: var(--font-display); font-size: 36px; font-weight: 800; line-height: 1; }
+.facts span { font-size: 13px; color: var(--muted); }
+.pitch-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.pitch-wrap svg { display: block; width: 100%; height: auto; }
+.pitch-cap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); padding: 12px 4px 2px; }
+@media (max-width: 700px) { .hero { min-height: clamp(560px, calc(100svh - 96px), 820px); } .hero::after { background: linear-gradient(0deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.62) 60%, rgba(0,0,0,.35) 100%); } }
+
+/* sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+.sec-head h2 { font-size: clamp(38px, 6vw, 64px); font-weight: 800; margin-top: 8px; }
+.sec-head p { max-width: 44ch; color: var(--muted); }
+
+/* booking */
+.book { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 960px) { .book { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+.days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 18px; }
+.day { flex: 1 0 74px; background: var(--surface2); border: 1.5px solid transparent; color: var(--fg); border-radius: 8px; padding: 10px 6px; cursor: pointer; font: 500 13px var(--font-body); text-align: center; }
+.day b { display: block; font-family: var(--font-display); font-size: 30px; line-height: 1.05; font-weight: 800; }
+.day small { color: var(--muted); font-size: 12px; text-transform: capitalize; }
+.day[aria-pressed="true"] { border-color: var(--accent); background: var(--surface); }
+.day[aria-pressed="true"] small { color: var(--accent-ink); }
+.tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 18px; }
+.tab { text-align: left; background: transparent; border: 1.5px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px 12px; cursor: pointer; font: 600 14px var(--font-body); }
+.tab small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.tab[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.tab[aria-pressed="true"] small { color: var(--on-accent); opacity: .8; }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.slot { border-radius: 8px; border: 1.5px solid var(--line); background: transparent; color: var(--fg); padding: 10px 6px; text-align: center; font: 600 16px var(--font-body); cursor: pointer; }
+.slot small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+.slot:hover:not(:disabled) { border-color: var(--free); }
+.slot[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.slot[aria-pressed="true"] small { color: var(--on-accent); }
+.slot:disabled { cursor: not-allowed; background: var(--surface2); opacity: .55; text-decoration: line-through; text-decoration-color: var(--busy); }
+.slot:disabled small { text-decoration: none; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-top: 16px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.sum h3 { font-size: 30px; font-weight: 800; margin-bottom: 14px; }
+.sum dl { margin: 0 0 16px; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 15px; }
+.sum dt { color: var(--muted); }
+.sum dd { margin: 0; text-align: right; font-weight: 600; }
+.price { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; margin-bottom: 4px; }
+.price b { font-family: var(--font-display); font-size: 44px; font-weight: 800; line-height: 1; }
+.per { font-size: 13px; color: var(--muted); margin-bottom: 16px; text-align: right; }
+.field { display: grid; gap: 5px; margin-bottom: 12px; }
+.field label, .field legend { font-size: 13px; font-weight: 600; color: var(--muted); }
+.field input[type="text"], .field input[type="tel"] { background: var(--bg); color: var(--fg); border: 1.5px solid var(--line); border-radius: 6px; padding: 11px 12px; font: 500 16px var(--font-body); width: 100%; }
+fieldset.field { border: 0; padding: 0; margin: 0 0 14px; }
+.pay { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pay label { display: block; }
+.pay input { position: absolute; opacity: 0; }
+.pay span { display: block; text-align: center; border: 1.5px solid var(--line); border-radius: 6px; padding: 9px 4px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--fg); }
+.pay input:checked + span { border-color: var(--accent); background: var(--surface2); }
+.pay input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.hint { font-size: 13px; color: var(--muted); margin-top: 10px; min-height: 20px; }
+.hint.err { color: var(--busy); }
+.sum .btn { width: 100%; }
+.empty { color: var(--muted); font-size: 15px; padding-block: 8px 18px; }
+
+/* open matches */
+.matches { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.match { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.match h3 { font-size: 26px; font-weight: 800; }
+.match .meta { font-size: 14px; color: var(--muted); }
+.dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.dots i { height: 8px; border-radius: 2px; background: var(--line); }
+.dots i.on { background: var(--free); }
+.match .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
+.match .row span { font-size: 14px; }
+.match .btn { padding: 9px 16px; font-size: 14px; }
+
+/* offers bento */
+.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { font-size: 32px; font-weight: 800; }
+.card p { color: var(--muted); font-size: 15px; }
+.card .tag { margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 600; color: var(--accent-ink); }
+.card.a { grid-column: span 3; background: var(--pitch); border-color: transparent; color: #fff; }
+.card.a p, .card.a .tag { color: #E8F5ED; }
+.card.b { grid-column: span 3; }
+.card.c, .card.d, .card.e { grid-column: span 2; }
+@media (max-width: 900px) { .card.a, .card.b { grid-column: span 6; } .card.c, .card.d, .card.e { grid-column: span 3; } }
+@media (max-width: 560px) { .card.c, .card.d, .card.e { grid-column: span 6; } }
+
+/* tarifs */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-variant-numeric: tabular-nums; }
+th, td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--line); font-size: 15px; }
+th { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.p { font-family: var(--font-display); font-size: 28px; font-weight: 800; white-space: nowrap; }
+td small { display: block; color: var(--muted); font-size: 13px; }
+.note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+/* infos */
+.info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.info h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--accent-ink); }
+.info p { color: var(--muted); font-size: 15px; }
+.info b { color: var(--fg); font-weight: 600; user-select: all; }
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
 </head>
-<body class="home">
-<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="bar">
-  <div class="left"><button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
-  <nav class="top-links" aria-label="Liens rapides"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav></div>
-  <a class="brand" href="index.html" aria-label="Léon Hotel, accueil"><img class="mark" src="logo-mark.png" alt="" width="44" height="45"><span class="wm"><b>LEON</b><i>HOTEL</i></span></a>
-  <a class="btn sm" href="contact.html#reserver">Réserver</a>
-</div></header>
-<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
-  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
-  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav>
-  <div class="ov-sub">
-    <div><p class="mono">L'hôtel</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a></div>
-    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
-  </div>
-</div>
-<section class="hero has-video">
-  <img class="bg" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1600&amp;h=-1&amp;s=1" alt="">
-  <video class="bg vid" muted loop playsinline preload="metadata" poster="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=1600&amp;h=-1&amp;s=1" aria-hidden="true"><source src="videos/hero.webm" type="video/webm"><source src="videos/hero.mp4" type="video/mp4"></video>
-  <button class="vid-ctl mono" id="vidCtl" type="button" hidden>Pause</button>
-  <div class="inner">
-    <p class="mono">Brazzaville · Avenue du Colonel Bisset</p>
-    <h1>Léon Hotel</h1>
-    <p class="lead">Piscine, table et chambres climatisées au centre-ville.</p>
-    <p><a class="btn inv" href="chambres.html">Voir les chambres</a></p>
-    <p class="cue mono" aria-hidden="true">Défiler ↓</p>
-  </div>
-</section>
-<main id="main">
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Le <span>Classico</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="l" href="#reserver">Réserver</a>
+      <a class="l" href="#matchs">Matchs ouverts</a>
+      <a class="l" href="#offres">Offres</a>
+      <a class="l" href="#tarifs">Tarifs</a>
+      <a class="btn" href="#reserver">Réserver un terrain</a>
+    </nav>
+  </header>
 
-<section class="sec collage-sec">
-  <div class="collage wrap">
-    <p class="monogram" aria-hidden="true">L</p>
-    <figure class="c-big"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" alt="Une chambre du Léon Hotel" loading="lazy"></figure>
-    <figure class="c-small"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/e9/leon-hotel.jpg?w=900&amp;h=-1&amp;s=1" alt="L'entrée de l'hôtel" loading="lazy"></figure>
-    <div class="c-text">
-      <p class="mono">Bienvenue au Léon Hotel</p>
-      <h2>Un hôtel à taille humaine</h2>
-      <p class="sub">Centre-ville de Brazzaville, à deux pas des administrations</p>
-      <p>Chambres et suites climatisées, restaurant, bar-lounge et piscine : l'essentiel, bien tenu, pour les séjours d'affaires comme pour les voyages en famille.</p>
-      <p><a class="link" href="chambres.html">Voir les chambres</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="sec flush">
-  <div class="wrap head"><p class="mono">Table &amp; détente</p><h2>Sur place</h2></div>
-  <div class="panels" id="panels">
-    <a class="panel active" href="restaurant-piscine.html#restaurant"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=1400&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Restaurant</span><span class="ht"><small class="mono">Table &amp; détente</small><b>Restaurant</b></span></a>
-    <a class="panel" href="restaurant-piscine.html#bar"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Bar &amp; lounge</span><span class="ht"><small class="mono">Au bord de la piscine</small><b>Bar &amp; lounge</b></span></a>
-    <a class="panel" href="restaurant-piscine.html#piscine"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Piscine</span><span class="ht"><small class="mono">Bassin extérieur</small><b>Piscine</b></span></a>
-    <a class="panel" href="chambres.html"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">En chambre</span><span class="ht"><small class="mono">Petit-déjeuner et repas</small><b>En chambre</b></span></a>
-  </div>
-</section>
-
-<section class="sec qsec" id="avis">
-  <div class="wrap narrow center">
-    <p class="mono">Avis voyageurs</p>
-    <div class="qs" aria-live="polite">
-      <figure class="q on"><blockquote>La réception était incroyable, très sympathique et serviable.</blockquote><figcaption class="mono">Brett H., Johannesburg · Tripadvisor, sept. 2018</figcaption></figure>
-      <figure class="q"><blockquote>Très bien situé, en plein cœur de la ville, près des centres commerciaux et des bâtiments administratifs.</blockquote><figcaption class="mono">Cinzia C., Brazzaville · Tripadvisor, févr. 2018</figcaption></figure>
-      <figure class="q"><blockquote>La nourriture et le personnel étaient excellents.</blockquote><figcaption class="mono">Charles N., Lagos · Tripadvisor, sept. 2019</figcaption></figure>
-    </div>
-    <div class="qdots" role="group" aria-label="Choisir un avis">
-      <button type="button" aria-label="Avis 1" aria-current="true"></button><button type="button" aria-label="Avis 2" aria-current="false"></button><button type="button" aria-label="Avis 3" aria-current="false"></button>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="autour">
-  <div class="wrap">
-    <div class="head"><p class="mono">Le quartier</p><h2>Autour de l'hôtel</h2></div>
-    <div class="near">
-      <div class="n"><b>3,3 km</b><span class="mono">Aéroport Maya-Maya</span></div>
-      <div class="n"><b>1,5 km</b><span class="mono">Basilique Sainte-Anne</span></div>
-      <div class="n"><b>1,9 km</b><span class="mono">Radisson Blu M'Bamou · restaurant</span></div>
-      <div class="n"><b>2,1 km</b><span class="mono">O Sympathic · cuisine française</span></div>
-    </div>
-    <p class="note-s">Une voiture est recommandée pour vos déplacements. Distances indicatives.</p>
-  </div>
-</section>
-
-<section class="sec ruled news">
-  <div class="wrap split top">
-    <div><p class="mono">Restons en contact</p><h2>Les nouvelles de l'hôtel</h2><p>Inscrivez-vous pour être informé de nos offres et actualités.</p></div>
-    <form id="nl" novalidate>
-      <div class="row">
-        <label for="nl-nom">Nom<input id="nl-nom" name="nom" autocomplete="name" required></label>
-        <label for="nl-mail">E-mail<input id="nl-mail" name="email" type="email" autocomplete="email" required></label>
+  <main id="top">
+    <div class="hero">
+      <video id="hero-video" src="hero.mp4" poster="hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+      <div class="hero-in">
+        <p class="eyebrow">Foot à 5 · Brazzaville</p>
+        <h1>Ton match, <em>ton terrain</em>, ce soir.</h1>
+        <p class="lead">Quatre terrains éclairés, gazon synthétique et palissades. Choisis ton créneau en quelques clics, confirme sur WhatsApp et paie par Mobile Money.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#reserver">Voir les créneaux libres</a>
+          <a class="btn ghost" href="#matchs">Rejoindre un match</a>
+        </div>
+        <div class="facts">
+          <div><b class="num">4</b><span>terrains 5 contre 5</span></div>
+          <div><b class="num">10h–23h</b><span>tous les jours</span></div>
+          <div><b class="num">15 000</b><span>FCFA l'heure, dès</span></div>
+        </div>
       </div>
-      <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les communications du Léon Hotel et je peux me désinscrire à tout moment.</label>
-      <div><button class="btn" type="submit">S'inscrire</button></div>
-      <p id="nl-msg" class="sent" hidden>Démo : l'inscription n'est pas encore connectée.</p>
-    </form>
-  </div>
-</section>
+    </div>
 
-</main>
-<aside class="rate" id="rate" aria-label="Réservation directe">
-  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
-  <p class="mono">Réservation directe</p>
-  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
-  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
-</aside>
-<footer class="site"><div class="wrap">
-  <div><b class="brand-f"><img class="mark" src="logo-mark.png" alt="" width="36" height="36"><span class="wm"><b>LEON</b><i>HOTEL</i></span></b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
-  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
-  <div><p class="mono">Séjour</p><a href="index.html#avis">Avis voyageurs</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
-  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
-</div></footer>
-<script src="script.js" defer></script>
+    <section id="reserver" aria-labelledby="t-res">
+      <div class="sec-head">
+        <div><p class="eyebrow">Réservation en ligne</p><h2 id="t-res">Choisis ton créneau</h2></div>
+        <p>Les créneaux ci-dessous sont des exemples pour la démonstration. Chaque créneau dure 1 heure.</p>
+      </div>
+      <div class="book">
+        <div class="panel">
+          <div class="days" id="days" role="group" aria-label="Choisir un jour"></div>
+          <div class="tabs" id="tabs" role="group" aria-label="Choisir un terrain"></div>
+          <div class="slots" id="slots" role="group" aria-label="Créneaux horaires"></div>
+          <div class="legend">
+            <span><i style="background:var(--free)"></i>Libre</span>
+            <span><i style="background:var(--accent)"></i>Ton choix</span>
+            <span><i style="background:var(--busy)"></i>Occupé ou passé</span>
+          </div>
+        </div>
+
+        <form class="panel sum" id="form" aria-live="polite" novalidate>
+          <h3>Ta réservation</h3>
+          <p class="empty" id="empty">Choisis un créneau libre pour voir le prix et confirmer.</p>
+          <div id="detail" hidden>
+            <dl>
+              <dt>Terrain</dt><dd id="s-terrain"></dd>
+              <dt>Date</dt><dd id="s-date"></dd>
+              <dt>Heure</dt><dd id="s-hour" class="num"></dd>
+            </dl>
+            <div class="price"><span>Total</span><b class="num" id="s-price"></b></div>
+            <p class="per num" id="s-per"></p>
+            <div class="field"><label for="f-name">Nom de l'équipe ou du capitaine</label><input type="text" id="f-name" autocomplete="name" placeholder="Ex. Les Aigles de Moungali"></div>
+            <div class="field"><label for="f-tel">Téléphone</label><input type="tel" id="f-tel" autocomplete="tel" inputmode="tel" placeholder="+242 06 000 00 00"></div>
+            <fieldset class="field">
+              <legend>Paiement</legend>
+              <div class="pay">
+                <label><input type="radio" name="pay" value="MTN Mobile Money" checked><span>MTN MoMo</span></label>
+                <label><input type="radio" name="pay" value="Airtel Money"><span>Airtel Money</span></label>
+                <label><input type="radio" name="pay" value="espèces sur place"><span>Sur place</span></label>
+              </div>
+            </fieldset>
+            <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Confirmer sur WhatsApp</a>
+            <p class="hint" id="hint">Le bouton ouvre WhatsApp avec ton message prêt à envoyer. Besoin de 2 heures ? Dis-le dans le message.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="matchs" aria-labelledby="t-m">
+      <div class="sec-head">
+        <div><p class="eyebrow">Trouver des joueurs</p><h2 id="t-m">Matchs ouverts</h2></div>
+        <p>Il manque des joueurs pour compléter une équipe ? Rejoins un match et partage le prix du terrain à 10.</p>
+      </div>
+      <div class="matches" id="matches"></div>
+    </section>
+
+    <section id="offres" aria-labelledby="t-o">
+      <div class="sec-head">
+        <div><p class="eyebrow">Plus que du foot</p><h2 id="t-o">Autour du terrain</h2></div>
+        <p>Le centre accueille les équipes de quartier, les entreprises et les familles.</p>
+      </div>
+      <div class="bento">
+        <article class="card a"><h3>Championnat de quartier</h3><p>Une équipe de 7 joueurs, 10 journées, arbitre et classement en ligne. Les inscriptions ouvrent chaque trimestre.</p><span class="tag">Inscription par équipe</span></article>
+        <article class="card b"><h3>Match d'entreprise</h3><p>Soirée cohésion pour 10 à 40 collègues : terrain, arbitre, boissons et facture au nom de la société.</p><span class="tag">Devis sur demande</span></article>
+        <article class="card c"><h3>Anniversaires</h3><p>Un terrain, des maillots et un gâteau pour les 8 à 16 ans.</p><span class="tag">Dès 60 000 FCFA</span></article>
+        <article class="card d"><h3>École de foot</h3><p>Séances les mercredis et samedis avec un éducateur formé.</p><span class="tag">Dès 20 000 FCFA / mois</span></article>
+        <article class="card e"><h3>Buvette</h3><p>Boissons fraîches, brochettes et plantain après le match.</p><span class="tag">Ouverte jusqu'à minuit</span></article>
+      </div>
+    </section>
+
+    <section id="tarifs" aria-labelledby="t-t">
+      <div class="sec-head">
+        <div><p class="eyebrow">Prix du terrain</p><h2 id="t-t">Tarifs à l'heure</h2></div>
+        <p>Un seul prix par terrain, partagé entre les 10 joueurs.</p>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Période</th><th>Horaires</th><th>Prix du terrain</th><th>Par joueur (à 10)</th></tr></thead>
+          <tbody>
+            <tr><td>Semaine, journée<small>Lundi au vendredi</small></td><td>10h – 17h</td><td class="p">15 000 FCFA</td><td>1 500 FCFA</td></tr>
+            <tr><td>Semaine, soirée<small>Lundi au vendredi</small></td><td>17h – 23h</td><td class="p">25 000 FCFA</td><td>2 500 FCFA</td></tr>
+            <tr><td>Week-end, journée<small>Samedi et dimanche</small></td><td>10h – 17h</td><td class="p">20 000 FCFA</td><td>2 000 FCFA</td></tr>
+            <tr><td>Week-end, soirée<small>Samedi et dimanche</small></td><td>17h – 23h</td><td class="p">30 000 FCFA</td><td>3 000 FCFA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Prix donnés à titre d'exemple pour la maquette. Ils se modifient en un seul endroit pour le site final.</p>
+    </section>
+
+    <section id="infos" aria-labelledby="t-i">
+      <div class="sec-head"><div><p class="eyebrow">Venir jouer</p><h2 id="t-i">Infos pratiques</h2></div></div>
+      <div class="info">
+        <div><h3>Adresse</h3><p>Avenue à renseigner, Brazzaville. Parking gardé et vestiaires avec douches.</p></div>
+        <div><h3>Horaires</h3><p>Tous les jours de <b>10h à 23h</b>. Dernier match à 22h.</p></div>
+        <div><h3>Contact</h3><p>WhatsApp et appels : <b>+242 06 000 00 00</b> (numéro d'exemple).</p></div>
+        <div><h3>Annulation</h3><p>Gratuite jusqu'à 6 heures avant le match, sur simple message WhatsApp.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Le Classico · Foot à 5 · Brazzaville</span>
+    <span>Maquette réalisée par l'Atelier KPM</span>
+  </footer>
+</div>
+
 <script>
-(function(){
-  var ps=[].slice.call(document.querySelectorAll('#panels .panel'));
-  function act(p){ps.forEach(function(x){x.classList.toggle('active',x===p);});}
-  ps.forEach(function(p){p.addEventListener('mouseenter',function(){act(p);});p.addEventListener('focus',function(){act(p);});});
-  var qs=[].slice.call(document.querySelectorAll('.q')),dots=[].slice.call(document.querySelectorAll('.qdots button')),i=0,t;
-  function show(n){i=n;qs.forEach(function(q,k){q.classList.toggle('on',k===n);});dots.forEach(function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});}
-  function restart(){clearInterval(t);if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){t=setInterval(function(){show((i+1)%qs.length);},8000);}}
-  dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);restart();});});
-  show(0);restart();
-  document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});
+(function () {
+  var HOURS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+  var TERRAINS = [
+    { n: "Terrain 1", k: "Couvert" },
+    { n: "Terrain 2", k: "Couvert" },
+    { n: "Terrain 3", k: "Plein air éclairé" },
+    { n: "Terrain 4", k: "Plein air éclairé" }
+  ];
+  var WA = "242060000000";
+  var now = new Date();
+  var DAYS = [];
+  for (var i = 0; i < 7; i++) { var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i); DAYS.push(d); }
+  var st = { day: 0, terrain: 0, hour: null };
+
+  function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function key(d) { return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function fcfa(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA"; }
+  function price(d, h) {
+    var we = d.getDay() === 0 || d.getDay() === 6;
+    var eve = h >= 17;
+    if (we) return eve ? 30000 : 20000;
+    return eve ? 25000 : 15000;
+  }
+  function state(di, t, h) {
+    var d = DAYS[di];
+    if (di === 0 && h <= now.getHours()) return "past";
+    var thr = h >= 18 ? 0.62 : (h >= 16 ? 0.4 : 0.2);
+    var r = (hash(key(d) + "|" + t + "|" + h) % 1000) / 1000;
+    return r < thr ? "busy" : "free";
+  }
+  function hh(h) { return (h < 10 ? "0" : "") + h + ":00"; }
+  function longDate(d) { return d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }); }
+
+  var elDays = document.getElementById("days"), elTabs = document.getElementById("tabs"), elSlots = document.getElementById("slots");
+
+  function renderDays() {
+    elDays.innerHTML = "";
+    DAYS.forEach(function (d, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "day"; b.setAttribute("aria-pressed", i === st.day);
+      var wd = i === 0 ? "auj." : d.toLocaleDateString("fr-FR", { weekday: "short" });
+      b.innerHTML = "<small>" + wd + "</small><b class='num'>" + d.getDate() + "</b><small>" + d.toLocaleDateString("fr-FR", { month: "short" }) + "</small>";
+      b.addEventListener("click", function () { st.day = i; st.hour = null; render(); });
+      elDays.appendChild(b);
+    });
+  }
+  function renderTabs() {
+    elTabs.innerHTML = "";
+    TERRAINS.forEach(function (t, i) {
+      var free = HOURS.filter(function (h) { return state(st.day, i, h) === "free"; }).length;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tab"; b.setAttribute("aria-pressed", i === st.terrain);
+      b.innerHTML = t.n + "<small>" + t.k + " · " + free + " libre" + (free > 1 ? "s" : "") + "</small>";
+      b.addEventListener("click", function () { st.terrain = i; st.hour = null; render(); });
+      elTabs.appendChild(b);
+    });
+  }
+  function renderSlots() {
+    elSlots.innerHTML = "";
+    HOURS.forEach(function (h) {
+      var s = state(st.day, st.terrain, h);
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "slot";
+      b.disabled = s !== "free";
+      b.setAttribute("aria-pressed", st.hour === h);
+      b.innerHTML = hh(h) + "<small class='num'>" + (s === "free" ? fcfa(price(DAYS[st.day], h)) : (s === "past" ? "Passé" : "Occupé")) + "</small>";
+      if (s === "free") b.addEventListener("click", function () { st.hour = h; render(); });
+      elSlots.appendChild(b);
+    });
+  }
+  var elEmpty = document.getElementById("empty"), elDetail = document.getElementById("detail");
+  var elName = document.getElementById("f-name"), elTel = document.getElementById("f-tel"), elWa = document.getElementById("wa"), elHint = document.getElementById("hint");
+
+  function payVal() { var r = document.querySelector("input[name='pay']:checked"); return r ? r.value : ""; }
+  function waLink() {
+    var d = DAYS[st.day], t = TERRAINS[st.terrain], p = price(d, st.hour);
+    var msg = "Bonjour, je voudrais réserver le " + t.n + " (" + t.k.toLowerCase() + ") le " + longDate(d) + " à " + hh(st.hour) + " pour 1 heure, soit " + fcfa(p) + ".\n" +
+      "Équipe : " + (elName.value.trim() || "…") + "\nTéléphone : " + (elTel.value.trim() || "…") + "\nPaiement : " + payVal() + ".";
+    return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+  }
+  function renderSummary() {
+    if (st.hour === null) { elEmpty.hidden = false; elDetail.hidden = true; return; }
+    elEmpty.hidden = true; elDetail.hidden = false;
+    var d = DAYS[st.day], p = price(d, st.hour);
+    document.getElementById("s-terrain").textContent = TERRAINS[st.terrain].n + " · " + TERRAINS[st.terrain].k;
+    document.getElementById("s-date").textContent = longDate(d);
+    document.getElementById("s-hour").textContent = hh(st.hour) + " – " + hh(st.hour + 1);
+    document.getElementById("s-price").textContent = fcfa(p);
+    document.getElementById("s-per").textContent = "soit " + fcfa(p / 10) + " par joueur à 10";
+    elWa.href = waLink();
+  }
+  function render() { renderDays(); renderTabs(); renderSlots(); renderSummary(); }
+
+  [elName, elTel].forEach(function (e) { e.addEventListener("input", function () { if (st.hour !== null) elWa.href = waLink(); }); });
+  document.querySelectorAll("input[name='pay']").forEach(function (r) { r.addEventListener("change", function () { if (st.hour !== null) elWa.href = waLink(); }); });
+  elWa.addEventListener("click", function (e) {
+    var ok = elName.value.trim().length > 1 && elTel.value.replace(/\D/g, "").length >= 8;
+    if (!ok) {
+      e.preventDefault();
+      elHint.className = "hint err";
+      elHint.textContent = "Ajoute le nom de l'équipe et un numéro de téléphone pour continuer.";
+      (elName.value.trim().length > 1 ? elTel : elName).focus();
+      return;
+    }
+    elWa.href = waLink();
+    elHint.className = "hint";
+    elHint.textContent = "WhatsApp s'ouvre dans un nouvel onglet. Le créneau n'est confirmé qu'après la réponse du centre.";
+  });
+  document.getElementById("form").addEventListener("submit", function (e) { e.preventDefault(); });
+
+  /* matchs ouverts */
+  var MATCHES = [
+    { t: "Ce soir", h: "19:00", ter: "Terrain 2", lvl: "Niveau moyen", have: 7, p: 2500 },
+    { t: "Demain", h: "20:00", ter: "Terrain 1", lvl: "Débutants bienvenus", have: 5, p: 2500 },
+    { t: "Samedi", h: "17:00", ter: "Terrain 3", lvl: "Niveau confirmé", have: 8, p: 3000 },
+    { t: "Dimanche", h: "10:00", ter: "Terrain 4", lvl: "Matinal et détendu", have: 4, p: 2000 }
+  ];
+  var elMatches = document.getElementById("matches");
+  function renderMatches() {
+    elMatches.innerHTML = "";
+    MATCHES.forEach(function (m, i) {
+      var c = document.createElement("article"); c.className = "match";
+      var dots = ""; for (var k = 0; k < 10; k++) dots += "<i" + (k < m.have ? " class='on'" : "") + "></i>";
+      var left = 10 - m.have;
+      c.innerHTML = "<div><h3>" + m.t + " · " + m.h + "</h3><p class='meta'>" + m.ter + " · " + m.lvl + "</p></div>" +
+        "<div class='dots' aria-hidden='true'>" + dots + "</div>" +
+        "<div class='row'><span class='num'>" + (left > 0 ? (left + " place" + (left > 1 ? "s" : "") + " · " + fcfa(m.p) + " chacun") : "Complet") + "</span></div>";
+      var b = document.createElement("button"); b.type = "button"; b.className = "btn";
+      b.textContent = left > 0 ? "Rejoindre" : "Complet"; b.disabled = left === 0;
+      if (m.joined) { b.textContent = "Tu es inscrit"; b.className = "btn ghost"; b.disabled = true; }
+      b.addEventListener("click", function () { m.have++; m.joined = true; renderMatches(); });
+      c.querySelector(".row").appendChild(b);
+      elMatches.appendChild(c);
+    });
+  }
+
+  var hv = document.getElementById("hero-video");
+  if (hv && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { hv.removeAttribute("autoplay"); hv.pause(); }
+
+  render(); renderMatches();
 })();
 </script>
 </body>
