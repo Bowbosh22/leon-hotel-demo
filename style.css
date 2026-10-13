@@ -1,10 +1,10 @@
 /* Léon Hotel — démo Atelier KPM
-   Direction : monochrome, étiquettes en machine à écrire, titres Caslon, photos au premier plan. */
+   Direction : bleu/vert du logo, Montserrat gras (proche du logo), photos au premier plan. */
 :root{
-  --ink:#111; --paper:#f3f3f1; --white:#fff; --grey:#5c5c59; --rule:#111; --soft:#dcdcd8;
-  --display:"Libre Caslon Display","Libre Caslon Text",Georgia,"Times New Roman",serif;
-  --text:"Libre Caslon Text",Georgia,"Times New Roman",serif;
-  --mono:"Courier Prime","Courier New",Courier,monospace;
+  --ink:#0c1f3a; --paper:#f4f7fb; --white:#fff; --grey:#55637a; --rule:#0c1f3a; --soft:#dde5f0;
+  --display:"Montserrat","Hanken Grotesk",system-ui,sans-serif;
+  --text:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Montserrat","Hanken Grotesk",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -13,7 +13,7 @@ body.lock{overflow:hidden}
 img{max-width:100%;display:block}
 figure{margin:0}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;margin:0;text-wrap:balance}
 h1{font-size:clamp(3rem,9vw,6.5rem);letter-spacing:.01em}
 h2{font-size:clamp(2rem,4.4vw,3.2rem)}
 h3{font-size:1.5rem}
@@ -216,8 +216,8 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid #444;padding-top:1.25re
 @media (min-width:100rem){.bar{max-width:104rem;padding-inline:3rem}}
 
 /* ===== Accueil sombre (sous la vidéo) ===== */
-body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16294a;--khaki:#a58a52;
-  --cond:"Oswald","Arial Narrow",Impact,sans-serif;--sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16294a;--khaki:#1a8f33;
+  --cond:"Montserrat","Hanken Grotesk",system-ui,sans-serif;--sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
   background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:1.0625rem}
 .home .promo{background:#081629;color:#cfccc5}
 .home header.site{background:#0c1f3a;border-bottom-color:#25395a}
@@ -233,7 +233,7 @@ body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16
 .home .rate .btn:hover{background:#fff;color:#111}
 .home footer.site{background:#071427;color:#cfccc5}
 .home a:focus-visible,.home button:focus-visible,.home input:focus-visible{outline-color:#fff}
-.home h2,.home h3{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.04em;line-height:1.05}
+.home h2,.home h3{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.05}
 .home h2{font-size:clamp(1.9rem,4vw,3rem)}
 .home .sec.ruled{border-top-color:#25395a}
 .home .link{color:#fff}
@@ -261,10 +261,10 @@ body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16
 .panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--soft);filter:brightness(.78);transition:filter .4s}
 .panel.active img,.panel:hover img{filter:brightness(1)}
 .panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.65) 100%)}
-.panel .vt{position:absolute;left:50%;bottom:1.5rem;z-index:2;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);font:500 clamp(1.4rem,2.4vw,2rem)/1 var(--cond);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;transition:opacity .25s}
+.panel .vt{position:absolute;left:50%;bottom:1.5rem;z-index:2;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);font:700 clamp(1.2rem,2.2vw,1.8rem)/1 var(--cond);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;transition:opacity .25s}
 .panel .ht{position:absolute;left:2rem;bottom:2rem;z-index:2;opacity:0;transition:opacity .35s .15s}
 .panel .ht small{display:block;margin-bottom:.4rem;text-transform:uppercase}
-.panel .ht b{display:block;font:500 clamp(2.2rem,5vw,4.2rem)/1 var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.panel .ht b{display:block;font:800 clamp(2rem,4.6vw,3.8rem)/1 var(--cond);text-transform:uppercase;letter-spacing:.03em}
 .panel.active .vt{opacity:0}
 .panel.active .ht{opacity:1}
 
@@ -273,7 +273,7 @@ body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16
 .qs{position:relative;min-height:15rem;display:grid;align-items:center}
 .q{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .6s}
 .q.on{opacity:1;visibility:visible}
-.q blockquote{font:500 clamp(2rem,5.2vw,3.8rem)/1.08 var(--cond);text-transform:uppercase;letter-spacing:.02em}
+.q blockquote{font:700 clamp(1.7rem,4.4vw,3.2rem)/1.15 var(--cond);text-transform:uppercase;letter-spacing:.02em}
 .q figcaption{color:var(--grey);margin-top:1.5rem;font-size:.8125rem}
 .qdots{display:flex;gap:.7rem;justify-content:center;margin-top:1.5rem}
 .qdots button{width:.65rem;height:.65rem;border-radius:50%;border:1px solid #fff;background:transparent;padding:0;cursor:pointer}
@@ -283,7 +283,7 @@ body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16
 .near{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem}
 .near>*{min-width:0}
 .n{background:#112a4d;padding:1.5rem;min-height:12rem;display:flex;flex-direction:column;justify-content:space-between;border:1px solid #25395a}
-.n b{font:500 clamp(2.6rem,5vw,3.8rem)/1 var(--cond);letter-spacing:.02em}
+.n b{font:800 clamp(2.4rem,4.6vw,3.4rem)/1 var(--cond);letter-spacing:.02em}
 .n .mono{margin:0;color:var(--grey)}
 .note-s{margin:1.25rem 0 0;color:var(--grey);font-size:.9rem}
 
@@ -309,3 +309,24 @@ body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16
   .qs{min-height:19rem}
 }
 @media (prefers-reduced-motion:reduce){.panel,.panel img,.q,.panel .ht,.panel .vt{transition:none}}
+
+/* Logo Léon Hotel : pictogramme + mot-symbole sans empattement gras (bleu / vert) */
+:root{--lb:#2a62c4;--lg:#1f9a35}
+body.home{--lb:#6aa6f5;--lg:#4cc152}
+.brand{display:inline-flex;align-items:center;gap:.7rem;letter-spacing:0;text-transform:none;justify-self:center}
+.brand .mark{height:2.7rem;width:auto;display:block}
+.wm{display:flex;flex-direction:column;align-items:flex-start;font-family:"Montserrat","Hanken Grotesk",system-ui,sans-serif;font-weight:800;line-height:1}
+.wm b{font-weight:800;font-size:clamp(1.25rem,2.6vw,1.7rem);letter-spacing:.04em;color:var(--lb)}
+.wm i{font-style:normal;font-weight:800;font-size:clamp(.78rem,1.6vw,1.02rem);letter-spacing:.1em;color:var(--lg);margin-top:.15rem}
+footer.site .brand-f{display:inline-flex;align-items:center;gap:.6rem;letter-spacing:0;text-transform:none}
+footer.site .brand-f .mark{height:2.4rem;width:auto}
+footer.site{--lb:#6aa6f5;--lg:#4cc152}
+@media (max-width:30rem){.brand .mark{height:2.2rem}.brand{gap:.5rem}}
+
+/* Montserrat : étiquettes et boutons un peu plus gras, interlettrage réduit */
+.mono,label,.top-links a,.menu-btn,.c-text .sub,.n span{font-family:var(--mono);font-weight:600;letter-spacing:.1em}
+.mono{font-size:.72rem}
+.btn{font-family:var(--display);font-weight:700;letter-spacing:.1em;font-size:.78rem}
+.btn:hover{background:var(--lg);border-color:var(--lg)}
+.home .btn:hover{background:#fff;color:#0c1f3a;border-color:#fff}
+.promo{font-family:var(--mono);font-weight:500;letter-spacing:.04em}
