@@ -11,13 +11,14 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Oswald:wght@400;500;600&amp;family=Hanken+Grotesk:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
 <div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
 <header class="site"><div class="bar">
-  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
+  <div class="left"><button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
+  <nav class="top-links" aria-label="Liens rapides"><a href="chambres.html">Chambres &amp; Suites</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav></div>
   <a class="brand" href="index.html">Léon Hotel<small>Brazzaville</small></a>
   <a class="btn sm" href="contact.html#reserver">Réserver</a>
 </div></header>
@@ -43,67 +44,55 @@
 </section>
 <main id="main">
 
-<section class="sec intro">
-  <div class="wrap narrow center">
-    <p class="mono">Bienvenue</p>
-    <h2>Un hôtel à taille humaine, au centre de Brazzaville</h2>
-    <p>Le Léon Hotel accueille voyageurs d'affaires et familles dans un quartier calme du centre-ville, à deux pas des commerces et des administrations. Chambres climatisées, restaurant, bar-lounge et piscine : l'essentiel, bien tenu.</p>
-  </div>
-  <div class="wrap strip">
-    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/4c/82/a8/reception.jpg?w=800&amp;h=-1&amp;s=1" alt="La réception" loading="lazy"><figcaption class="mono">La réception</figcaption></figure>
-    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=800&amp;h=-1&amp;s=1" alt="Le restaurant" loading="lazy"><figcaption class="mono">Le restaurant</figcaption></figure>
-    <figure><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=800&amp;h=-1&amp;s=1" alt="Une chambre" loading="lazy"><figcaption class="mono">Une chambre</figcaption></figure>
-  </div>
-</section>
-
-<section class="sec ruled">
-  <div class="wrap split">
-    <figure><img class="ph" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/55/2b/photo0jpg.jpg?w=1100&amp;h=-1&amp;s=1" alt="Une suite du Léon Hotel" loading="lazy"></figure>
-    <div>
-      <p class="mono">Hébergement</p>
-      <h2>Chambres et suites</h2>
-      <p>Des chambres calmes et climatisées, avec réfrigérateur et minibar, et des suites plus spacieuses pour les séjours de plusieurs nuits. Wi-Fi gratuit et service en chambre.</p>
+<section class="sec collage-sec">
+  <div class="collage wrap">
+    <p class="monogram" aria-hidden="true">L</p>
+    <figure class="c-big"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/50/leon-hotel.jpg?w=1200&amp;h=-1&amp;s=1" alt="Une chambre du Léon Hotel" loading="lazy"></figure>
+    <figure class="c-small"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/76/e9/leon-hotel.jpg?w=900&amp;h=-1&amp;s=1" alt="L'entrée de l'hôtel" loading="lazy"></figure>
+    <div class="c-text">
+      <p class="mono">Bienvenue au Léon Hotel</p>
+      <h2>Un hôtel à taille humaine</h2>
+      <p class="sub">Centre-ville de Brazzaville, à deux pas des administrations</p>
+      <p>Chambres et suites climatisées, restaurant, bar-lounge et piscine : l'essentiel, bien tenu, pour les séjours d'affaires comme pour les voyages en famille.</p>
       <p><a class="link" href="chambres.html">Voir les chambres</a></p>
     </div>
   </div>
 </section>
 
-<section class="sec ruled">
-  <div class="wrap">
-    <div class="head"><p class="mono">Table &amp; détente</p><h2>Sur place</h2></div>
-    <div class="cards">
-      <a class="card" href="restaurant-piscine.html#restaurant"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=800&amp;h=-1&amp;s=1" alt="Le restaurant" loading="lazy"><p class="mono">restaurant</p><h3>Petit-déjeuner et repas</h3></a>
-      <a class="card" href="restaurant-piscine.html#bar"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=800&amp;h=-1&amp;s=1" alt="Le bar-lounge" loading="lazy"><p class="mono">bar &amp; lounge</p><h3>Au bord de la piscine</h3></a>
-      <a class="card" href="restaurant-piscine.html#piscine"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=800&amp;h=-1&amp;s=1" alt="La piscine" loading="lazy"><p class="mono">piscine</p><h3>Un bassin extérieur</h3></a>
-    </div>
+<section class="sec flush">
+  <div class="wrap head"><p class="mono">Table &amp; détente</p><h2>Sur place</h2></div>
+  <div class="panels" id="panels">
+    <a class="panel active" href="restaurant-piscine.html#restaurant"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/8e/a-view-of-the-restaurant.jpg?w=1400&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Restaurant</span><span class="ht"><small class="mono">Table &amp; détente</small><b>Restaurant</b></span></a>
+    <a class="panel" href="restaurant-piscine.html#bar"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/42/11/pool-and-bar-area-on.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Bar &amp; lounge</span><span class="ht"><small class="mono">Au bord de la piscine</small><b>Bar &amp; lounge</b></span></a>
+    <a class="panel" href="restaurant-piscine.html#piscine"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/41/e4/a-view-of-the-pool-area.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">Piscine</span><span class="ht"><small class="mono">Bassin extérieur</small><b>Piscine</b></span></a>
+    <a class="panel" href="chambres.html"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/f3/75/99/leon-hotel.jpg?w=900&amp;h=-1&amp;s=1" alt="" loading="lazy"><span class="vt">En chambre</span><span class="ht"><small class="mono">Petit-déjeuner et repas</small><b>En chambre</b></span></a>
   </div>
 </section>
 
-<section class="sec dark" id="avis">
+<section class="sec qsec" id="avis">
   <div class="wrap narrow center">
     <p class="mono">Avis voyageurs</p>
-    <blockquote class="big">« La réception était incroyable, très sympathique et serviable. »</blockquote>
-    <p class="mono src">Brett H., Johannesburg · Tripadvisor, sept. 2018</p>
-    <blockquote class="med">« Très bien situé, en plein cœur de la ville, à proximité des centres commerciaux et des bâtiments administratifs. »</blockquote>
-    <p class="mono src">Cinzia C., Brazzaville · Tripadvisor, févr. 2018</p>
+    <div class="qs" aria-live="polite">
+      <figure class="q on"><blockquote>La réception était incroyable, très sympathique et serviable.</blockquote><figcaption class="mono">Brett H., Johannesburg · Tripadvisor, sept. 2018</figcaption></figure>
+      <figure class="q"><blockquote>Très bien situé, en plein cœur de la ville, près des centres commerciaux et des bâtiments administratifs.</blockquote><figcaption class="mono">Cinzia C., Brazzaville · Tripadvisor, févr. 2018</figcaption></figure>
+      <figure class="q"><blockquote>La nourriture et le personnel étaient excellents.</blockquote><figcaption class="mono">Charles N., Lagos · Tripadvisor, sept. 2019</figcaption></figure>
+    </div>
+    <div class="qdots" role="group" aria-label="Choisir un avis">
+      <button type="button" aria-label="Avis 1" aria-current="true"></button><button type="button" aria-label="Avis 2" aria-current="false"></button><button type="button" aria-label="Avis 3" aria-current="false"></button>
+    </div>
   </div>
 </section>
 
 <section class="sec" id="autour">
-  <div class="wrap split top">
-    <div>
-      <p class="mono">Le quartier</p>
-      <h2>Autour de l'hôtel</h2>
-      <p>Le Léon Hotel est situé avenue du Colonel Bisset, dans le centre-ville. Une voiture est recommandée pour vos déplacements.</p>
+  <div class="wrap">
+    <div class="head"><p class="mono">Le quartier</p><h2>Autour de l'hôtel</h2></div>
+    <div class="near">
+      <div class="n"><b>3,3 km</b><span class="mono">Aéroport Maya-Maya</span></div>
+      <div class="n"><b>1,5 km</b><span class="mono">Basilique Sainte-Anne</span></div>
+      <div class="n"><b>1,9 km</b><span class="mono">Radisson Blu M'Bamou · restaurant</span></div>
+      <div class="n"><b>2,1 km</b><span class="mono">O Sympathic · cuisine française</span></div>
     </div>
-    <ul class="around">
-      <li><span>Aéroport Maya-Maya</span><b class="mono">3,3 km</b></li>
-      <li><span>Basilique Sainte-Anne</span><b class="mono">1,5 km</b></li>
-      <li><span>Radisson Blu M'Bamou · restaurant</span><b class="mono">1,9 km</b></li>
-      <li><span>O Sympathic · cuisine française</span><b class="mono">2,1 km</b></li>
-      <li><span>Cathédrale du Sacré-Cœur</span><b class="mono">13 min</b></li>
-      <li><span>La Mandarine · cuisine française</span><b class="mono">12 min</b></li>
-    </ul>
+    <p class="note-s">Une voiture est recommandée pour vos déplacements. Distances indicatives.</p>
   </div>
 </section>
 
@@ -137,6 +126,18 @@
   <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos issues de Tripadvisor (voyageurs et établissement), utilisées uniquement pour cette présentation privée. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
 <script src="script.js" defer></script>
-<script>document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});</script>
+<script>
+(function(){
+  var ps=[].slice.call(document.querySelectorAll('#panels .panel'));
+  function act(p){ps.forEach(function(x){x.classList.toggle('active',x===p);});}
+  ps.forEach(function(p){p.addEventListener('mouseenter',function(){act(p);});p.addEventListener('focus',function(){act(p);});});
+  var qs=[].slice.call(document.querySelectorAll('.q')),dots=[].slice.call(document.querySelectorAll('.qdots button')),i=0,t;
+  function show(n){i=n;qs.forEach(function(q,k){q.classList.toggle('on',k===n);});dots.forEach(function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});}
+  function restart(){clearInterval(t);if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){t=setInterval(function(){show((i+1)%qs.length);},8000);}}
+  dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);restart();});});
+  show(0);restart();
+  document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});
+})();
+</script>
 </body>
 </html>
