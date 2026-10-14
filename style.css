@@ -212,8 +212,7 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid #444;padding-top:1.25re
 .top-links{display:none;gap:1.5rem;align-items:center}
 .top-links a{font:400 .75rem var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap;padding:.3rem 0;border-bottom:1px solid transparent}
 .top-links a:hover,.top-links a[aria-current="page"]{border-bottom-color:currentColor}
-@media (min-width:92rem){.top-links{display:flex;gap:1.25rem}.top-links a{font-size:.7rem;letter-spacing:.1em}.bar .left{gap:1.5rem}}
-@media (min-width:100rem){.bar{max-width:104rem;padding-inline:3rem}}
+@media (min-width:100rem){.top-links{display:flex;gap:1.1rem}.top-links a{font-size:.68rem;letter-spacing:.06em}.bar .left{gap:1.25rem}.bar{max-width:104rem;padding-inline:3rem}.menu-btn span:last-child{display:none}}
 
 /* ===== Accueil sombre (sous la vidéo) ===== */
 body.home{--paper:#0c1f3a;--ink:#eae8e2;--grey:#a29f98;--rule:#25395a;--soft:#16294a;--khaki:#1a8f33;
@@ -350,3 +349,6 @@ footer.site{--lb:#6aa6f5;--lg:#4cc152}
 @media (max-width:52rem){.home .brand .mark{height:2.4rem}.home header.site.solid .brand .mark{height:2rem}.home .hero .inner{padding-top:7rem}}
 .home .rate{transition:opacity .35s,transform .35s}
 body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-events:none}
+
+.bar{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.top-links a{letter-spacing:.06em}
