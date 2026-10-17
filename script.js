@@ -35,6 +35,8 @@
     var sc=y>Math.max(40,ph);if(h)h.classList.toggle('solid',sc);document.body.classList.toggle('scrolled',y>window.innerHeight*0.6);
   }
   upd();window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);
+})();
+(function(){
   // Vidéos d'ambiance : lecture seulement quand visibles, jamais en économie de données
   var lv=[].slice.call(document.querySelectorAll('video[data-lazyvid]'));
   if(lv.length){
