@@ -35,4 +35,15 @@
     var sc=y>Math.max(40,ph);if(h)h.classList.toggle('solid',sc);document.body.classList.toggle('scrolled',y>window.innerHeight*0.6);
   }
   upd();window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);
+  // Vidéos d'ambiance : lecture seulement quand visibles, jamais en économie de données
+  var lv=[].slice.call(document.querySelectorAll('video[data-lazyvid]'));
+  if(lv.length){
+    var cn=navigator.connection||{},rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,
+        slow=!!(cn.saveData||/(^|-)2g$/.test(cn.effectiveType||''));
+    if(!rm&&!slow&&'IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;
+        if(e.isIntersecting){v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){});}else{v.pause();}});},{threshold:.35});
+      lv.forEach(function(v){io.observe(v);});
+    }
+  }
 })();
