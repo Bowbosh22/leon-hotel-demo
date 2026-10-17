@@ -352,3 +352,12 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 
 .bar{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
 .top-links a{letter-spacing:.06em}
+@media (max-width:40rem){
+.bar,.home .bar{grid-template-columns:auto minmax(0,1fr) auto;gap:.5rem;padding-inline:.9rem}
+.bar .left{gap:0}
+.brand{justify-self:center;gap:.4rem}
+.brand .mark,.home .brand .mark,.home header.site.solid .brand .mark{height:1.9rem}
+.wm b{font-size:1.05rem}.wm i{font-size:.62rem}
+.bar .btn,.home .bar .btn{padding:.6rem .85rem;font-size:.66rem;letter-spacing:.08em;white-space:nowrap}
+.menu-btn span:last-child{display:none}
+}
