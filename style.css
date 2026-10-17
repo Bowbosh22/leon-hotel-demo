@@ -374,3 +374,39 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 .ov-sub{animation:ovFade .6s 1.05s both}
 @keyframes ovFade{from{opacity:0;transform:translateY(.8rem)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.overlay,.ov-top,.ov-sub{animation:none}.ov-nav a{animation:none;opacity:1}}
+/* Visite immersive (optionnelle) */
+.imm-card{display:flex;align-items:center;gap:.9rem;width:100%;max-width:26rem;margin:1.2rem 0;padding:.6rem .9rem .6rem .6rem;background:#0c1f3a;color:#fff;border:1px solid #25395a;border-radius:.4rem;cursor:pointer;text-align:left;font:inherit;transition:transform .2s,border-color .2s}
+.imm-card:hover{transform:translateY(-2px);border-color:var(--lg)}
+.imm-card img{width:2.6rem;height:4.6rem;object-fit:cover;border-radius:.25rem;flex:none;background:#112a4d}
+.imm-card span{display:flex;flex-direction:column;gap:.15rem;flex:1;min-width:0}
+.imm-card b{font:700 .9rem/1.25 "Montserrat",var(--sans)}
+.imm-card small{font-size:.75rem;color:#9fb2cf}
+.imm-card svg{width:1.3rem;height:1.3rem;flex:none;color:var(--lg)}
+.imm{position:fixed;inset:0;z-index:80;background:#071427;color:#fff}
+.imm[hidden]{display:none}
+.imm-scroll{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;outline:0}
+.imm-track{height:520vh;position:relative}
+.imm-stick{position:sticky;top:0;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.imm-stick canvas{height:100%;max-width:100%;aspect-ratio:480/854;object-fit:cover;display:block;background:#112a4d}
+@media (max-width:52rem){.imm-stick canvas{width:100%;height:100%;aspect-ratio:auto}}
+.imm-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;background:linear-gradient(180deg,rgba(7,20,39,.85),rgba(7,20,39,0));z-index:3}
+.imm-top button{background:none;border:0;color:#fff;font:700 .75rem var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.5rem}
+.imm-bot{position:absolute;left:0;right:0;bottom:0;padding:3rem 1.5rem 1.4rem;background:linear-gradient(0deg,rgba(7,20,39,.92) 35%,rgba(7,20,39,0));z-index:2;max-width:30rem;margin-inline:auto;width:100%}
+.tour-cap{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.8rem}
+.tour-cap b{font:700 1.1rem/1.2 "Montserrat",var(--sans);color:#4cc152}
+.tour-cap span{color:#e3ebf7}
+.tour-prog{position:relative;height:3px;background:#3a5070}
+.tour-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:#4cc152}
+.tour-prog u{position:absolute;top:-4px;width:2px;height:11px;background:#071427;box-shadow:0 0 0 1px #6a82a8}
+.imm-hint{position:absolute;left:0;right:0;bottom:7.2rem;margin:0;display:flex;flex-direction:column;align-items:center;gap:.2rem;font:600 .78rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.7);opacity:0;transition:opacity .5s;pointer-events:none;z-index:2}
+.imm-hint.on{opacity:1}
+.imm-hint svg{width:1.6rem;height:1.6rem;animation:immBob 1.5s ease-in-out infinite}
+@keyframes immBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(5px)}}
+.imm-load{position:absolute;top:3.6rem;left:50%;transform:translateX(-50%);width:min(18rem,80%);z-index:3;text-align:center;font-size:.72rem;letter-spacing:.06em;color:#cfdbee;transition:opacity .5s}
+.imm-load i{display:block;height:2px;width:0;background:#4cc152;margin-bottom:.4rem;transition:width .2s}
+.imm-load.ok{opacity:0;pointer-events:none}
+.imm-end{position:absolute;left:0;right:0;bottom:8.2rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:4;background:rgba(7,20,39,.9);padding:1rem;max-width:18rem;margin-inline:auto;border-radius:.4rem}
+.imm-end[hidden]{display:none}
+.imm-end p{margin:0;font:700 1rem "Montserrat",var(--sans)}
+.imm-end button{background:none;border:0;color:#cfdbee;text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem}
+@media (prefers-reduced-motion:reduce){.imm-hint svg{animation:none}}
