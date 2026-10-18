@@ -83,17 +83,36 @@
     </div>
   </div>
 </section>
-<section class="sec ruled">
-  <div class="wrap split top">
-    <div><p class="mono">Tarifs</p><h2>Un tarif pour vos dates</h2></div>
-    <div><p>Les tarifs varient selon le type de chambre et la période. Indiquez vos dates : nous vous répondons avec les disponibilités.</p><p><a class="btn" href="contact.html#reserver">Demander un tarif</a></p></div>
+<section class="sec ruled" id="tarifs">
+  <div class="wrap">
+    <div class="center narrow"><p class="mono">Tarifs</p><h2>Nos chambres, par nuit</h2>
+    <p>Quatre catégories pour s'adapter à votre séjour. Tarifs indicatifs en FCFA, <span class="tbc">à confirmer avec l'hôtel</span>.</p></div>
+    <div class="rates">
+      <article class="rate-card"><p class="mono">Chambre</p><h3>Standard</h3><p class="price"><b>85 000</b> FCFA <small>/ nuit</small></p><a class="btn" href="contact.html#reserver">Demander cette chambre</a></article>
+      <article class="rate-card"><p class="mono">Chambre</p><h3>Semi Luxe</h3><p class="price"><b>100 000</b> FCFA <small>/ nuit</small></p><a class="btn" href="contact.html#reserver">Demander cette chambre</a></article>
+      <article class="rate-card"><p class="mono">Chambre</p><h3>Semi Grand Luxe</h3><p class="price"><b>120 000</b> FCFA <small>/ nuit</small></p><a class="btn" href="contact.html#reserver">Demander cette chambre</a></article>
+      <article class="rate-card"><p class="mono">Chambre</p><h3>Grand Luxe</h3><p class="price"><b>140 000</b> FCFA <small>/ nuit</small></p><a class="btn" href="contact.html#reserver">Demander cette chambre</a></article>
+    </div>
+    <p class="rate-note">Équipements, petit-déjeuner et conditions d'annulation <span class="tbc">à confirmer</span>. Les photos de chaque catégorie arrivent bientôt.</p>
+  </div>
+</section>
+<section class="sec ruled" id="services">
+  <div class="wrap">
+    <div class="center narrow"><p class="mono">Services</p><h2>Tout ce qu'il faut pour votre séjour</h2></div>
+    <div class="svc">
+      <div><h3>À votre service</h3><ul class="plain"><li>Réception 24h/24</li><li>Coffre-fort à la réception</li><li>Consigne à bagages</li><li>Service réveil</li><li>Laverie et lavage à sec</li></ul></div>
+      <div><h3>Table &amp; détente</h3><ul class="plain"><li>Restaurant</li><li>Bar et bar snack</li><li>Barbecue</li><li>Piscine et piscine pour enfants</li><li>Jardin et terrasse</li></ul></div>
+      <div><h3>Déplacements</h3><ul class="plain"><li>Transport depuis l'aéroport</li><li>Location de voitures</li><li>Parking</li></ul></div>
+      <div><h3>Confort</h3><ul class="plain"><li>Wi-Fi et Internet</li><li>Climatisation dans les parties communes</li><li>Chambres non-fumeur</li><li>Animaux de compagnie acceptés</li><li>Fax et presse</li></ul></div>
+    </div>
+    <p class="rate-note">Tarifs et conditions de certains services <span class="tbc">à confirmer avec l'hôtel</span>.</p>
   </div>
 </section>
 <div class="imm" id="imm" hidden role="dialog" aria-modal="true" aria-label="Visite en immersion de la chambre">
   <div class="imm-scroll" id="immScroll" tabindex="0">
     <div class="imm-track" id="immTrack">
       <div class="imm-stick">
-        <canvas id="immCv" width="480" height="854" role="img" aria-label="Visite de la chambre, image par image"></canvas>
+        <canvas id="immCv" width="576" height="1024" role="img" aria-label="Visite de la chambre, image par image"></canvas>
         <div class="imm-load" id="immLoad"><i id="immLoadBar"></i><span id="immLoadTxt">Chargement de la visite…</span></div>
         <div class="imm-top"><span class="mono">Visite en immersion</span><button type="button" id="immClose">Fermer ✕</button></div>
         <div class="imm-bot">
