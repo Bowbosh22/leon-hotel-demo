@@ -78,7 +78,7 @@
           <label for="b-tel">Téléphone ou WhatsApp<input id="b-tel" type="tel" autocomplete="tel" required></label>
         </div>
         <label for="b-mail">E-mail <small>(facultatif)</small><input id="b-mail" type="email" autocomplete="email"></label>
-        <label for="b-msg">Message <small>(facultatif)</small><textarea id="b-msg"></textarea></label>
+        <label for="b-msg">Demande spécifique <small>(facultatif)</small><textarea id="b-msg" placeholder="Lit supplémentaire, arrivée tardive, transfert aéroport…"></textarea></label>
         <p class="err" id="e3" role="alert" hidden></p>
         <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="submit">Confirmer la demande</button></div>
       </section>
@@ -152,7 +152,7 @@ if(st===1){if(!arr.value||!dep.value)return void err('e1','Indiquez vos dates d\
 else if(st===2){if(!room)return void err('e2','Choisissez une chambre pour continuer.');err('e2','');$('recap').innerHTML=recap();show(3)}});
 form.addEventListener('submit',function(e){e.preventDefault();var nom=$('b-nom').value.trim(),tel=$('b-tel').value.trim();if(!nom||!tel)return void err('e3','Indiquez votre nom et un numéro de téléphone ou WhatsApp.');err('e3','');
 var r=R(),n=nights(),mail=$('b-mail').value.trim(),msg=$('b-msg').value.trim();
-var txt='Bonjour, je souhaite réserver au Léon Hotel.\nChambre : '+r.n+'\nArrivée : '+fr(arr.value)+'\nDépart : '+fr(dep.value)+' ('+n+(n>1?' nuits':' nuit')+')\nPersonnes : '+pers.value+'\nTotal estimé : '+fmt(r.p*n)+' FCFA\nNom : '+nom+'\nTéléphone : '+tel+(mail?'\nE-mail : '+mail:'')+(msg?'\nMessage : '+msg:'');
+var txt='Bonjour, je souhaite réserver au Léon Hotel.\nChambre : '+r.n+'\nArrivée : '+fr(arr.value)+'\nDépart : '+fr(dep.value)+' ('+n+(n>1?' nuits':' nuit')+')\nPersonnes : '+pers.value+'\nTotal estimé : '+fmt(r.p*n)+' FCFA\nNom : '+nom+'\nTéléphone : '+tel+(mail?'\nE-mail : '+mail:'')+(msg?'\nDemande spécifique : '+msg:'');
 $('sendWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(txt);
 $('sendMail').href='mailto:'+MAIL+'?subject='+encodeURIComponent('Demande de réservation — '+r.n)+'&body='+encodeURIComponent(txt);
 $('doneTxt').textContent='Merci '+nom+'. Vérifiez le récapitulatif puis envoyez votre demande à l\'hôtel.';$('recap2').innerHTML=recap();show(4)});
