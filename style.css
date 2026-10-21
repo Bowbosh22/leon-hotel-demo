@@ -436,3 +436,11 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 .wa:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .rate{right:5.5rem;width:min(19rem,calc(100vw - 6.5rem))}
 @media (prefers-reduced-motion:reduce){.wa{transition:none}}
+/* Bandeau services (accueil) */
+.qh{color:#fff;margin:.4rem 0 0}
+.hl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;margin:2.5rem 0;text-align:center}
+.hl .h{padding:1.2rem .5rem;border-top:1px solid #25395a}
+.hl .h b{display:block;font:800 clamp(1.5rem,3vw,2.2rem)/1.1 "Montserrat",sans-serif;color:#fff;margin-bottom:.5rem}
+.hl .h span{color:#9fb0c9}
+.qsec .btn.inv{background:#fff;color:#0c1f3a;border-color:#fff}.qsec .btn.inv:hover{background:transparent;color:#fff}
+@media (max-width:48rem){.hl{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
