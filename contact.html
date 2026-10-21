@@ -44,38 +44,66 @@
 <main id="main">
 
 <section class="sec" id="reserver">
-  <div class="wrap split top">
-    <div>
-      <p class="mono">Coordonnées</p>
-      <h2>Nous trouver</h2>
-      <dl class="info">
-        <div><dt class="mono">Adresse</dt><dd>Léon Hotel<br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</dd></div>
-        <div><dt class="mono">E-mail</dt><dd>contact@leon-hotel-brazzaville.com</dd></div>
-        <div><dt class="mono">Site</dt><dd>www.leon-hotel-brazzaville.com</dd></div>
-        <div><dt class="mono">Téléphone</dt><dd><span class="tbc">à confirmer avec l'hôtel</span></dd></div>
-        <div><dt class="mono">Accès</dt><dd>À 3,3 km de l'aéroport Maya-Maya. Basilique Sainte-Anne à environ 1,5 km. Voiture recommandée pour vos déplacements.</dd></div>
-        <div><dt class="mono">Plan</dt><dd><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Leon+Hotel+Avenue+du+Colonel+Bisset+Brazzaville" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></dd></div>
-      </dl>
-    </div>
-    <form class="book" id="bk" novalidate>
-      <p class="mono">Réservation</p>
-      <h2>Demande de réservation</h2>
-      <div class="row">
-        <label for="b-nom">Nom<input id="b-nom" name="nom" autocomplete="name" required></label>
-        <label for="b-mail">E-mail<input id="b-mail" name="email" type="email" autocomplete="email" required></label>
-      </div>
-      <div class="row">
-        <label for="b-arr">Arrivée<input id="b-arr" name="arrivee" type="date" required></label>
-        <label for="b-dep">Départ<input id="b-dep" name="depart" type="date" required></label>
-      </div>
-      <div class="row">
-        <label for="b-type">Type de chambre<select id="b-type" name="type"><option>Chambre</option><option>Suite</option><option>Je ne sais pas encore</option></select></label>
-        <label for="b-pers">Personnes<input id="b-pers" name="personnes" type="number" min="1" max="6" value="2"></label>
-      </div>
-      <label for="b-msg">Message<textarea id="b-msg" name="message"></textarea></label>
-      <div><button class="btn" type="submit">Envoyer la demande</button></div>
-      <p id="b-ok" class="sent" hidden>Démo : le formulaire n'est pas encore connecté à la messagerie de l'hôtel.</p>
+  <div class="wrap bkw">
+    <div class="center narrow"><p class="mono">Réservation</p><h2>Réservez votre séjour</h2></div>
+    <ol class="steps" id="steps" aria-label="Étapes de la réservation">
+      <li aria-current="step"><b>1</b><span>Séjour</span></li><li><b>2</b><span>Chambre</span></li><li><b>3</b><span>Confirmation</span></li>
+    </ol>
+    <form class="wiz" id="wz" novalidate>
+      <section class="st" data-st="1" aria-labelledby="h1">
+        <h3 id="h1" tabindex="-1">Vos dates de séjour</h3>
+        <div class="row">
+          <label for="b-arr">Arrivée<input id="b-arr" type="date" required></label>
+          <label for="b-dep">Départ<input id="b-dep" type="date" required></label>
+        </div>
+        <div class="row">
+          <label for="b-pers">Nombre de personnes<input id="b-pers" type="number" min="1" max="10" value="2" required></label>
+          <p class="nuits" id="nuits" aria-live="polite"></p>
+        </div>
+        <p class="err" id="e1" role="alert" hidden></p>
+        <div class="nav"><span></span><button class="btn" type="button" data-next>Choisir ma chambre</button></div>
+      </section>
+      <section class="st" data-st="2" aria-labelledby="h2" hidden>
+        <h3 id="h2" tabindex="-1">Choisissez votre chambre</h3>
+        <p class="sub" id="sub2"></p>
+        <div class="opts" role="radiogroup" aria-labelledby="h2" id="opts"></div>
+        <p class="err" id="e2" role="alert" hidden></p>
+        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="button" data-next>Continuer</button></div>
+      </section>
+      <section class="st" data-st="3" aria-labelledby="h3" hidden>
+        <h3 id="h3" tabindex="-1">Confirmez votre demande</h3>
+        <dl class="recap" id="recap"></dl>
+        <div class="row">
+          <label for="b-nom">Nom complet<input id="b-nom" autocomplete="name" required></label>
+          <label for="b-tel">Téléphone ou WhatsApp<input id="b-tel" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="b-mail">E-mail <small>(facultatif)</small><input id="b-mail" type="email" autocomplete="email"></label>
+        <label for="b-msg">Message <small>(facultatif)</small><textarea id="b-msg"></textarea></label>
+        <p class="err" id="e3" role="alert" hidden></p>
+        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="submit">Confirmer la demande</button></div>
+      </section>
+      <section class="st done" data-st="4" aria-labelledby="h4" hidden>
+        <h3 id="h4" tabindex="-1">Votre demande est prête</h3>
+        <p id="doneTxt"></p>
+        <dl class="recap" id="recap2"></dl>
+        <div class="send"><a class="btn wa-btn" id="sendWa" target="_blank" rel="noopener">Envoyer par WhatsApp</a><a class="btn ghost" id="sendMail">Envoyer par e-mail</a></div>
+        <p class="sent">Démo : l'envoi se fait depuis votre WhatsApp ou votre messagerie. L'hôtel confirme ensuite la disponibilité et le tarif définitif. Numéro WhatsApp <span class="tbc">à confirmer</span>.</p>
+      </section>
     </form>
+  </div>
+</section>
+<section class="sec ruled" id="trouver">
+  <div class="wrap narrow">
+    <p class="mono">Coordonnées</p>
+    <h2>Nous trouver</h2>
+    <dl class="info">
+      <div><dt class="mono">Adresse</dt><dd>Léon Hotel<br>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</dd></div>
+      <div><dt class="mono">E-mail</dt><dd>contact@leon-hotel-brazzaville.com</dd></div>
+      <div><dt class="mono">Site</dt><dd>www.leon-hotel-brazzaville.com</dd></div>
+      <div><dt class="mono">Téléphone</dt><dd><span class="tbc">à confirmer avec l'hôtel</span></dd></div>
+      <div><dt class="mono">Accès</dt><dd>À 3,3 km de l'aéroport Maya-Maya. Basilique Sainte-Anne à environ 1,5 km. Voiture recommandée pour vos déplacements.</dd></div>
+      <div><dt class="mono">Plan</dt><dd><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Leon+Hotel+Avenue+du+Colonel+Bisset+Brazzaville" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></dd></div>
+    </dl>
   </div>
 </section>
 
@@ -96,8 +124,39 @@
 </div></footer>
 <script src="script.js" defer></script>
 <script>
-document.getElementById('bk').addEventListener('submit',function(e){e.preventDefault();document.getElementById('b-ok').hidden=false;});
-(function(){try{var p=new URLSearchParams(location.search);[['arrivee','b-arr'],['depart','b-dep'],['personnes','b-pers']].forEach(function(m){var v=p.get(m[0]);if(v){document.getElementById(m[1]).value=v;}});}catch(e){}})();
+(function(){
+var WA='',MAIL='contact@leon-hotel-brazzaville.com';
+var ROOMS=[{id:'standard',n:'Standard',p:85000},{id:'semi-luxe',n:'Semi Luxe',p:100000},{id:'semi-grand-luxe',n:'Semi Grand Luxe',p:120000},{id:'grand-luxe',n:'Grand Luxe',p:140000}];
+var $=function(i){return document.getElementById(i)};
+var st=1,room=null,form=$('wz'),arr=$('b-arr'),dep=$('b-dep'),pers=$('b-pers');
+function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f')}
+function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+var today=new Date();today.setHours(0,0,0,0);arr.min=iso(today);
+function nights(){if(!arr.value||!dep.value)return 0;return Math.round((new Date(dep.value)-new Date(arr.value))/864e5)}
+function fr(v){var d=new Date(v+'T00:00:00');return d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'long',year:'numeric'})}
+function upd(){if(arr.value){var m=new Date(arr.value);m.setDate(m.getDate()+1);dep.min=iso(m);}var n=nights();$('nuits').textContent=n>0?n+(n>1?' nuits':' nuit'):'';}
+arr.addEventListener('change',function(){if(dep.value&&nights()<1)dep.value='';upd()});dep.addEventListener('change',upd);
+try{var q=new URLSearchParams(location.search);[['arrivee',arr],['depart',dep],['personnes',pers]].forEach(function(m){var v=q.get(m[0]);if(v)m[1].value=v});var c=q.get('chambre');ROOMS.forEach(function(r){if(r.id===c)room=r.id});}catch(e){}
+upd();
+function steps(){var li=$('steps').children;for(var i=0;i<li.length;i++){li[i].className=(i+1<Math.min(st,3)?'ok':'');if(i+1===Math.min(st,3))li[i].setAttribute('aria-current','step');else li[i].removeAttribute('aria-current')}}
+function show(n){st=n;[].forEach.call(form.querySelectorAll('.st'),function(s){s.hidden=(+s.getAttribute('data-st')!==n)});steps();var h=$('h'+n);if(h){h.focus({preventScroll:true});}$('steps').scrollIntoView({behavior:'smooth',block:'start'})}
+function err(id,msg){var e=$(id);e.textContent=msg;e.hidden=!msg;return !msg}
+function rooms(){var n=nights(),h='';ROOMS.forEach(function(r){var on=r.id===room;h+='<label class="opt'+(on?' on':'')+'"><input type="radio" name="room" value="'+r.id+'"'+(on?' checked':'')+'><span class="oi"><b>'+r.n+'</b><small>'+fmt(r.p)+' FCFA / nuit</small></span><span class="ot">'+fmt(r.p*n)+' FCFA<small>pour '+n+(n>1?' nuits':' nuit')+'</small></span></label>'});$('opts').innerHTML=h;
+$('sub2').textContent=fr(arr.value)+' → '+fr(dep.value)+' · '+pers.value+(+pers.value>1?' personnes':' personne')}
+$('opts').addEventListener('change',function(e){room=e.target.value;[].forEach.call($('opts').children,function(l){l.classList.toggle('on',l.querySelector('input').checked)});err('e2','')});
+function R(){return ROOMS.filter(function(r){return r.id===room})[0]}
+function recap(){var r=R(),n=nights();var rows=[['Arrivée',fr(arr.value)],['Départ',fr(dep.value)],['Durée',n+(n>1?' nuits':' nuit')],['Personnes',pers.value],['Chambre',r.n],['Total estimé',fmt(r.p*n)+' FCFA <small>(à confirmer par l\'hôtel)</small>']];return rows.map(function(x){return '<div><dt class="mono">'+x[0]+'</dt><dd>'+x[1]+'</dd></div>'}).join('')}
+form.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data-prev')){show(st-1);return}
+if(!t.hasAttribute('data-next'))return;
+if(st===1){if(!arr.value||!dep.value)return void err('e1','Indiquez vos dates d\'arrivée et de départ.');if(new Date(arr.value)<today)return void err('e1','La date d\'arrivée est déjà passée.');if(nights()<1)return void err('e1','Le départ doit être après l\'arrivée.');if(!(+pers.value>=1))return void err('e1','Indiquez le nombre de personnes.');err('e1','');rooms();show(2)}
+else if(st===2){if(!room)return void err('e2','Choisissez une chambre pour continuer.');err('e2','');$('recap').innerHTML=recap();show(3)}});
+form.addEventListener('submit',function(e){e.preventDefault();var nom=$('b-nom').value.trim(),tel=$('b-tel').value.trim();if(!nom||!tel)return void err('e3','Indiquez votre nom et un numéro de téléphone ou WhatsApp.');err('e3','');
+var r=R(),n=nights(),mail=$('b-mail').value.trim(),msg=$('b-msg').value.trim();
+var txt='Bonjour, je souhaite réserver au Léon Hotel.\nChambre : '+r.n+'\nArrivée : '+fr(arr.value)+'\nDépart : '+fr(dep.value)+' ('+n+(n>1?' nuits':' nuit')+')\nPersonnes : '+pers.value+'\nTotal estimé : '+fmt(r.p*n)+' FCFA\nNom : '+nom+'\nTéléphone : '+tel+(mail?'\nE-mail : '+mail:'')+(msg?'\nMessage : '+msg:'');
+$('sendWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(txt);
+$('sendMail').href='mailto:'+MAIL+'?subject='+encodeURIComponent('Demande de réservation — '+r.n)+'&body='+encodeURIComponent(txt);
+$('doneTxt').textContent='Merci '+nom+'. Vérifiez le récapitulatif puis envoyez votre demande à l\'hôtel.';$('recap2').innerHTML=recap();show(4)});
+})();
 </script>
 </body>
 </html>

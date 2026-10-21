@@ -444,3 +444,44 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 .hl .h span{color:#9fb0c9}
 .qsec .btn.inv{background:#fff;color:#0c1f3a;border-color:#fff}.qsec .btn.inv:hover{background:transparent;color:#fff}
 @media (max-width:48rem){.hl{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
+/* Réservation en 3 étapes */
+.bkw{max-width:46rem}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:2rem 0 1.6rem;padding:0;counter-reset:s}
+.steps li{display:flex;align-items:center;gap:.6rem;padding-bottom:.7rem;border-bottom:2px solid var(--rule);color:var(--grey);font:600 .78rem/1.2 "Montserrat",sans-serif;text-transform:uppercase;letter-spacing:.08em}
+.steps li b{display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;border:1px solid currentColor;font-size:.8rem}
+.steps li[aria-current]{color:var(--ink);border-color:var(--ink)}
+.steps li[aria-current] b{background:var(--ink);color:#fff;border-color:var(--ink)}
+.steps li.ok{color:#1f9a35;border-color:#1f9a35}
+.wiz{display:block;background:#fff;border:1px solid var(--rule);padding:1.6rem}
+.wiz .st{display:grid;gap:1.1rem}
+.wiz .st[hidden]{display:none}
+.wiz h3{font-family:var(--display);font-size:1.5rem;margin:0;color:var(--ink)}
+.wiz h3:focus{outline:none}
+.wiz .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end}
+.wiz label{display:grid;gap:.4rem;font-size:.85rem;color:var(--ink)}
+.wiz small{color:var(--grey)}
+.nuits{margin:0;font-weight:700;color:var(--ink);padding-bottom:.7rem}
+.sub{margin:0;color:var(--grey)}
+.err{margin:0;color:#b3261e;font-size:.9rem}
+.nav{display:flex;justify-content:space-between;gap:1rem;margin-top:.4rem}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.opts{display:grid;gap:.7rem}
+.opt{display:flex!important;grid-template-columns:none;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;border:1px solid var(--rule);cursor:pointer;position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:#f1f5fb}
+.opt:focus-within{outline:2px solid #2a62c4;outline-offset:2px}
+.opt .oi b{display:block;font-family:var(--display);font-size:1.1rem}
+.opt .ot{text-align:right;font:800 1.15rem/1.2 "Montserrat",sans-serif;color:var(--ink)}
+.opt small{display:block;font:400 .8rem/1.3 var(--body,inherit);color:var(--grey)}
+.recap{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem 1.2rem;margin:0;padding:1rem;background:#f1f5fb}
+.recap dt{color:var(--grey);margin:0}.recap dd{margin:.15rem 0 0;font-weight:600;color:var(--ink)}
+.send{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn.wa-btn{background:#25d366;border-color:#25d366;color:#fff}
+.done .sent{margin:0;color:var(--grey);font-size:.88rem}
+#trouver .info{margin-top:1.2rem}
+@media (max-width:40rem){.wiz{padding:1.1rem}.wiz .row{grid-template-columns:1fr}.recap{grid-template-columns:1fr}.steps li span{display:none}.steps li{justify-content:center}.steps li[aria-current] span{display:inline}.steps{grid-template-columns:1fr 1fr 1fr}.opt{flex-direction:column;align-items:flex-start}.opt .ot{text-align:left}.nav .btn{flex:1}}
+.steps{scroll-margin-top:6rem}
+.wiz .opt{text-transform:none;letter-spacing:0;font-size:1rem}
+.wiz .opt .ot{font-size:1.1rem}
+.wiz .opt small{font:400 .8rem/1.3 "Hanken Grotesk",sans-serif;text-transform:none;letter-spacing:0;color:var(--grey)}
