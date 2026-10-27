@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Restaurant et piscine — Léon Hotel Brazzaville</title>
-<meta name="description" content="Restaurant, petit-déjeuner, bar-lounge et piscine du Léon Hotel à Brazzaville.">
+<meta name="description" content="Restaurant, petit-déjeuner, bar-lounge et piscine du Léon Hotel à Brazzaville. Location de l'espace restaurant pour vos événements.">
 <meta property="og:title" content="Restaurant et piscine — Léon Hotel Brazzaville">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
@@ -55,12 +55,48 @@
     <figure><img class="ph" src="restaurant.jpg" alt="Le restaurant et son buffet" loading="lazy"></figure>
     <div><p class="mono">Restaurant</p><h2>À table au Léon Hotel</h2>
     <p>Le restaurant de l'hôtel sert le petit-déjeuner et les repas. Vous pouvez aussi vous faire servir en chambre.</p>
-    <p>Horaires et carte <span class="tbc">à confirmer avec l'hôtel</span></p></div>
+    <p>Horaires et carte <span class="tbc">à confirmer avec l'hôtel</span></p>
+    <p>L'espace de restauration peut aussi être loué pour vos événements.</p>
+    <p><a class="btn ghost" href="#location">Louer l'espace</a></p></div>
   </div>
   <div class="wrap strip two">
     <figure><img src="buffet.jpg" alt="Petit-déjeuner" loading="lazy"><figcaption class="mono">Le petit-déjeuner</figcaption></figure>
     <figure><img src="salle-petit-dejeuner.jpg" alt="Salle du petit-déjeuner" loading="lazy"><figcaption class="mono">La salle du petit-déjeuner</figcaption></figure>
     <figure><img src="plat.jpg" alt="Plat du restaurant" loading="lazy"><figcaption class="mono">Un plat du chef</figcaption></figure>
+  </div>
+</section>
+<section class="sec ruled" id="location">
+  <div class="wrap bkw">
+    <div class="center narrow"><p class="mono">Événements</p><h2>Louer l'espace restaurant</h2>
+    <p>Mariage, anniversaire, séminaire, repas d'entreprise : l'espace de restauration de l'hôtel peut être loué. Capacité, tarifs et conditions <span class="tbc">à confirmer avec l'hôtel</span>.</p></div>
+    <form class="wiz" id="lc" novalidate style="margin-top:2rem">
+      <section class="st" aria-labelledby="lh">
+        <h3 id="lh">Votre demande de location</h3>
+        <div class="row">
+          <label for="l-type">Type d'événement<select id="l-type"><option>Mariage</option><option>Anniversaire</option><option>Séminaire ou réunion</option><option>Repas d'entreprise</option><option>Autre événement</option></select></label>
+          <label for="l-date">Date souhaitée<input id="l-date" type="date" required></label>
+        </div>
+        <div class="row">
+          <label for="l-nb">Nombre de personnes<input id="l-nb" type="number" min="1" value="30" required></label>
+          <label for="l-hor">Horaire souhaité <small>(facultatif)</small><input id="l-hor" placeholder="Ex. 18h à minuit"></label>
+        </div>
+        <div class="row">
+          <label for="l-nom">Nom complet<input id="l-nom" autocomplete="name" required></label>
+          <label for="l-tel">Téléphone ou WhatsApp<input id="l-tel" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="l-mail">E-mail <small>(facultatif)</small><input id="l-mail" type="email" autocomplete="email"></label>
+        <label for="l-msg">Demande spécifique <small>(facultatif)</small><textarea id="l-msg" placeholder="Traiteur, décoration, sonorisation, installation de la salle…"></textarea></label>
+        <p class="err" id="l-err" role="alert" hidden></p>
+        <div class="nav"><span></span><button class="btn wa-btn" type="submit">Envoyer sur WhatsApp</button></div>
+      </section>
+      <section class="st done" id="l-done" aria-labelledby="ld" hidden>
+        <h3 id="ld" tabindex="-1">Votre demande est prête</h3>
+        <p id="l-txt"></p>
+        <dl class="recap" id="l-recap"></dl>
+        <div class="send"><a class="btn wa-btn" id="l-wa" target="_blank" rel="noopener">Ouvrir WhatsApp</a><a class="btn ghost" id="l-mail-btn">Envoyer par e-mail</a></div>
+        <p class="sent">Démo : votre demande part depuis votre propre WhatsApp. L'hôtel vous répond ensuite avec la disponibilité et le devis. Numéro WhatsApp <span class="tbc">à confirmer</span>.</p>
+      </section>
+    </form>
   </div>
 </section>
 <section class="sec ruled" id="bar">
@@ -99,6 +135,42 @@
   <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos : Hôtel Léon. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
 </div></footer>
 <script src="script.js" defer></script>
-
+<script>
+(function(){
+var WA='',MAIL='contact@leon-hotel-brazzaville.com';
+var $=function(i){return document.getElementById(i)},f=$('lc');if(!f)return;
+var d=$('l-date'),t=new Date();t.setHours(0,0,0,0);var p=function(n){return ('0'+n).slice(-2)};d.min=t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate());
+function fr(v){return new Date(v+'T00:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+function err(m){var e=$('l-err');e.textContent=m;e.hidden=!m;return !m}
+var T={
+'Mariage':{o:"organiser un mariage",q:["la capacité de l'espace pour la réception","le tarif de location","la possibilité d'un traiteur et de la décoration","les conditions de réservation et d'acompte"]},
+'Anniversaire':{o:"organiser un anniversaire",q:["la disponibilité de l'espace","le tarif de location","les options de restauration, de gâteau et de décoration","la possibilité d'une sonorisation"]},
+'Séminaire ou réunion':{o:"organiser un séminaire ou une réunion",q:["la disponibilité de l'espace","le tarif à la journée ou à la demi-journée","le matériel disponible (vidéoprojecteur, sonorisation, Wi-Fi)","les formules de pauses café et de déjeuner"]},
+"Repas d'entreprise":{o:"organiser un repas d'entreprise",q:["la disponibilité de l'espace","les formules de menu et leur tarif","la possibilité de privatiser la salle","les modalités de facturation"]},
+'Autre événement':{o:"organiser un événement",q:["la disponibilité de l'espace","le tarif de location","les services possibles (restauration, décoration, sonorisation)","les conditions de réservation"]}};
+function msg(){
+var ty=$('l-type').value,c=T[ty]||T['Autre événement'],nb=$('l-nb').value,h=$('l-hor').value.trim(),m=$('l-mail').value.trim(),sp=$('l-msg').value.trim(),nom=$('l-nom').value.trim(),tel=$('l-tel').value.trim();
+var L=["Bonjour, je souhaite louer l'espace restaurant du Léon Hotel pour "+c.o+".","","*Date* : "+fr(d.value),"*Invités* : "+nb+(+nb>1?" personnes":" personne")];
+if(h)L.push("*Horaire* : "+h);
+if(sp)L.push("*Demande spécifique* : "+sp);
+L.push("","Pouvez-vous m'indiquer :");c.q.forEach(function(x){L.push("- "+x)});
+L.push("","*Nom* : "+nom,"*Téléphone* : "+tel);if(m)L.push("*E-mail* : "+m);
+L.push("","Merci d'avance.");return {txt:L.join("\n"),ty:ty};
+}
+f.addEventListener('submit',function(e){e.preventDefault();
+var nom=$('l-nom').value.trim(),tel=$('l-tel').value.trim();
+if(!d.value)return void err('Indiquez la date souhaitée.');if(new Date(d.value)<t)return void err('Cette date est déjà passée.');
+if(!(+$('l-nb').value>=1))return void err('Indiquez le nombre de personnes.');if(!nom||!tel)return void err('Indiquez votre nom et un numéro de téléphone ou WhatsApp.');err('');
+var r=msg(),url='https://wa.me/'+WA+'?text='+encodeURIComponent(r.txt),h=$('l-hor').value.trim();
+var rows=[['Événement',r.ty],['Date',fr(d.value)],['Invités',$('l-nb').value]];if(h)rows.push(['Horaire',h]);
+$('l-recap').innerHTML=rows.map(function(x){return '<div><dt class="mono">'+x[0]+'</dt><dd>'+x[1]+'</dd></div>'}).join('');
+$('l-wa').href=url;
+$('l-mail-btn').href='mailto:'+MAIL+'?subject='+encodeURIComponent('Location espace restaurant — '+r.ty)+'&body='+encodeURIComponent(r.txt);
+$('l-txt').textContent='Merci '+nom+'. WhatsApp s\'ouvre avec votre message déjà rédigé : il ne reste qu\'à l\'envoyer. Si rien ne s\'ouvre, utilisez le bouton ci-dessous.';
+f.querySelector('.st').hidden=true;$('l-done').hidden=false;$('ld').focus();$('location').scrollIntoView({behavior:'smooth',block:'start'});
+var w=window.open(url,'_blank','noopener');if(!w){/* pop-up bloquée : le bouton reste disponible */}
+});
+})();
+</script>
 </body>
 </html>
