@@ -71,7 +71,7 @@
         <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="button" data-next>Continuer</button></div>
       </section>
       <section class="st" data-st="3" aria-labelledby="h3" hidden>
-        <h3 id="h3" tabindex="-1">Confirmez votre demande</h3>
+        <h3 id="h3" tabindex="-1">Confirmez et envoyez votre demande</h3>
         <dl class="recap" id="recap"></dl>
         <div class="row">
           <label for="b-nom">Nom complet<input id="b-nom" autocomplete="name" required></label>
@@ -80,14 +80,14 @@
         <label for="b-mail">E-mail <small>(facultatif)</small><input id="b-mail" type="email" autocomplete="email"></label>
         <label for="b-msg">Demande spécifique <small>(facultatif)</small><textarea id="b-msg" placeholder="Lit supplémentaire, arrivée tardive, transfert aéroport…"></textarea></label>
         <p class="err" id="e3" role="alert" hidden></p>
-        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="submit">Confirmer la demande</button></div>
+        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn wa-btn" type="submit">Envoyer sur WhatsApp</button></div>
       </section>
       <section class="st done" data-st="4" aria-labelledby="h4" hidden>
         <h3 id="h4" tabindex="-1">Votre demande est prête</h3>
         <p id="doneTxt"></p>
         <dl class="recap" id="recap2"></dl>
-        <div class="send"><a class="btn wa-btn" id="sendWa" target="_blank" rel="noopener">Envoyer par WhatsApp</a><a class="btn ghost" id="sendMail">Envoyer par e-mail</a></div>
-        <p class="sent">Démo : l'envoi se fait depuis votre WhatsApp ou votre messagerie. L'hôtel confirme ensuite la disponibilité et le tarif définitif. Numéro WhatsApp <span class="tbc">à confirmer</span>.</p>
+        <div class="send"><a class="btn wa-btn" id="sendWa" target="_blank" rel="noopener">Ouvrir WhatsApp</a><a class="btn ghost" id="sendMail">Envoyer par e-mail</a></div>
+        <p class="sent">Démo : votre demande part depuis votre propre WhatsApp. L'hôtel confirme ensuite la disponibilité et le tarif définitif. Numéro WhatsApp <span class="tbc">à confirmer</span>.</p>
       </section>
     </form>
   </div>
@@ -151,11 +151,20 @@ if(!t.hasAttribute('data-next'))return;
 if(st===1){if(!arr.value||!dep.value)return void err('e1','Indiquez vos dates d\'arrivée et de départ.');if(new Date(arr.value)<today)return void err('e1','La date d\'arrivée est déjà passée.');if(nights()<1)return void err('e1','Le départ doit être après l\'arrivée.');if(!(+pers.value>=1))return void err('e1','Indiquez le nombre de personnes.');err('e1','');rooms();show(2)}
 else if(st===2){if(!room)return void err('e2','Choisissez une chambre pour continuer.');err('e2','');$('recap').innerHTML=recap();show(3)}});
 form.addEventListener('submit',function(e){e.preventDefault();var nom=$('b-nom').value.trim(),tel=$('b-tel').value.trim();if(!nom||!tel)return void err('e3','Indiquez votre nom et un numéro de téléphone ou WhatsApp.');err('e3','');
-var r=R(),n=nights(),mail=$('b-mail').value.trim(),msg=$('b-msg').value.trim();
-var txt='Bonjour, je souhaite réserver au Léon Hotel.\nChambre : '+r.n+'\nArrivée : '+fr(arr.value)+'\nDépart : '+fr(dep.value)+' ('+n+(n>1?' nuits':' nuit')+')\nPersonnes : '+pers.value+'\nTotal estimé : '+fmt(r.p*n)+' FCFA\nNom : '+nom+'\nTéléphone : '+tel+(mail?'\nE-mail : '+mail:'')+(msg?'\nDemande spécifique : '+msg:'');
-$('sendWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(txt);
+var r=R(),n=nights(),mail=$('b-mail').value.trim(),sp=$('b-msg').value.trim();
+var Q={'standard':["la disponibilité d'une chambre Standard","si le petit-déjeuner est inclus","les conditions d'annulation"],
+'semi-luxe':["la disponibilité d'une chambre Semi Luxe avec baignoire","si le petit-déjeuner est inclus","les conditions d'annulation"],
+'semi-grand-luxe':["la disponibilité d'une chambre Semi Grand Luxe avec coin salon et bureau","si le petit-déjeuner est inclus","les conditions d'annulation"],
+'grand-luxe':["la disponibilité d'une chambre Grand Luxe avec coin salon","si le petit-déjeuner est inclus","les conditions d'annulation"]};
+var L=["Bonjour, je souhaite réserver une chambre *"+r.n+"* au Léon Hotel.","","*Arrivée* : "+fr(arr.value),"*Départ* : "+fr(dep.value)+" ("+n+(n>1?" nuits":" nuit")+")","*Personnes* : "+pers.value,"*Tarif indicatif* : "+fmt(r.p)+" FCFA / nuit, soit "+fmt(r.p*n)+" FCFA pour le séjour"];
+if(sp)L.push("*Demande spécifique* : "+sp);
+L.push("","Pouvez-vous me confirmer :");(Q[r.id]||[]).forEach(function(x){L.push("- "+x)});L.push("- le tarif définitif");
+L.push("","*Nom* : "+nom,"*Téléphone* : "+tel);if(mail)L.push("*E-mail* : "+mail);L.push("","Merci d'avance.");
+var txt=L.join("\n"),url='https://wa.me/'+WA+'?text='+encodeURIComponent(txt);
+$('sendWa').href=url;
 $('sendMail').href='mailto:'+MAIL+'?subject='+encodeURIComponent('Demande de réservation — '+r.n)+'&body='+encodeURIComponent(txt);
-$('doneTxt').textContent='Merci '+nom+'. Vérifiez le récapitulatif puis envoyez votre demande à l\'hôtel.';$('recap2').innerHTML=recap();show(4)});
+$('doneTxt').textContent="Merci "+nom+". WhatsApp s'ouvre avec votre demande déjà rédigée : il ne reste qu'à l'envoyer. Si rien ne s'ouvre, utilisez le bouton ci-dessous.";$('recap2').innerHTML=recap();show(4);
+var w=window.open(url,'_blank','noopener');if(!w){/* pop-up bloquée : le bouton reste disponible */}});
 })();
 </script>
 </body>
