@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>QR codes à imprimer — Léon Hotel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1f3a'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<style>
+.wrapq{max-width:64rem;margin:0 auto;padding:1rem 1rem 3rem}
+.ctl{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:48rem){.ctl{grid-template-columns:1fr 1fr}}
+.ctl label.f{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+.ctl .help{color:var(--grey);font-size:.85rem;margin:.3rem 0 0}
+.ck{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem}
+.ck label{display:flex;gap:.45rem;align-items:center;font-size:.98rem}
+.ck input{width:1.15rem;height:1.15rem;accent-color:var(--lb)}
+.bar{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin:1.2rem 0 .4rem}
+.bar .send{width:auto;margin:0;padding:.85rem 1.4rem}
+.cnt{color:var(--grey);font-size:.92rem}
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem;margin-top:1rem}
+.qc{background:#fff;border:1.5px solid var(--ink);border-radius:.8rem;padding:1.1rem 1rem;text-align:center;break-inside:avoid;page-break-inside:avoid}
+.qc .wm{align-items:center;margin:0 auto .6rem}
+.qc .lieu{font:800 1.15rem/1.2 var(--display);margin:.2rem 0 .1rem}
+.qc .inv{font:700 .95rem var(--display);margin:.5rem 0 0}
+.qc .inv2{color:var(--grey);font-size:.82rem;margin:.1rem 0 0}
+.qc .q{width:78%;margin:.5rem auto}
+.qc .q svg{width:100%;height:auto;display:block}
+.qc .url{font-size:.62rem;color:var(--grey);word-break:break-all;margin-top:.4rem}
+@media print{
+  body{background:#fff}.noprint{display:none!important}
+  .wrapq{max-width:none;padding:0}
+  .sheet{grid-template-columns:repeat(2,1fr);gap:8mm;margin:0}
+  .qc{border:1.2pt solid #0c1f3a}
+  @page{size:A4;margin:10mm}
+}
+</style>
+</head>
+<body>
+<div class="wrapq">
+  <div class="top noprint"><div class="wm"><b>LEON</b><i>HOTEL</i></div><div class="cnt">QR codes à imprimer</div></div>
+  <section class="card noprint">
+    <div class="ctl">
+      <div>
+        <label class="f" for="base">Adresse de la page d'avis</label>
+        <input type="text" id="base" spellcheck="false">
+        <p class="help">C'est l'adresse où les clients arriveront. Elle est préremplie ; changez-la si le site a une autre adresse.</p>
+      </div>
+      <div>
+        <label class="f" for="rooms">Numéros de chambres</label>
+        <input type="text" id="rooms" value="101-110, 201-210" spellcheck="false">
+        <p class="help">Plages ou numéros séparés par des virgules (ex : 101-110, 201-210, 305). Laissez vide pour aucune chambre.</p>
+      </div>
+    </div>
+    <div class="ck" style="margin-top:1rem">
+      <label><input type="checkbox" id="c-restaurant" checked> Restaurant</label>
+      <label><input type="checkbox" id="c-patisserie" checked> Pâtisserie</label>
+      <label><input type="checkbox" id="c-fastfood" checked> Fast-food</label>
+      <label><input type="checkbox" id="c-hebergement" checked> Hébergement (QR général, réception)</label>
+    </div>
+    <div class="bar"><button class="send" id="print" type="button">Imprimer / Enregistrer en PDF</button><span class="cnt" id="cnt"></span></div>
+    <p class="help">Astuce : dans la fenêtre d'impression, choisissez « Enregistrer en PDF » pour garder le fichier. Testez toujours un QR avec un téléphone avant d'imprimer en quantité.</p>
+  </section>
+  <div class="sheet" id="sheet"></div>
+</div>
+<script src="qrcode.js"></script>
+<script>
+(function(){
+'use strict';
+var $=function(i){return document.getElementById(i)};
+var def=location.href.split('#')[0].split('?')[0].replace(/qr\.html$/,'');
+var proto=location.protocol==='file:'?'https://VOTRE-ADRESSE/':def;
+$('base').value=proto;
+function parseRooms(s){
+  var out=[],seen={};
+  String(s||'').split(',').forEach(function(p){
+    p=p.trim(); if(!p)return;
+    var m=p.match(/^(\d{1,5})\s*[-–]\s*(\d{1,5})$/);
+    if(m){var a=+m[1],b=+m[2];if(b<a){var t=a;a=b;b=t}if(b-a>300)b=a+300;for(var i=a;i<=b;i++)add(String(i))}
+    else if(/^[A-Za-z0-9]{1,6}$/.test(p))add(p);
+  });
+  function add(n){if(!seen[n]){seen[n]=1;out.push(n)}}
+  return out;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function card(label,url){
+  var qr=qrcode(0,'M');qr.addData(url);qr.make();
+  return '<div class="qc"><div class="wm"><b>LEON</b><i>HOTEL</i></div><div class="lieu">'+esc(label)+'</div>'+
+   '<div class="q">'+qr.createSvgTag({cellSize:4,margin:2,scalable:true})+'</div>'+
+   '<div class="inv">Votre avis en 30 secondes</div><div class="inv2">Scannez · Scan to leave a review</div>'+
+   '<div class="url">'+esc(url)+'</div></div>';
+}
+function render(){
+  var base=$('base').value.trim();if(base&&!/[\/]$/.test(base))base+='/';
+  var items=[];
+  parseRooms($('rooms').value).forEach(function(n){items.push(['Chambre '+n,base+'index.html?lieu=chambre-'+encodeURIComponent(n)])});
+  if($('c-hebergement').checked)items.push(['Hébergement · Réception',base+'index.html?lieu=hebergement']);
+  if($('c-restaurant').checked)items.push(['Restaurant',base+'index.html?lieu=restaurant']);
+  if($('c-patisserie').checked)items.push(['Pâtisserie',base+'index.html?lieu=patisserie']);
+  if($('c-fastfood').checked)items.push(['Fast-food',base+'index.html?lieu=fast-food']);
+  $('sheet').innerHTML=items.map(function(i){return card(i[0],i[1])}).join('');
+  $('cnt').textContent=items.length+' QR code'+(items.length>1?'s':'');
+}
+['base','rooms'].forEach(function(i){$(i).addEventListener('input',render)});
+document.querySelectorAll('.ck input').forEach(function(c){c.addEventListener('change',render)});
+$('print').addEventListener('click',function(){window.print()});
+render();
+})();
+</script>
+</body>
+</html>
