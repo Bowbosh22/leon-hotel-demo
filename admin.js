@@ -57,7 +57,7 @@ function revHtml(a,mode){
   if(mode==='recl'){
     h+='<div class="chips">'+STATUTS.map(function(x){return '<button type="button" class="s-'+x.slice(0,2)+(x===st(a)?' on':'')+'" data-id="'+esc(a.id)+'" data-s="'+x+'">'+x+'</button>'}).join('')+'</div>'+
       '<textarea class="note" data-id="'+esc(a.id)+'" placeholder="Note interne (action prise, responsable…)" maxlength="500">'+esc(a.noteInterne||'')+'</textarea>'+
-      '<div class="noterow"><button type="button" class="notesave" data-id="'+esc(a.id)+'" disabled>Enregistrer la note</button><span class="notemsg" role="status"></span></div>';
+      '<div class="noterow"><button type="button" class="notesave" data-id="'+esc(a.id)+'" disabled>Valider</button><span class="notemsg" role="status"></span></div>';
     var hi=a.historique&&a.historique.length?a.historique[a.historique.length-1]:null;
     if(hi)h+='<div class="hist">'+esc(hi.s)+' · '+when(hi.date)+'</div>';
   }
@@ -92,13 +92,14 @@ function render(){
 }
 var tt;function toast(m){var t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},5000)}
 $('tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tab=b.dataset.t;render()});
-$('recl').addEventListener('click',function(e){var b=e.target.closest('.chips button');if(!b||b.classList.contains('on'))return;
-  Store.update(b.dataset.id,function(a){a.statut=b.dataset.s;(a.historique=a.historique||[]).push({s:b.dataset.s,date:new Date().toISOString()})});
-  tab=b.dataset.s;render()});
-$('recl').addEventListener('input',function(e){var t=e.target.closest('textarea.note');if(!t)return;var r=t.parentNode.querySelector('.noterow'),b=r.querySelector('button'),m=r.querySelector('.notemsg');b.disabled=false;m.className='notemsg dirty';m.textContent='Modification non enregistrée'});
-$('recl').addEventListener('click',function(e){var b=e.target.closest('button.notesave');if(!b)return;var r=b.parentNode,t=r.parentNode.querySelector('textarea.note'),m=r.querySelector('.notemsg');b.disabled=true;m.className='notemsg';m.textContent='Enregistrement…';
-  Promise.resolve(Store.update(b.dataset.id,function(a){a.noteInterne=t.value.trim()})).then(function(ok){
-    if(ok){var d=new Date();m.className='notemsg ok';m.textContent='✓ Note enregistrée à '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+function dirty(card){var b=card.querySelector('.notesave'),m=card.querySelector('.notemsg');b.disabled=false;m.className='notemsg dirty';m.textContent='Modifications non validées'}
+$('recl').addEventListener('click',function(e){var b=e.target.closest('.chips button');if(!b)return;var card=b.closest('.rv');
+  card.querySelectorAll('.chips button').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');dirty(card)});
+$('recl').addEventListener('input',function(e){var t=e.target.closest('textarea.note');if(t)dirty(t.closest('.rv'))});
+$('recl').addEventListener('click',function(e){var b=e.target.closest('button.notesave');if(!b)return;var card=b.closest('.rv'),t=card.querySelector('textarea.note'),m=card.querySelector('.notemsg'),sel=card.querySelector('.chips button.sel'),ns=sel?sel.dataset.s:null,txt=t.value.trim();
+  b.disabled=true;m.className='notemsg';m.textContent='Enregistrement…';
+  Promise.resolve(Store.update(b.dataset.id,function(a){if(ns&&ns!==st(a)){a.statut=ns;(a.historique=a.historique||[]).push({s:ns,date:new Date().toISOString()})}a.noteInterne=txt})).then(function(ok){
+    if(ok){toast('✓ Validé : '+(ns||'note')+' enregistré'+(ns?'':'e'));if(ns)tab=ns;render()}
     else{b.disabled=false;m.className='notemsg err';m.textContent='✕ Échec, réessayez'}})});
 $('seuil').addEventListener('change',function(){var c=Store.cfg();c.seuil=+$('seuil').value;Store.setCfg(c);render()});
 $('banner').addEventListener('click',function(){tab='Nouveau';render()});

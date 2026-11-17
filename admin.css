@@ -109,3 +109,5 @@
 .notesave:disabled{opacity:.35;cursor:default}
 .notemsg{font-size:.85rem;color:var(--mute,#5a6478)}
 .notemsg.ok{color:#0a7a2f;font-weight:700}.notemsg.err{color:#b3261e;font-weight:700}.notemsg.dirty{color:#a15c00}
+
+.chips button.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink) inset;color:var(--ink)}
