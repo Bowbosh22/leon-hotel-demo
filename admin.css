@@ -70,3 +70,10 @@
 .ds{display:grid;grid-template-columns:2.6rem 1fr 5.6rem;align-items:center;gap:.6rem;margin:.55rem 0;font-size:.92rem}
 .ds .n{font-weight:700}.ds .c{text-align:right;font-weight:600}.ds small{color:var(--grey);font-weight:400}
 .sv.sel .row span:first-child{color:var(--lb)}
+
+.nav2{display:grid;grid-template-columns:3rem 1fr 3rem;gap:.4rem;align-items:stretch;margin-bottom:.4rem}
+.nav2 button{font:700 1.5rem/1 var(--display);border:1.5px solid var(--soft);background:#fff;color:var(--ink);border-radius:.6rem;cursor:pointer;padding:0}
+.nav2 button:disabled{opacity:.35;cursor:not-allowed}
+.curp{position:relative;border:1.5px solid var(--ink);border-radius:.6rem;background:#fff;display:flex;align-items:center;justify-content:center;min-height:3rem;padding:.3rem .5rem;text-align:center;font:800 .95rem/1.25 var(--display)}
+.curp input,.curp select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px}
+.lnk{background:none;border:0;color:var(--lb);font:600 .9rem var(--text);text-decoration:underline;cursor:pointer;margin:0 0 .6rem;padding:0}

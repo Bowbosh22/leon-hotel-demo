@@ -19,6 +19,10 @@
   <div class="seg" id="per" role="tablist" aria-label="Période">
     <button type="button" data-p="day">Jour</button><button type="button" data-p="week">Semaine</button><button type="button" data-p="month" aria-pressed="true">Mois</button><button type="button" data-p="year">Année</button><button type="button" data-p="all">Tout</button>
   </div>
+  <div class="nav2" id="nav"><button type="button" id="pv" aria-label="Période précédente">‹</button>
+    <div class="curp"><span id="plab"></span><input type="date" id="pick" aria-label="Choisir une date"><select id="pickY" aria-label="Choisir une année" hidden></select></div>
+    <button type="button" id="nx" aria-label="Période suivante">›</button></div>
+  <button type="button" class="lnk" id="todayB" hidden>Revenir à aujourd'hui</button>
   <div class="flt">
     <select id="fs" aria-label="Service"></select>
     <select id="fn" aria-label="Note"><option value="">Toutes les notes</option><option value="5">5 étoiles</option><option value="4">4 étoiles</option><option value="3">3 étoiles</option><option value="2">2 étoiles</option><option value="1">1 étoile</option></select>
