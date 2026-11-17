@@ -28,15 +28,17 @@ function seed(){
    fastfood:[[4,'Rapide et efficace.'],[5,'Burger excellent.'],[3,'Frites tièdes.'],[2,"Trop d'attente pour un fast-food."],[4,''],[5,'Très bon !']]};
   var rooms=['101','102','104','105','108','201','203','205','207','210'],out=[],now=Date.now();
   var keys=['hebergement','hebergement','restaurant','restaurant','patisserie','fastfood','hebergement','restaurant'];
-  for(var i=0;i<64;i++){
+  for(var i=0;i<150;i++){
     var s=keys[Math.floor(rnd()*keys.length)],pool=P[s],it=pool[Math.floor(rnd()*pool.length)];
-    var ago=Math.floor(rnd()*30*864e5*(i<10?0.1:1));
+    var ago=Math.floor(rnd()*180*864e5*(i<14?0.06:(i<60?0.25:1)));
     var rec=it[1]&&rnd()<.3;
     out.push({id:'DEMO-'+(1000+i),date:new Date(now-ago).toISOString(),service:s,lieu:s==='hebergement'?'Chambre '+rooms[Math.floor(rnd()*rooms.length)]:null,
       note:it[0],details:{},comment:it[1],lang:'fr',contact:rec?{prenom:['Awa','Jean','Marie','Paul','Grâce'][Math.floor(rnd()*5)],nom:'',tel:'+242 06 '+Math.floor(100+rnd()*899)+' 00 00',email:''}:null,recontact:rec,statut:'Nouveau'});
   }
   out.sort(function(a,b){return a.date<b.date?-1:1});
-  var k=0;for(var j=out.length-1;j>=0;j--){if(out[j].note<=2){var st=['Nouveau','Nouveau','Nouveau','En cours','En cours','Traité','Traité','Clos'][k%8];k++;out[j].statut=st;if(st!=='Nouveau')out[j].historique=[{s:st,date:new Date(new Date(out[j].date).getTime()+36e5*3).toISOString()}]}}
+  var k=0;for(var j=out.length-1;j>=0;j--){if(out[j].note<=2){var age=(now-new Date(out[j].date).getTime())/864e5,st;
+    if(age>14)st=(k%3===0)?'Traité':'Clos';else st=['Nouveau','Nouveau','Nouveau','En cours','En cours','Traité','Clos'][k%7];
+    k++;out[j].statut=st;if(st!=='Nouveau')out[j].historique=[{s:st,date:new Date(new Date(out[j].date).getTime()+36e5*3).toISOString()}]}}
   Store.save(out);
 }
 
