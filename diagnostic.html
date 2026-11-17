@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Diagnostic — Léon Hotel</title><link rel="stylesheet" href="style.css">
+<style>.app{max-width:34rem}.ck{list-style:none;padding:0;margin:1rem 0}.ck li{display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--soft);font-size:.98rem}
+.ck .i{flex:none;width:1.5rem;height:1.5rem;border-radius:50%;display:grid;place-items:center;font:800 .85rem Montserrat;color:#fff}
+.ck .ok .i{background:var(--lg)}.ck .ko .i{background:var(--err)}.ck .wa .i{background:#c98a00}.ck .no .i{background:#9aa6b8}
+.ck small{display:block;color:var(--grey)}.f{display:grid;gap:.5rem;margin:.8rem 0}.f input{font:inherit;padding:.75rem;border:1.5px solid var(--soft);border-radius:.6rem}
+.sum{font:800 1.05rem Montserrat;margin:.8rem 0}</style></head>
+<body><div class="app">
+<div class="top"><div class="wm"><b>LEON</b><i>HOTEL</i></div></div>
+<h1 style="font:800 1.4rem Montserrat">Diagnostic de la base de données</h1>
+<p class="sub">Vérifie que la connexion et la sécurité sont bien en place. Pour le test complet, saisissez un compte de l'espace direction : un avis de test est ajouté puis supprimé.</p>
+<div class="card"><div class="f"><input type="email" id="e" placeholder="E-mail du compte (facultatif)" autocomplete="username"><input type="password" id="p" placeholder="Mot de passe (facultatif)" autocomplete="current-password"></div>
+<button class="send" id="go" type="button" style="margin-top:.3rem">Lancer le diagnostic</button></div>
+<div class="sum" id="sum"></div><ul class="ck" id="res"></ul>
+</div>
+<script src="config.js"></script>
+<script>
+(function(){
+var C=window.LEON_CFG||{},U=String(C.SUPABASE_URL||'').replace(/\/+$/,''),K=String(C.SUPABASE_ANON_KEY||'').trim(),$=function(i){return document.getElementById(i)};
+function req(m,path,o){o=o||{};var h={apikey:K,Authorization:'Bearer '+(o.t||K),'Content-Type':'application/json'};for(var k in (o.h||{}))h[k]=o.h[k];
+  return fetch(U+path,{method:m,headers:h,body:o.b?JSON.stringify(o.b):undefined}).then(function(r){return r.text().then(function(t){var d=null;try{d=t?JSON.parse(t):null}catch(e){}return{s:r.status,d:d}})})}
+var nOk=0,nKo=0;
+function add(st,txt,sub){var li=document.createElement('li');li.className=st;li.innerHTML='<span class="i">'+(st==='ok'?'✓':st==='ko'?'✕':st==='wa'?'!':'–')+'</span><div>'+txt+(sub?'<small>'+sub+'</small>':'')+'</div>';$('res').appendChild(li);if(st==='ok')nOk++;if(st==='ko')nKo++}
+function run(){
+  $('res').innerHTML='';nOk=0;nKo=0;$('sum').textContent='';$('go').disabled=true;
+  if(!U||!K){add('ko','Configuration absente','Renseignez SUPABASE_URL et SUPABASE_ANON_KEY dans config.js.');return done()}
+  add('ok','Configuration renseignée',U);
+  var tok=null,role=null,id='DIAG-'+Date.now().toString(36).toUpperCase();
+  req('POST','/rest/v1/rpc/ping',{b:{}}).then(function(r){
+    if(r.s===200&&r.d==='ok')add('ok','Base de données joignable');else add('ko','Base de données injoignable ou schéma non installé','Réponse '+r.s+'. Avez-vous exécuté schema.sql ?');
+    return req('GET','/rest/v1/reviews?select=id&limit=1');
+  }).then(function(r){
+    if(r.s===401||r.s===403||(r.s===200&&Array.isArray(r.d)&&!r.d.length))add('ok','Les avis ne sont PAS lisibles publiquement','Un visiteur non connecté ne peut rien lire.');else add('ko','ALERTE : les avis sont lisibles sans connexion','Vérifiez que schema.sql a été exécuté en entier.');
+    return req('GET','/rest/v1/staff?select=user_id&limit=1');
+  }).then(function(r){
+    if(r.s===401||r.s===403||(r.s===200&&Array.isArray(r.d)&&!r.d.length))add('ok','La liste du personnel est protégée');else add('ko','ALERTE : la liste du personnel est lisible publiquement');
+    var e=$('e').value.trim(),p=$('p').value;
+    if(!e||!p){add('no','Test complet non lancé','Saisissez un compte pour tester la connexion et le traitement des avis.');return null}
+    return req('POST','/auth/v1/token?grant_type=password',{b:{email:e,password:p}}).then(function(a){
+      if(a.s!==200){add('ko','Connexion refusée',(a.d&&(a.d.error_description||a.d.msg))||('Erreur '+a.s));return null}
+      tok=a.d.access_token;
+      return req('GET','/rest/v1/staff?select=role&user_id=eq.'+a.d.user.id,{t:tok}).then(function(q){
+        if(!q.d||!q.d.length){add('ko','Ce compte existe mais n\'est pas dans la liste du personnel','Exécutez l\'insertion dans la table staff (voir schema.sql, étape 6).');return null}
+        role=q.d[0].role;add('ok','Connexion réussie','Rôle : '+role);
+        return req('POST','/rest/v1/reviews',{b:{id:id,service:'restaurant',lieu:'TEST',note:3,comment:'Avis de test (diagnostic)',lang:'fr'},h:{Prefer:'return=minimal'}}).then(function(w){
+          if(w.s===201)add('ok','Un client peut déposer un avis');else{add('ko','Dépôt d\'avis refusé','Réponse '+w.s+' : '+(w.d&&w.d.message||''));return null}
+          return req('GET','/rest/v1/reviews?id=eq.'+id,{t:tok});
+        }).then(function(g){
+          if(!g)return null;
+          if(g.d&&g.d.length===1)add('ok','Le personnel peut lire les avis');else{add('ko','Le personnel ne voit pas l\'avis de test');return null}
+          return req('PATCH','/rest/v1/reviews?id=eq.'+id,{t:tok,h:{Prefer:'return=minimal'},b:{statut:'En cours',note_interne:'test',historique:[{s:'En cours'}]}}).then(function(u){
+            if(u.s===204||u.s===200)add('ok','Le personnel peut traiter une réclamation');else add('ko','Traitement refusé','Réponse '+u.s);
+            return req('PATCH','/rest/v1/reviews?id=eq.'+id,{t:tok,h:{Prefer:'return=minimal'},b:{note:5}});
+          }).then(function(u2){
+            if(u2.s>=400)add('ok','La note d\'un avis ne peut pas être modifiée','Les clients ne peuvent pas être falsifiés.');else add('ko','ALERTE : la note d\'un avis est modifiable');
+            if(role!=='direction'){add('wa','Avis de test conservé','Seule la direction peut le supprimer : il porte le lieu « TEST ».');return null}
+            return req('DELETE','/rest/v1/reviews?id=eq.'+id,{t:tok,h:{Prefer:'return=representation'}}).then(function(d){
+              if(d.s===200&&d.d&&d.d.length===1)add('ok','La direction peut supprimer (avis de test retiré)');else add('ko','Suppression refusée','Réponse '+d.s);
+            });
+          });
+        });
+      });
+    });
+  }).catch(function(err){add('ko','Erreur réseau',String(err.message||err))}).then(done);
+}
+function done(){$('go').disabled=false;$('sum').textContent=nKo?('✕ '+nKo+' problème'+(nKo>1?'s':'')+' à corriger'):('✓ Tout est en ordre ('+nOk+' contrôles réussis)');$('sum').style.color=nKo?'#b3261e':'#17702a'}
+$('go').addEventListener('click',run);
+})();
+</script></body></html>

@@ -18,6 +18,7 @@
     <h1 style="font-size:1.35rem">Espace direction</h1>
     <p class="sub">Connectez-vous pour consulter les avis de vos clients.</p>
     <form id="lf" autocomplete="off" novalidate>
+      <input type="email" id="em" placeholder="Adresse e-mail" aria-label="Adresse e-mail" autocomplete="username" hidden style="margin-top:1rem;width:100%;font:inherit;padding:.85rem;border:1.5px solid var(--soft);border-radius:.6rem">
       <input type="password" id="pw" placeholder="Mot de passe" aria-label="Mot de passe" style="margin-top:1rem;width:100%;font:inherit;padding:.85rem;border:1.5px solid var(--soft);border-radius:.6rem">
       <div class="err" id="lerr" role="alert"></div>
       <button class="send" type="submit" style="margin-top:.4rem">Se connecter</button>
@@ -69,6 +70,7 @@
 
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="config.js"></script>
 <script src="store.js"></script>
 <script src="menu.js"></script>
 <script src="admin.js"></script>

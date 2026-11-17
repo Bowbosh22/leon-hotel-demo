@@ -113,5 +113,5 @@ $('todayB').addEventListener('click',function(){anchor=new Date();render()});
 $('pick').addEventListener('change',function(){var v=this.value;if(!v)return;var p=v.split('-');anchor=period==='month'?new Date(+p[0],+p[1]-1,1):new Date(+p[0],+p[1]-1,+p[2]);render()});
 $('pickY').addEventListener('change',function(){anchor=new Date(+this.value,0,1);render()});
 ['fs','fn','fl'].forEach(function(i){$(i).addEventListener('change',render)});
-ALL=Store.all();fill();render();
+Store.ready().then(function(){ALL=Store.all();fill();render()});
 })();

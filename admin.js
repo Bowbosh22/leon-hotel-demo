@@ -98,23 +98,25 @@ $('recl').addEventListener('change',function(e){var t=e.target.closest('textarea
 $('seuil').addEventListener('change',function(){var c=Store.cfg();c.seuil=+$('seuil').value;Store.setCfg(c);render()});
 $('banner').addEventListener('click',function(){tab='Nouveau';render()});
 /* alerte en direct : un avis négatif arrive pendant que la direction consulte le tableau de bord */
-window.addEventListener('storage',function(e){
-  if(e.key!=='leon_avis_v1'||!Auth.isIn())return;
+Store.watch(function(){
+  if(!Auth.isIn())return;
   var fresh=Store.all().filter(function(a){return !known[a.id]&&a.note<=seuil()});
   render();
   if(fresh.length){var a=fresh[fresh.length-1];toast('Nouvel avis négatif : '+(a.lieu||SVC[a.service])+' · '+a.note+' ★')}
 });
 function show(){
   var ok=Auth.isIn();$('login').hidden=ok;$('dash').hidden=!ok;
-  if(ok)render();
+  if(ok){if(window.Menu)Menu.build();Store.ready().then(render)}
 }
+if(Auth.remote){$('em').hidden=false;$('seed').hidden=true;$('clr').hidden=true;$('lerr').textContent=''}
 $('lf').addEventListener('submit',function(e){
-  e.preventDefault();
-  if(Auth.login($('pw').value)){
+  e.preventDefault();$('lerr').textContent='';
+  var b=$('lf').querySelector('button');b.disabled=true;
+  Auth.login($('em').value,$('pw').value).then(function(){
     var n=new URLSearchParams(location.search).get('next');
     if(n&&/^[a-z]+\.html$/.test(n)){location.replace(n);return}
-    $('pw').value='';show();
-  }else $('lerr').textContent='Mot de passe incorrect.';
+    $('pw').value='';b.disabled=false;show();
+  },function(err){b.disabled=false;$('lerr').textContent=err.message||'Connexion impossible.'});
 });
 $('seed').addEventListener('click',function(){seed();render()});
 $('clr').addEventListener('click',function(){if(confirm('Effacer tous les avis enregistrés sur cet appareil ?')){Store.clear();render()}});

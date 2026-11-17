@@ -52,5 +52,5 @@ function render(){
 }
 $('q').addEventListener('input',render);
 $('f').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;filt=b.dataset.f;document.querySelectorAll('#f button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()});
-render();
+Store.ready().then(render);
 })();

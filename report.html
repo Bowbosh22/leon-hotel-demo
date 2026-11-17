@@ -7,8 +7,9 @@
 <title>Rapport mensuel — Léon Hotel</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="admin.css">
+<script src="config.js"></script>
 <script src="store.js"></script>
-<script>if(!Auth.isIn())location.replace("admin.html?next=exports.html");</script>
+<script>if(!Auth.isIn()||Auth.role()!=="direction")location.replace("admin.html?next=exports.html");</script>
 <style>
 .rp{max-width:50rem;margin:0 auto;padding:1rem}
 .rp .bar2{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}

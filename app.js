@@ -22,7 +22,7 @@ var T={
   consent:'J\'accepte d\'être recontacté(e) concernant mon expérience.',
   contactHint:'Ces informations ne sont jamais obligatoires.',
   send:'Envoyer mon avis',needRate:'Choisissez une note pour envoyer.',
-  thx:'Merci pour votre avis !',thx2:'Vos remarques nous aident à nous améliorer.',again:'Donner un autre avis',
+  thx:'Merci pour votre avis !',thx2:'Vos remarques nous aident à nous améliorer.',again:'Donner un autre avis',sendErr:"L'envoi a échoué. Vérifiez votre connexion et réessayez.",
   foot:'Léon Hotel · Brazzaville'},
  en:{svc:{hebergement:'Accommodation',restaurant:'Restaurant',patisserie:'Pastry shop',fastfood:'Fast food'},
   title:'We value your feedback',sub:'30 seconds, no account needed.',pick:'What would you like to rate?',
@@ -34,7 +34,7 @@ var T={
   consent:'I agree to be contacted about my experience.',
   contactHint:'This information is never required.',
   send:'Send my review',needRate:'Choose a rating to send.',
-  thx:'Thank you for your review!',thx2:'Your feedback helps us improve.',again:'Leave another review',
+  thx:'Thank you for your review!',thx2:'Your feedback helps us improve.',again:'Leave another review',sendErr:'Sending failed. Check your connection and try again.',
   foot:'Léon Hotel · Brazzaville'}
 };
 var $=function(i){return document.getElementById(i)};
@@ -86,13 +86,18 @@ $('form').addEventListener('submit',function(e){
   Object.keys(S.det).forEach(function(i){det[crit[i]]=S.det[i]});
   var f=$('first').value.trim(),l=$('last').value.trim(),p=$('phone').value.trim(),m=$('email').value.trim();
   var has=f||l||p||m;
-  Store.add({id:'AV-'+Date.now().toString(36).toUpperCase(),date:new Date().toISOString(),service:S.service,lieu:S.lieu,note:S.note,details:det,
-    comment:$('com').value.trim(),lang:lang,contact:has?{prenom:f,nom:l,tel:p,email:m}:null,recontact:has&&$('consent').checked,statut:'Nouveau'});
-  $('got').innerHTML=[1,2,3,4,5].map(function(i){return STAR.replace('<svg','<svg class="'+(i<=S.note?'on':'')+'"')}).join('');
-  $('form').hidden=true;$('pick').hidden=true;$('where').hidden=true;document.querySelector('.hero').hidden=true;$('done').hidden=false;window.scrollTo(0,0);
+  var rec={id:'AV-'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,6).toUpperCase(),date:new Date().toISOString(),service:S.service,lieu:S.lieu,note:S.note,details:det,
+    comment:$('com').value.trim(),lang:lang,contact:has?{prenom:f,nom:l,tel:p,email:m}:null,recontact:has&&$('consent').checked,statut:'Nouveau'};
+  var done=function(){
+    $('got').innerHTML=[1,2,3,4,5].map(function(i){return STAR.replace('<svg','<svg class="'+(i<=S.note?'on':'')+'"')}).join('');
+    $('form').hidden=true;$('pick').hidden=true;$('where').hidden=true;document.querySelector('.hero').hidden=true;$('done').hidden=false;window.scrollTo(0,0);
+  };
+  if($('website')&&$('website').value){done();return}   /* champ piège anti-robots : on fait semblant, sans enregistrer */
+  $('send').disabled=true;
+  Promise.resolve(Store.add(rec)).then(done,function(){$('send').disabled=false;$('hint').textContent=t().sendErr;$('hint').style.color='#b3261e'});
 });
 $('again').addEventListener('click',function(){
-  S.note=0;S.det={};$('com').value='';['first','last','phone','email'].forEach(function(i){$(i).value=''});$('consent').checked=false;
+  S.note=0;S.det={};$('hint').style.color='';$('com').value='';['first','last','phone','email'].forEach(function(i){$(i).value=''});$('consent').checked=false;
   $('done').hidden=true;document.querySelector('.hero').hidden=false;render();window.scrollTo(0,0)});
 render();
 })();

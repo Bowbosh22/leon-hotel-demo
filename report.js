@@ -1,4 +1,4 @@
-(function(){
+Store.ready().then(function(){
 'use strict';
 var $=function(i){return document.getElementById(i)};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -48,4 +48,4 @@ h+='<div class="foot3">Rapport généré par la plateforme d\'avis du Léon Hote
 $('sheet').innerHTML=h;
 document.title='Rapport '+title+' — Léon Hotel';
 $('pr').addEventListener('click',function(){window.print()});
-})();
+});

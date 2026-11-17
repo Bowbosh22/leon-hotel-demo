@@ -37,5 +37,5 @@ $('xc').addEventListener('click',function(){
     rows.push([c.prenom,c.nom,c.tel,c.email,l.length,(Math.round(l.reduce(function(s,a){return s+a.note},0)/l.length*10)/10).toString().replace('.',','),dstr(l[0].date),l.some(function(a){return a.recontact})?'Oui':'Non'])});
   save('clients-leon-hotel-'+suffix()+'.csv',csv(rows));
 });
-info();
+Store.ready().then(info);
 })();

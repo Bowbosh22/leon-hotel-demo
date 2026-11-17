@@ -64,8 +64,9 @@
   </section>
   <div class="sheet" id="sheet"></div>
 </div>
+<script src="config.js"></script>
 <script src="store.js"></script>
-<script>if(!Auth.isIn())location.replace("admin.html?next=qr.html");</script>
+<script>if(!Auth.isIn()||Auth.role()!=="direction")location.replace("admin.html?next=qr.html");</script>
 <script src="menu.js"></script>
 <script src="qrcode.js"></script>
 <script>
