@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Exports — Léon Hotel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1f3a'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+<script src="store.js"></script>
+<script>if(!Auth.isIn())location.replace("admin.html?next=exports.html");</script>
+</head>
+<body>
+<div class="app adm">
+  <div id="hdr" data-active="exports"></div>
+  <h1 class="ttl">Exports et rapports</h1>
+  <p class="sub">Récupérez vos données pour Excel, ou imprimez un rapport mensuel en PDF.</p>
+
+  <section class="card">
+    <h2>Rapport mensuel (PDF)</h2>
+    <p class="sub" style="margin:.2rem 0 .8rem">Un résumé d'une page : note, évolution, services, réclamations et commentaires.</p>
+    <label class="f2" for="rm">Mois</label>
+    <input type="month" id="rm" class="srch">
+    <button type="button" class="btnp" id="rep">Ouvrir le rapport</button>
+  </section>
+
+  <section class="card">
+    <h2>Données (Excel / CSV)</h2>
+    <label class="f2" for="em">Période</label>
+    <select id="ep" class="srch"><option value="all">Toutes les données</option><option value="month">Un mois précis</option></select>
+    <input type="month" id="em" class="srch" hidden>
+    <div class="exp">
+      <button type="button" class="btnp" id="xa">Télécharger les avis</button>
+      <button type="button" class="btnp" id="xc">Télécharger les clients</button>
+    </div>
+    <p class="hint" style="text-align:left" id="xinfo"></p>
+    <p class="hint" style="text-align:left">Le fichier s'ouvre directement dans Excel (ou Google Sheets).</p>
+  </section>
+</div>
+<script src="menu.js"></script>
+<script src="clients.js"></script>
+<script src="exports.js"></script>
+</body>
+</html>

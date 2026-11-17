@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rapport mensuel — Léon Hotel</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+<script src="store.js"></script>
+<script>if(!Auth.isIn())location.replace("admin.html?next=exports.html");</script>
+<style>
+.rp{max-width:50rem;margin:0 auto;padding:1rem}
+.rp .bar2{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.rp .bar2 a,.rp .bar2 button{font:700 .8rem var(--display);letter-spacing:.04em;text-transform:uppercase;border:0;border-radius:.6rem;padding:.8rem 1.1rem;cursor:pointer;text-decoration:none}
+.rp .bar2 .p{background:var(--ink);color:#fff}.rp .bar2 .s{background:#fff;color:var(--ink);border:1.5px solid var(--soft)}
+.sheet2{background:#fff;border:1px solid var(--soft);border-radius:.8rem;padding:1.4rem}
+.sheet2 header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;border-bottom:2px solid var(--ink);padding-bottom:.8rem;margin-bottom:1rem}
+.sheet2 h1{font:800 1.35rem/1.2 var(--display);margin:0}.sheet2 .mois{color:var(--lb);font:800 1.05rem var(--display);margin-top:.2rem}
+.sheet2 .gen{font-size:.78rem;color:var(--grey);text-align:right}
+.sheet2 h3{font:800 .82rem var(--display);letter-spacing:.07em;text-transform:uppercase;color:var(--grey);margin:1.3rem 0 .5rem}
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.k4 div{border:1px solid var(--soft);border-radius:.6rem;padding:.6rem .7rem}
+.k4 b{display:block;font:800 1.5rem/1.1 var(--display)}.k4 span{font-size:.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:.04em;font-weight:700}.k4 small{display:block;font-size:.72rem;color:var(--grey);margin-top:.15rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+table.t{width:100%;border-collapse:collapse;font-size:.9rem}
+table.t th,table.t td{text-align:left;padding:.4rem .3rem;border-bottom:1px solid var(--soft)}table.t th{font-size:.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:.04em}
+table.t td.r,table.t th.r{text-align:right}
+.q2{border-left:3px solid var(--soft);padding:.2rem .7rem;margin:.45rem 0;font-size:.9rem;break-inside:avoid}.q2.neg{border-color:var(--err)}.q2.pos{border-color:var(--lg)}.q2 small{color:var(--grey);display:block}
+.empty2{color:var(--grey);font-size:.9rem}
+.sheet2 .foot3{margin-top:1.4rem;font-size:.75rem;color:var(--grey);border-top:1px solid var(--soft);padding-top:.6rem}
+@media(max-width:36rem){.k4{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.sheet2{padding:1rem}}
+@media print{
+  body{background:#fff}.noprint{display:none!important}
+  .rp{max-width:none;padding:0}.sheet2{border:0;padding:0;border-radius:0}
+  .k4{grid-template-columns:repeat(4,1fr)}.two{grid-template-columns:1fr 1fr}
+  @page{size:A4;margin:12mm}
+}
+</style>
+</head>
+<body>
+<div class="rp">
+  <div class="bar2 noprint"><a class="s" href="exports.html">← Exports</a><button type="button" class="p" id="pr">Imprimer / Enregistrer en PDF</button></div>
+  <article class="sheet2" id="sheet"></article>
+</div>
+<script src="charts.js"></script>
+<script src="report.js"></script>
+</body>
+</html>

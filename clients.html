@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Clients — Léon Hotel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1f3a'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+<script src="store.js"></script>
+<script>if(!Auth.isIn())location.replace("admin.html?next=clients.html");</script>
+</head>
+<body>
+<div class="app adm">
+  <div id="hdr" data-active="clients"></div>
+  <h1 class="ttl">Clients</h1>
+  <p class="sub">Clients ayant laissé volontairement leurs coordonnées.</p>
+  <input type="search" id="q" class="srch" placeholder="Rechercher par nom, téléphone ou e-mail" aria-label="Rechercher un client" autocomplete="off">
+  <div class="seg2" id="f"><button type="button" data-f="all" aria-pressed="true">Tous</button><button type="button" data-f="rec" aria-pressed="false">À recontacter</button></div>
+  <div class="mut cnt" id="cnt"></div>
+  <div id="list"></div>
+  <div id="none" class="card empty" hidden><p><b>Aucun client trouvé.</b></p><p class="sub" id="nonetxt">Les clients qui laissent leurs coordonnées apparaîtront ici.</p></div>
+</div>
+<script src="menu.js"></script>
+<script src="clients.js"></script>
+</body>
+</html>

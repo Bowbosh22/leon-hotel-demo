@@ -39,7 +39,7 @@
 </head>
 <body>
 <div class="wrapq">
-  <div class="top noprint"><div class="wm"><b>LEON</b><i>HOTEL</i></div><a class="cnt" href="admin.html" style="color:var(--lb);font-weight:600">← Tableau de bord</a></div>
+  <div id="hdr" data-active="qr"></div>
   <section class="card noprint">
     <div class="ctl">
       <div>
@@ -66,6 +66,7 @@
 </div>
 <script src="store.js"></script>
 <script>if(!Auth.isIn())location.replace("admin.html?next=qr.html");</script>
+<script src="menu.js"></script>
 <script src="qrcode.js"></script>
 <script>
 (function(){

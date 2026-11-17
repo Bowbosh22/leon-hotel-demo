@@ -26,14 +26,15 @@ function seed(){
     [2,'Plat froid à la livraison à la table.'],[4,''],[5,''],[4,'Bon rapport qualité/prix.']],
    patisserie:[[5,'Croissants frais, un régal.'],[5,'Gâteau d\'anniversaire parfait.'],[4,'Très bon pain, merci.'],[3,'Bon mais cher.'],[5,''],[4,'']],
    fastfood:[[4,'Rapide et efficace.'],[5,'Burger excellent.'],[3,'Frites tièdes.'],[2,"Trop d'attente pour un fast-food."],[4,''],[5,'Très bon !']]};
+  var CL=[['Awa','Ndinga','+242 06 412 31 08','awa.ndinga@mail.com'],['Jean','Mavoungou','+242 05 521 77 90',''],['Marie','Okemba','+242 06 788 02 14','marie.okemba@mail.com'],['Paul','Itoua','+242 05 604 19 33',''],['Grâce','Mabiala','+242 06 230 45 61','grace.m@mail.com'],['Patrick','Bouanga','+242 06 933 88 02',''],['Sandrine','Ebata','','sandrine.ebata@mail.com'],['Olivier','Tsoumou','+242 05 117 64 25','o.tsoumou@mail.com'],['Nadège','Loubaki','+242 06 355 90 17',''],['Thierry','Malonga','+242 05 842 36 70','thierry.m@mail.com'],['Chantal','Kiongo','+242 06 470 51 83',''],['David','Moukoko','+33 6 12 34 56 78','david.moukoko@mail.com']];
   var rooms=['101','102','104','105','108','201','203','205','207','210'],out=[],now=Date.now();
   var keys=['hebergement','hebergement','restaurant','restaurant','patisserie','fastfood','hebergement','restaurant'];
   for(var i=0;i<150;i++){
     var s=keys[Math.floor(rnd()*keys.length)],pool=P[s],it=pool[Math.floor(rnd()*pool.length)];
     var ago=Math.floor(rnd()*180*864e5*(i<14?0.06:(i<60?0.25:1)));
-    var rec=it[1]&&rnd()<.3;
+    var rec=rnd()<.38;var cl=CL[Math.floor(rnd()*CL.length)];
     out.push({id:'DEMO-'+(1000+i),date:new Date(now-ago).toISOString(),service:s,lieu:s==='hebergement'?'Chambre '+rooms[Math.floor(rnd()*rooms.length)]:null,
-      note:it[0],details:{},comment:it[1],lang:'fr',contact:rec?{prenom:['Awa','Jean','Marie','Paul','Grâce'][Math.floor(rnd()*5)],nom:'',tel:'+242 06 '+Math.floor(100+rnd()*899)+' 00 00',email:''}:null,recontact:rec,statut:'Nouveau'});
+      note:it[0],details:{},comment:it[1],lang:'fr',contact:rec?{prenom:cl[0],nom:cl[1],tel:cl[2],email:cl[3]}:null,recontact:rec&&rnd()<.15,statut:'Nouveau'});
   }
   out.sort(function(a,b){return a.date<b.date?-1:1});
   var k=0;for(var j=out.length-1;j>=0;j--){if(out[j].note<=2){var age=(now-new Date(out[j].date).getTime())/864e5,st;
@@ -115,7 +116,6 @@ $('lf').addEventListener('submit',function(e){
     $('pw').value='';show();
   }else $('lerr').textContent='Mot de passe incorrect.';
 });
-$('out').addEventListener('click',function(){Auth.out();$('lerr').textContent='';show()});
 $('seed').addEventListener('click',function(){seed();render()});
 $('clr').addEventListener('click',function(){if(confirm('Effacer tous les avis enregistrés sur cet appareil ?')){Store.clear();render()}});
 $('more').addEventListener('click',function(){shown+=8;render()});
