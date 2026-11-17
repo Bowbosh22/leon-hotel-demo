@@ -30,6 +30,7 @@
     <div class="wm"><b>LEON</b><i>HOTEL</i></div>
     <div class="acts"><a href="qr.html" class="pill">QR codes</a><button type="button" class="pill" id="out">Quitter</button></div>
   </div>
+  <a href="#reclC" class="banner" id="banner" hidden></a>
   <h1 class="ttl">Tableau de bord</h1>
   <p class="sub" id="upd"></p>
 
@@ -46,9 +47,12 @@
       <div class="kpi"><div class="lab">Clients satisfaits</div><div class="val" id="sat">–</div><div class="mut">4 et 5 étoiles</div></div>
     </div>
 
-    <section class="card" id="warnC" hidden>
-      <h2 class="warn">À traiter <span class="badge" id="warnN"></span></h2>
-      <div id="warn"></div>
+    <section class="card" id="reclC">
+      <h2>Réclamations</h2>
+      <div class="cfg"><label for="seuil">Alerte pour les notes de</label>
+        <select id="seuil"><option value="1">1 étoile</option><option value="2" selected>1 à 2 étoiles</option><option value="3">1 à 3 étoiles</option></select></div>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div id="recl"></div>
     </section>
 
     <section class="card">
@@ -67,6 +71,7 @@
 </section>
 
 </div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="store.js"></script>
 <script src="admin.js"></script>
 </body>

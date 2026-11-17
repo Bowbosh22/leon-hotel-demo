@@ -39,3 +39,21 @@
 .demo{width:auto;color:var(--grey);font-size:.85rem}
 .empty{text-align:center;padding:2rem 1rem}
 .foot2{text-align:center;margin-top:1.5rem}
+
+.banner{display:block;background:var(--err);color:#fff;font:700 .92rem var(--display);border-radius:.8rem;padding:.8rem 1rem;margin-bottom:.8rem;text-decoration:none}
+.cfg{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;font-size:.9rem;color:var(--grey);margin:-.2rem 0 .8rem}
+.cfg select{font:inherit;padding:.4rem .5rem;border:1.5px solid var(--soft);border-radius:.5rem;background:#fff;color:var(--ink)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-bottom:.9rem}
+.tabs button{font:700 .72rem var(--display);letter-spacing:.02em;border:1.5px solid var(--soft);background:#fff;color:var(--grey);border-radius:.6rem;padding:.55rem .15rem;cursor:pointer;line-height:1.25}
+.tabs button b{display:block;font-size:1.05rem;color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] b{color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.chips button{font:700 .72rem var(--display);border:1.5px solid var(--soft);background:#fff;color:var(--grey);border-radius:2rem;padding:.4rem .75rem;cursor:pointer}
+.chips button.on{background:var(--ink);border-color:var(--ink);color:#fff;cursor:default}
+.chips button.s-En.on{background:#c98a00;border-color:#c98a00}.chips button.s-Tr.on{background:var(--lb);border-color:var(--lb)}.chips button.s-Cl.on{background:var(--lg);border-color:var(--lg)}
+.rv textarea.note{width:100%;min-height:2.6rem;margin-top:.6rem;font:inherit;font-size:.9rem;padding:.55rem .65rem;border:1.5px solid var(--soft);border-radius:.5rem;background:#fff;resize:vertical}
+.rv .hist{font-size:.78rem;color:var(--grey);margin-top:.35rem}
+.empt{color:var(--grey);text-align:center;padding:1rem 0}
+.toast{position:fixed;left:1rem;right:1rem;bottom:1rem;max-width:30rem;margin:0 auto;background:var(--ink);color:#fff;border-radius:.8rem;padding:.9rem 1rem;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:50}
+.tag.neg{background:#fbe3e1;color:var(--err)}

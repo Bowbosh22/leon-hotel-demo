@@ -36,39 +36,71 @@ function seed(){
       note:it[0],details:{},comment:it[1],lang:'fr',contact:rec?{prenom:['Awa','Jean','Marie','Paul','Grâce'][Math.floor(rnd()*5)],nom:'',tel:'+242 06 '+Math.floor(100+rnd()*899)+' 00 00',email:''}:null,recontact:rec,statut:'Nouveau'});
   }
   out.sort(function(a,b){return a.date<b.date?-1:1});
+  var k=0;for(var j=out.length-1;j>=0;j--){if(out[j].note<=2){var st=['Nouveau','Nouveau','Nouveau','En cours','En cours','Traité','Traité','Clos'][k%8];k++;out[j].statut=st;if(st!=='Nouveau')out[j].historique=[{s:st,date:new Date(new Date(out[j].date).getTime()+36e5*3).toISOString()}]}}
   Store.save(out);
 }
 
 /* ---- affichage ---- */
-var shown=8;
-function revHtml(a,alert){
+var shown=8,tab='Nouveau',known={};
+function seuil(){return +(Store.cfg().seuil||2)}
+function st(a){return a.statut||'Nouveau'}
+function revHtml(a,mode){
   var lieu=a.lieu?SVC[a.service]+' · '+a.lieu:SVC[a.service];
   var who=a.contact&&(a.contact.prenom||a.contact.nom||a.contact.tel||a.contact.email)?
     '<div class="who">'+esc([a.contact.prenom,a.contact.nom].filter(Boolean).join(' '))+(a.contact.tel?' · '+esc(a.contact.tel):'')+(a.contact.email?' · '+esc(a.contact.email):'')+(a.recontact?' · <b>souhaite être recontacté(e)</b>':'')+'</div>':'';
-  return '<div class="rv'+(alert?' alert':'')+'"><div class="hd"><b>'+esc(lieu)+'</b><span>'+when(a.date)+'</span></div>'+
-    '<div class="sts">'+stars(a.note)+'</div>'+(a.comment?'<p>'+esc(a.comment)+'</p>':'<p class="who"><i>Pas de commentaire</i></p>')+who+'</div>';
+  var tag=(mode!=='recl'&&a.note<=seuil())?' <span class="tag neg">'+st(a)+'</span>':'';
+  var h='<div class="rv'+(mode==='recl'&&st(a)==='Nouveau'?' alert':'')+'"><div class="hd"><b>'+esc(lieu)+tag+'</b><span>'+when(a.date)+'</span></div>'+
+    '<div class="sts">'+stars(a.note)+'</div>'+(a.comment?'<p>'+esc(a.comment)+'</p>':'<p class="who"><i>Pas de commentaire</i></p>')+who;
+  if(mode==='recl'){
+    h+='<div class="chips">'+STATUTS.map(function(x){return '<button type="button" class="s-'+x.slice(0,2)+(x===st(a)?' on':'')+'" data-id="'+esc(a.id)+'" data-s="'+x+'">'+x+'</button>'}).join('')+'</div>'+
+      '<textarea class="note" data-id="'+esc(a.id)+'" placeholder="Note interne (action prise, responsable…)" maxlength="500">'+esc(a.noteInterne||'')+'</textarea>';
+    var hi=a.historique&&a.historique.length?a.historique[a.historique.length-1]:null;
+    if(hi)h+='<div class="hist">'+esc(hi.s)+' · '+when(hi.date)+'</div>';
+  }
+  return h+'</div>';
 }
 function render(){
   var L=Store.all().sort(function(a,b){return a.date<b.date?1:-1});
-  $('empty').hidden=L.length>0;$('main').hidden=L.length===0;
+  $('empty').hidden=L.length>0;$('main').hidden=L.length===0;$('banner').hidden=true;
   $('upd').textContent=L.length?'Mis à jour à '+two(new Date().getHours())+':'+two(new Date().getMinutes()):'';
+  known={};L.forEach(function(a){known[a.id]=1});
   if(!L.length)return;
   var sum=0,sat=0;L.forEach(function(a){sum+=a.note;if(a.note>=4)sat++});
   var avg=sum/L.length;
   $('avg').textContent=fmt(avg);$('avgst').innerHTML=stars(avg);
   $('cnt').textContent=L.length;$('sat').textContent=Math.round(sat*100/L.length)+' %';
-  var warn=L.filter(function(a){return a.note<=2&&a.statut==='Nouveau'});
-  $('warnC').hidden=!warn.length;$('warnN').textContent=warn.length;
-  $('warn').innerHTML=warn.slice(0,6).map(function(a){return revHtml(a,true)}).join('');
+  /* réclamations */
+  $('seuil').value=String(seuil());
+  var neg=L.filter(function(a){return a.note<=seuil()}),cn={};
+  STATUTS.forEach(function(x){cn[x]=0});neg.forEach(function(a){cn[st(a)]++});
+  if(cn['Nouveau']>0){$('banner').hidden=false;$('banner').textContent='⚠ '+cn['Nouveau']+(cn['Nouveau']>1?' nouveaux avis négatifs':' nouvel avis négatif')+' à traiter'}
+  $('tabs').innerHTML=STATUTS.map(function(x){return '<button type="button" role="tab" data-t="'+x+'" aria-selected="'+(x===tab)+'"><b>'+cn[x]+'</b>'+x+'</button>'}).join('');
+  var lst=neg.filter(function(a){return st(a)===tab});
+  $('recl').innerHTML=lst.length?lst.slice(0,10).map(function(a){return revHtml(a,'recl')}).join('')+(lst.length>10?'<p class="empt">+ '+(lst.length-10)+' autres</p>':''):'<p class="empt">Aucun avis « '+tab+' ».</p>';
   $('bysvc').innerHTML=Object.keys(SVC).map(function(k){
     var l=L.filter(function(a){return a.service===k});
     if(!l.length)return '<div class="sv"><div class="row"><span>'+SVC[k]+'</span><small>aucun avis</small></div><div class="bar"></div></div>';
     var m=l.reduce(function(s,a){return s+a.note},0)/l.length,c=m>=4?'':(m>=3?'mid':'low');
     return '<div class="sv"><div class="row"><span>'+SVC[k]+'</span><span>'+fmt(m)+' / 5 <small>· '+l.length+' avis</small></span></div><div class="bar"><i class="'+c+'" style="width:'+(m*20)+'%"></i></div></div>';
   }).join('');
-  $('recent').innerHTML=L.slice(0,shown).map(function(a){return revHtml(a,false)}).join('');
+  $('recent').innerHTML=L.slice(0,shown).map(function(a){return revHtml(a,'')}).join('');
   $('more').hidden=L.length<=shown;
 }
+var tt;function toast(m){var t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},5000)}
+$('tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tab=b.dataset.t;render()});
+$('recl').addEventListener('click',function(e){var b=e.target.closest('.chips button');if(!b||b.classList.contains('on'))return;
+  Store.update(b.dataset.id,function(a){a.statut=b.dataset.s;(a.historique=a.historique||[]).push({s:b.dataset.s,date:new Date().toISOString()})});
+  tab=b.dataset.s;render()});
+$('recl').addEventListener('change',function(e){var t=e.target.closest('textarea.note');if(!t)return;Store.update(t.dataset.id,function(a){a.noteInterne=t.value.trim()})});
+$('seuil').addEventListener('change',function(){var c=Store.cfg();c.seuil=+$('seuil').value;Store.setCfg(c);render()});
+$('banner').addEventListener('click',function(){tab='Nouveau';render()});
+/* alerte en direct : un avis négatif arrive pendant que la direction consulte le tableau de bord */
+window.addEventListener('storage',function(e){
+  if(e.key!=='leon_avis_v1'||!Auth.isIn())return;
+  var fresh=Store.all().filter(function(a){return !known[a.id]&&a.note<=seuil()});
+  render();
+  if(fresh.length){var a=fresh[fresh.length-1];toast('Nouvel avis négatif : '+(a.lieu||SVC[a.service])+' · '+a.note+' ★')}
+});
 function show(){
   var ok=Auth.isIn();$('login').hidden=ok;$('dash').hidden=!ok;
   if(ok)render();

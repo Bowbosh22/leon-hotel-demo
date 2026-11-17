@@ -7,8 +7,12 @@ window.Store={
   all:function(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return mem}},
   save:function(l){try{localStorage.setItem(KEY,JSON.stringify(l))}catch(e){mem=l}},
   add:function(a){var l=this.all();l.push(a);this.save(l)},
-  clear:function(){this.save([])}
+  clear:function(){this.save([])},
+  update:function(id,fn){var l=this.all();for(var i=0;i<l.length;i++){if(l[i].id===id){fn(l[i]);break}}this.save(l)},
+  cfg:function(){try{return JSON.parse(localStorage.getItem('leon_cfg')||'{}')}catch(e){return {}}},
+  setCfg:function(c){try{localStorage.setItem('leon_cfg',JSON.stringify(c))}catch(e){}}
 };
+window.STATUTS=['Nouveau','En cours','Traité','Clos'];
 /* Authentification de démonstration (côté navigateur, non sécurisée). La vraie connexion viendra avec la base en ligne. */
 var PW='leon2026',AK='leon_admin';
 window.Auth={
