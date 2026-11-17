@@ -3,11 +3,7 @@
    il sera remplacé par la base en ligne dans la version finale. */
 (function(){
 'use strict';
-var KEY='leon_avis_v1';
-var Store={
-  all:function(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return window.__mem||[]}},
-  add:function(a){var l=this.all();l.push(a);try{localStorage.setItem(KEY,JSON.stringify(l))}catch(e){window.__mem=l}}
-};
+var Store=window.Store;
 var ICON={
   hebergement:'<svg viewBox="0 0 24 24"><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 18h18M3 14h18M6 9V6h5v3"/></svg>',
   restaurant:'<svg viewBox="0 0 24 24"><path d="M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10"/></svg>',

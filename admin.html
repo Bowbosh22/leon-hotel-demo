@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espace direction — Léon Hotel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1f3a'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="app adm">
+
+<section id="login" hidden>
+  <div class="top"><div class="wm"><b>LEON</b><i>HOTEL</i></div></div>
+  <div class="card">
+    <h1 style="font-size:1.35rem">Espace direction</h1>
+    <p class="sub">Connectez-vous pour consulter les avis de vos clients.</p>
+    <form id="lf" autocomplete="off" novalidate>
+      <input type="password" id="pw" placeholder="Mot de passe" aria-label="Mot de passe" style="margin-top:1rem;width:100%;font:inherit;padding:.85rem;border:1.5px solid var(--soft);border-radius:.6rem">
+      <div class="err" id="lerr" role="alert"></div>
+      <button class="send" type="submit" style="margin-top:.4rem">Se connecter</button>
+    </form>
+  </div>
+</section>
+
+<section id="dash" hidden>
+  <div class="top">
+    <div class="wm"><b>LEON</b><i>HOTEL</i></div>
+    <div class="acts"><a href="qr.html" class="pill">QR codes</a><button type="button" class="pill" id="out">Quitter</button></div>
+  </div>
+  <h1 class="ttl">Tableau de bord</h1>
+  <p class="sub" id="upd"></p>
+
+  <div id="empty" class="card empty" hidden>
+    <p><b>Aucun avis pour le moment.</b></p>
+    <p class="sub">Les avis laissés par vos clients apparaîtront ici.</p>
+    <button type="button" class="demo" id="seed">Charger des avis d'exemple (démo)</button>
+  </div>
+
+  <div id="main" hidden>
+    <div class="kpis">
+      <div class="kpi big"><div class="lab">Note moyenne</div><div class="val" id="avg">–</div><div class="st" id="avgst"></div></div>
+      <div class="kpi"><div class="lab">Avis reçus</div><div class="val" id="cnt">–</div></div>
+      <div class="kpi"><div class="lab">Clients satisfaits</div><div class="val" id="sat">–</div><div class="mut">4 et 5 étoiles</div></div>
+    </div>
+
+    <section class="card" id="warnC" hidden>
+      <h2 class="warn">À traiter <span class="badge" id="warnN"></span></h2>
+      <div id="warn"></div>
+    </section>
+
+    <section class="card">
+      <h2>Satisfaction par service</h2>
+      <div id="bysvc"></div>
+    </section>
+
+    <section class="card">
+      <h2>Avis récents</h2>
+      <div id="recent"></div>
+      <button type="button" class="more" id="more" hidden>Voir plus d'avis</button>
+    </section>
+
+    <div class="foot2"><button type="button" class="demo" id="clr">Effacer les avis (démo)</button></div>
+  </div>
+</section>
+
+</div>
+<script src="store.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
