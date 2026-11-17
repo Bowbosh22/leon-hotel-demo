@@ -3,142 +3,64 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Accès privé — Léon Hotel Brazzaville</title>
-<meta name="description" content="Démonstration privée. Saisissez le code reçu pour y accéder.">
-<meta property="og:title" content="Accès privé — Léon Hotel Brazzaville">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Oswald:wght@400;500;600&amp;family=Hanken+Grotesk:wght@300;400;500&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
-<script src="gate.js"></script>
+<meta name="robots" content="noindex">
+<title>Votre avis — Léon Hotel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1f3a'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="home">
-<div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
-<header class="site"><div class="bar">
-  <div class="left"><button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="overlay"><span class="burger" aria-hidden="true"></span><span>Menu</span></button>
-  <nav class="top-links" aria-label="Liens rapides"><a href="chambres.html">Chambres</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav></div>
-  <a class="brand" href="index.html" aria-label="Léon Hotel, accueil"><img class="mark" src="logo-mark.png" alt="" width="44" height="45"><span class="wm"><b>LEON</b><i>HOTEL</i></span></a>
-  <a class="btn sm" href="contact.html#reserver">Réserver</a>
-</div></header>
-<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Menu principal">
-  <div class="ov-top"><button class="menu-btn" id="menuClose" type="button">Fermer ✕</button><a class="btn sm inv" href="contact.html#reserver">Réserver</a></div>
-  <nav class="ov-nav" aria-label="Navigation principale"><a href="chambres.html">Chambres</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a></nav>
-  <div class="ov-sub">
-    <div><p class="mono">L'hôtel</p><a href="chambres.html#services">Services</a><a href="index.html#autour">Autour de l'hôtel</a></div>
-    <div><p class="mono">Contact</p><a href="contact.html#reserver">Demande de réservation</a><span>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</span></div>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="wm" aria-label="Léon Hotel"><b>LEON</b><i>HOTEL</i></div>
+    <div class="lang" role="group" aria-label="Langue"><button type="button" data-l="fr">FR</button><button type="button" data-l="en">EN</button></div>
   </div>
-</div>
-<section class="hero has-video">
-  <img class="bg" src="videos/poster.jpg" alt="">
-  <video class="bg vid" muted loop playsinline preload="auto" poster="videos/poster.jpg" aria-hidden="true"><source src="videos/hero.webm" type="video/webm"><source src="videos/hero.mp4" type="video/mp4"></video>
-  <button class="vid-ctl mono" id="vidCtl" type="button" hidden>Pause</button>
-  <div class="inner">
-    <p class="mono">Brazzaville · Avenue du Colonel Bisset</p>
-    <h1>Léon Hotel</h1>
-    <p class="lead">Piscine, table et chambres climatisées au centre-ville.</p>
-    <p><a class="btn inv" href="chambres.html">Voir les chambres</a></p>
-    <p class="cue mono" aria-hidden="true">Défiler ↓</p>
+  <div class="hero">
+    <span class="where" id="where" hidden></span>
+    <h1 id="title"></h1>
+    <p class="sub" id="sub"></p>
   </div>
-</section>
-<main id="main">
 
-<section class="sec collage-sec">
-  <div class="collage wrap">
-    <p class="monogram" aria-hidden="true">L</p>
-    <figure class="c-big"><img src="restaurant.jpg" alt="Le restaurant du Léon Hotel" loading="lazy"></figure>
-    <figure class="c-small"><img src="chambre-1.jpg" alt="Une chambre du Léon Hotel" loading="lazy"></figure>
-    <div class="c-text">
-      <p class="mono">Bienvenue au Léon Hotel</p>
-      <h2>Un hôtel à taille humaine</h2>
-      <p class="sub">Centre-ville de Brazzaville, à deux pas des administrations</p>
-      <p>Chambres climatisées, restaurant, bar-lounge et piscine : l'essentiel, bien tenu, pour les séjours d'affaires comme pour les voyages en famille.</p>
-      <p><a class="link" href="chambres.html">Voir les chambres</a></p>
-    </div>
-  </div>
-</section>
+  <section class="card" id="pick" hidden>
+    <h2 id="pickT"></h2>
+    <div class="svc" id="svcs"></div>
+  </section>
 
-<section class="sec flush">
-  <div class="wrap head"><p class="mono">Table &amp; détente</p><h2>Sur place</h2></div>
-  <div class="panels" id="panels">
-    <a class="panel active" href="restaurant-piscine.html#restaurant"><img src="restaurant.jpg" alt="" loading="lazy"><span class="vt">Restaurant</span><span class="ht"><small class="mono">Table &amp; détente</small><b>Restaurant</b></span></a>
-    <a class="panel" href="restaurant-piscine.html#bar"><img src="restaurant-piscine.jpg" alt="" loading="lazy"><span class="vt">Bar &amp; lounge</span><span class="ht"><small class="mono">Au bord de la piscine</small><b>Bar &amp; lounge</b></span></a>
-    <a class="panel" href="restaurant-piscine.html#piscine"><img src="piscine.jpg" alt="" loading="lazy"><span class="vt">Piscine</span><span class="ht"><small class="mono">Bassin extérieur</small><b>Piscine</b></span></a>
-    <a class="panel" href="chambres.html"><img src="chambre-a1.jpg" alt="" loading="lazy" style="object-position:center 66%"><span class="vt">En chambre</span><span class="ht"><small class="mono">Petit-déjeuner et repas</small><b>En chambre</b></span></a>
-  </div>
-</section>
-
-<section class="sec qsec" id="services">
-  <div class="wrap">
-    <div class="center narrow"><p class="mono">Services</p><h2 class="qh">Tout pour votre séjour</h2></div>
-    <div class="hl">
-      <div class="h"><b>24h/24</b><span class="mono">Réception</span></div>
-      <div class="h"><b>Aéroport</b><span class="mono">Transport sur demande</span></div>
-      <div class="h"><b>Piscine</b><span class="mono">Et bassin pour enfants</span></div>
-      <div class="h"><b>Table</b><span class="mono">Restaurant, bar et barbecue</span></div>
-    </div>
-    <p class="center"><a class="btn inv" href="chambres.html#services">Tous les services</a></p>
-  </div>
-</section>
-
-<section class="sec" id="autour">
-  <div class="wrap">
-    <div class="head"><p class="mono">Le quartier</p><h2>Autour de l'hôtel</h2></div>
-    <div class="near">
-      <div class="n"><b>3,3 km</b><span class="mono">Aéroport Maya-Maya</span></div>
-      <div class="n"><b>1,5 km</b><span class="mono">Basilique Sainte-Anne</span></div>
-      <div class="n"><b>1,9 km</b><span class="mono">Radisson Blu M'Bamou · restaurant</span></div>
-      <div class="n"><b>2,1 km</b><span class="mono">O Sympathic · cuisine française</span></div>
-    </div>
-    <p class="note-s">Une voiture est recommandée pour vos déplacements. Distances indicatives.</p>
-  </div>
-</section>
-
-<section class="sec ruled news">
-  <div class="wrap split top">
-    <div><p class="mono">Restons en contact</p><h2>Les nouvelles de l'hôtel</h2><p>Inscrivez-vous pour être informé de nos offres et actualités.</p></div>
-    <form id="nl" novalidate>
-      <div class="row">
-        <label for="nl-nom">Nom<input id="nl-nom" name="nom" autocomplete="name" required></label>
-        <label for="nl-mail">E-mail<input id="nl-mail" name="email" type="email" autocomplete="email" required></label>
+  <form id="form" hidden novalidate>
+    <section class="card">
+      <h2 id="rateT"></h2>
+      <div class="stars" id="stars" role="group"></div>
+      <div class="rlabel" id="rlabel" aria-live="polite"></div>
+      <details class="more"><summary id="moreS"></summary><div id="crits"></div></details>
+    </section>
+    <section class="card">
+      <h2 id="comT"></h2>
+      <textarea id="com" maxlength="1000" aria-labelledby="comT"></textarea>
+    </section>
+    <section class="card">
+      <h2 id="conT"></h2>
+      <div class="grid2">
+        <input type="text" id="first" autocomplete="given-name" maxlength="60">
+        <input type="text" id="last" autocomplete="family-name" maxlength="60">
+        <input class="full" type="tel" id="phone" autocomplete="tel" maxlength="30">
+        <input class="full" type="email" id="email" autocomplete="email" maxlength="120">
       </div>
-      <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les communications du Léon Hotel et je peux me désinscrire à tout moment.</label>
-      <div><button class="btn" type="submit">S'inscrire</button></div>
-      <p id="nl-msg" class="sent" hidden>Démo : l'inscription n'est pas encore connectée.</p>
-    </form>
-  </div>
-</section>
+      <label class="chk"><input type="checkbox" id="consent"><span id="consentT"></span></label>
+      <div class="hint" id="conH"></div>
+    </section>
+    <button class="send" id="send" type="submit" disabled></button>
+    <div class="hint" id="hint"></div>
+  </form>
 
-</main>
-<a class="wa" href="https://wa.me/?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20une%20chambre%20au%20L%C3%A9on%20Hotel." target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-<aside class="rate" id="rate" aria-label="Réservation directe">
-  <button class="rate-x" id="rateX" type="button" aria-label="Fermer">✕</button>
-  <p class="mono">Réservation directe</p>
-  <p class="rate-t">Meilleur tarif, directement auprès de l'hôtel.</p>
-  <a class="btn sm" href="contact.html#reserver">Vérifier les disponibilités</a>
-</aside>
-<footer class="site"><div class="wrap">
-  <div><b class="brand-f"><img class="mark" src="logo-mark.png" alt="" width="36" height="36"><span class="wm"><b>LEON</b><i>HOTEL</i></span></b><p>Avenue du Colonel Bisset, CL7 Centre-ville<br>Brazzaville, République du Congo</p></div>
-  <div><p class="mono">Explorer</p><a href="chambres.html">Chambres</a><a href="restaurant-piscine.html">Restaurant &amp; Piscine</a><a href="galerie.html">Galerie</a></div>
-  <div><p class="mono">Séjour</p><a href="chambres.html#services">Services</a><a href="index.html#autour">Autour de l'hôtel</a><a href="contact.html#reserver">Réservations</a></div>
-  <div><p class="mono">Contact</p><span>contact@leon-hotel-brazzaville.com</span><span>Téléphone <span class="tbc">à confirmer</span></span></div>
-  <p class="legal">Maquette de démonstration par l'Atelier KPM, non officielle. Photos : Hôtel Léon. Vidéo d'en-tête : illustration provisoire, à remplacer par une vidéo de l'hôtel.</p>
-</div></footer>
-<script src="script.js" defer></script>
-<script>
-(function(){
-  var ps=[].slice.call(document.querySelectorAll('#panels .panel'));
-  function act(p){ps.forEach(function(x){x.classList.toggle('active',x===p);});}
-  ps.forEach(function(p){p.addEventListener('mouseenter',function(){act(p);});p.addEventListener('focus',function(){act(p);});});
-  var qs=[].slice.call(document.querySelectorAll('.q')),dots=[].slice.call(document.querySelectorAll('.qdots button')),i=0,t;
-  function show(n){i=n;qs.forEach(function(q,k){q.classList.toggle('on',k===n);});dots.forEach(function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});}
-  function restart(){clearInterval(t);if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){t=setInterval(function(){show((i+1)%qs.length);},8000);}}
-  dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);restart();});});
-  show(0);restart();
-  document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});
-})();
-</script>
+  <section class="card thanks" id="done" hidden>
+    <div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h1 id="thx"></h1>
+    <div class="got" id="got"></div>
+    <p class="sub" id="thx2"></p>
+    <button class="link" id="again" type="button"></button>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+<script src="app.js"></script>
 </body>
 </html>
