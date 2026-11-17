@@ -18,7 +18,7 @@
 <script>
 (function(){
 var C=window.LEON_CFG||{},U=String(C.SUPABASE_URL||'').replace(/\/+$/,''),K=String(C.SUPABASE_ANON_KEY||'').trim(),$=function(i){return document.getElementById(i)};
-function req(m,path,o){o=o||{};var h={apikey:K,Authorization:'Bearer '+(o.t||K),'Content-Type':'application/json'};for(var k in (o.h||{}))h[k]=o.h[k];
+function req(m,path,o){o=o||{};var h={apikey:K,'Content-Type':'application/json'};if(o.t)h.Authorization='Bearer '+o.t;for(var k in (o.h||{}))h[k]=o.h[k];
   return fetch(U+path,{method:m,headers:h,body:o.b?JSON.stringify(o.b):undefined}).then(function(r){return r.text().then(function(t){var d=null;try{d=t?JSON.parse(t):null}catch(e){}return{s:r.status,d:d}})})}
 var nOk=0,nKo=0;
 function add(st,txt,sub){var li=document.createElement('li');li.className=st;li.innerHTML='<span class="i">'+(st==='ok'?'✓':st==='ko'?'✕':st==='wa'?'!':'–')+'</span><div>'+txt+(sub?'<small>'+sub+'</small>':'')+'</div>';$('res').appendChild(li);if(st==='ok')nOk++;if(st==='ko')nKo++}

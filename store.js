@@ -11,7 +11,7 @@ window.SVC={hebergement:'Hébergement',restaurant:'Restaurant',patisserie:'Pâti
 window.STATUTS=['Nouveau','En cours','Traité','Clos'];
 
 function http(method,path,o){
-  o=o||{};var h={apikey:KEY_,'Authorization':'Bearer '+(o.token||KEY_),'Content-Type':'application/json'};
+  o=o||{};var h={apikey:KEY_,'Content-Type':'application/json'};if(o.token)h['Authorization']='Bearer '+o.token;
   if(o.h)for(var k in o.h)h[k]=o.h[k];
   var ctl=typeof AbortController!=='undefined'?new AbortController():null,tm=ctl&&setTimeout(function(){ctl.abort()},20000);
   return fetch(URL_+path,{method:method,headers:h,body:o.body?JSON.stringify(o.body):undefined,signal:ctl?ctl.signal:undefined}).then(function(r){
