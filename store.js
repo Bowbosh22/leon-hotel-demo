@@ -116,10 +116,10 @@ window.Store={
   },
   clear:function(){this.save([])},
   update:function(id,fn){
-    if(!REMOTE){var l=this.all();for(var i=0;i<l.length;i++){if(l[i].id===id){fn(l[i]);break}}this.save(l);return}
+    if(!REMOTE){var l=this.all();for(var i=0;i<l.length;i++){if(l[i].id===id){fn(l[i]);break}}this.save(l);return Promise.resolve(true)}
     var o=null;for(var j=0;j<cache.length;j++){if(cache[j].id===id){o=cache[j];break}}
-    if(!o)return;fn(o);
-    Auth.token().then(function(t){return http('PATCH','/rest/v1/reviews?id=eq.'+encodeURIComponent(id),{token:t,h:{Prefer:'return=minimal'},body:{statut:o.statut||'Nouveau',note_interne:o.noteInterne||null,historique:o.historique||[]}})}).catch(function(e){bar('Modification non enregistrée : '+e.message)});
+    if(!o)return Promise.resolve(false);fn(o);
+    return Auth.token().then(function(t){return http('PATCH','/rest/v1/reviews?id=eq.'+encodeURIComponent(id),{token:t,h:{Prefer:'return=minimal'},body:{statut:o.statut||'Nouveau',note_interne:o.noteInterne||null,historique:o.historique||[]}})}).then(function(){return true},function(e){bar('Modification non enregistrée : '+e.message);return false});
   },
   watch:function(fn){
     if(!REMOTE){window.addEventListener('storage',function(e){if(e.key===LKEY)fn()});return}
