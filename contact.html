@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Oswald:wght@400;500;600&amp;family=Hanken+Grotesk:wght@300;400;500&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>#fallback[hidden]{display:none!important}.wiz .canal{border:0;padding:0;margin:.2rem 0 0;display:flex;gap:.7rem;flex-wrap:wrap}.wiz .canal legend{font-size:.85rem;margin-bottom:.4rem;padding:0}.wiz .cn{display:flex!important;align-items:center;gap:.5rem;padding:.7rem 1rem;border:1px solid var(--rule);cursor:pointer}.wiz .cn input{width:1.1rem;height:1.1rem;accent-color:var(--ink)}.wiz .cn:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:#f1f5fb}</style>
 </head>
 <body class="">
 <div class="promo">Maquette de démonstration réalisée par l'Atelier KPM · contenus et photos à valider avec l'hôtel</div>
@@ -77,17 +78,19 @@
           <label for="b-nom">Nom complet<input id="b-nom" autocomplete="name" required></label>
           <label for="b-tel">Téléphone ou WhatsApp<input id="b-tel" type="tel" autocomplete="tel" required></label>
         </div>
-        <label for="b-mail">E-mail <small>(facultatif)</small><input id="b-mail" type="email" autocomplete="email"></label>
+        <label for="b-mail" id="mailL">E-mail <small id="mailOpt">(facultatif)</small><input id="b-mail" type="email" autocomplete="email"></label>
+        <fieldset class="canal"><legend>Où souhaitez-vous recevoir la confirmation ?</legend><label class="cn"><input type="radio" name="canal" value="whatsapp" checked><span>WhatsApp</span></label><label class="cn"><input type="radio" name="canal" value="email"><span>E-mail</span></label></fieldset>
         <label for="b-msg">Demande spécifique <small>(facultatif)</small><textarea id="b-msg" placeholder="Lit supplémentaire, arrivée tardive, transfert aéroport…"></textarea></label>
+        <input type="text" id="b-site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p class="err" id="e3" role="alert" hidden></p>
-        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn wa-btn" type="submit">Envoyer sur WhatsApp</button></div>
+        <div class="nav"><button class="btn ghost" type="button" data-prev>Retour</button><button class="btn" type="submit" id="sendBtn">Réserver</button></div>
       </section>
       <section class="st done" data-st="4" aria-labelledby="h4" hidden>
-        <h3 id="h4" tabindex="-1">Votre demande est prête</h3>
+        <h3 id="h4" tabindex="-1">Votre demande est envoyée</h3>
         <p id="doneTxt"></p>
         <dl class="recap" id="recap2"></dl>
-        <div class="send"><a class="btn wa-btn" id="sendWa" target="_blank" rel="noopener">Ouvrir WhatsApp</a><a class="btn ghost" id="sendMail">Envoyer par e-mail</a></div>
-        <p class="sent">Démo : votre demande part depuis votre propre WhatsApp. L'hôtel confirme ensuite la disponibilité et le tarif définitif. Numéro WhatsApp <span class="tbc">à confirmer</span>.</p>
+        <div class="send" id="fallback" hidden><a class="btn wa-btn" id="sendWa" target="_blank" rel="noopener">Ouvrir WhatsApp</a><a class="btn ghost" id="sendMail">Envoyer par e-mail</a></div>
+        <p class="sent" id="sentTxt">Votre demande n'est pas une réservation ferme : la réception vérifie les disponibilités puis vous confirme. Délai de réponse <span class="tbc">à confirmer avec l'hôtel</span>.</p>
       </section>
     </form>
   </div>
@@ -126,6 +129,7 @@
 <script>
 (function(){
 var WA='',MAIL='contact@leon-hotel-brazzaville.com';
+var SB_URL='https://eodpoyyxnlpizoidbhax.supabase.co',SB_KEY='sb_publishable_BxaPcc28yuaHRkW72mw0yA_0iLopb_r';
 var ROOMS=[{id:'standard',n:'Standard',p:85000},{id:'semi-luxe',n:'Semi Luxe',p:100000},{id:'semi-grand-luxe',n:'Semi Grand Luxe',p:120000},{id:'grand-luxe',n:'Grand Luxe',p:140000}];
 var $=function(i){return document.getElementById(i)};
 var st=1,room=null,form=$('wz'),arr=$('b-arr'),dep=$('b-dep'),pers=$('b-pers');
@@ -150,8 +154,30 @@ form.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data
 if(!t.hasAttribute('data-next'))return;
 if(st===1){if(!arr.value||!dep.value)return void err('e1','Indiquez vos dates d\'arrivée et de départ.');if(new Date(arr.value)<today)return void err('e1','La date d\'arrivée est déjà passée.');if(nights()<1)return void err('e1','Le départ doit être après l\'arrivée.');if(!(+pers.value>=1))return void err('e1','Indiquez le nombre de personnes.');err('e1','');rooms();show(2)}
 else if(st===2){if(!room)return void err('e2','Choisissez une chambre pour continuer.');err('e2','');$('recap').innerHTML=recap();show(3)}});
-form.addEventListener('submit',function(e){e.preventDefault();var nom=$('b-nom').value.trim(),tel=$('b-tel').value.trim();if(!nom||!tel)return void err('e3','Indiquez votre nom et un numéro de téléphone ou WhatsApp.');err('e3','');
-var r=R(),n=nights(),mail=$('b-mail').value.trim(),sp=$('b-msg').value.trim();
+function canal(){var c=form.querySelector('input[name="canal"]:checked');return c?c.value:'whatsapp'}
+form.addEventListener('change',function(e){if(e.target.name==='canal'){$('mailOpt').textContent=canal()==='email'?'(obligatoire)':'(facultatif)';err('e3','')}});
+function sendReq(rec){
+  var ctl=typeof AbortController!=='undefined'?new AbortController():null,tm=ctl&&setTimeout(function(){ctl.abort()},15000);
+  return fetch(SB_URL+'/rest/v1/reservations',{method:'POST',headers:{apikey:SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(rec),signal:ctl?ctl.signal:undefined})
+   .then(function(r){clearTimeout(tm);return r.ok},function(){clearTimeout(tm);return false});
+}
+form.addEventListener('submit',function(e){e.preventDefault();var nom=$('b-nom').value.trim(),tel=$('b-tel').value.trim();if(!nom||!tel)return void err('e3','Indiquez votre nom et un numéro de téléphone ou WhatsApp.');
+var r=R(),n=nights(),mail=$('b-mail').value.trim(),sp=$('b-msg').value.trim(),cn=canal();
+if(cn==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))return void err('e3','Indiquez une adresse e-mail valide pour recevoir la confirmation par e-mail.');
+err('e3','');
+var btn=$('sendBtn'),lab=btn.textContent;
+function ok(ref){
+  $('doneTxt').textContent='Merci '+nom+'. Votre demande '+ref+' a bien été reçue. La réception vérifie les disponibilités puis vous confirme '+(cn==='email'?'par e-mail à '+mail:'sur WhatsApp au '+tel)+'. Conservez cette référence : '+ref+'.';
+  $('recap2').innerHTML=recap();$('fallback').hidden=true;show(4);
+}
+if($('b-site').value){return void ok('RES-'+Math.random().toString(36).slice(2,8).toUpperCase())}
+var ref='RES-'+Date.now().toString(36).slice(-3).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();
+btn.disabled=true;btn.textContent='Envoi en cours…';
+sendReq({id:ref,arrivee:arr.value,depart:dep.value,personnes:+pers.value,chambre:room,total_estime:r.p*n,nom:nom,tel:tel,email:mail||null,canal:cn,message:sp||null,lang:'fr'}).then(function(sent){
+  btn.disabled=false;btn.textContent=lab;
+  if(sent)ok(ref);else legacy();
+});
+function legacy(){
 var Q={'standard':["la disponibilité d'une chambre Standard","si le petit-déjeuner est inclus","les conditions d'annulation"],
 'semi-luxe':["la disponibilité d'une chambre Semi Luxe avec baignoire","si le petit-déjeuner est inclus","les conditions d'annulation"],
 'semi-grand-luxe':["la disponibilité d'une chambre Semi Grand Luxe avec coin salon et bureau","si le petit-déjeuner est inclus","les conditions d'annulation"],
@@ -163,8 +189,10 @@ L.push("","*Nom* : "+nom,"*Téléphone* : "+tel);if(mail)L.push("*E-mail* : "+ma
 var txt=L.join("\n"),url='https://wa.me/'+WA+'?text='+encodeURIComponent(txt);
 $('sendWa').href=url;
 $('sendMail').href='mailto:'+MAIL+'?subject='+encodeURIComponent('Demande de réservation — '+r.n)+'&body='+encodeURIComponent(txt);
-$('doneTxt').textContent="Merci "+nom+". WhatsApp s'ouvre avec votre demande déjà rédigée : il ne reste qu'à l'envoyer. Si rien ne s'ouvre, utilisez le bouton ci-dessous.";$('recap2').innerHTML=recap();show(4);
-var w=window.open(url,'_blank','noopener');if(!w){/* pop-up bloquée : le bouton reste disponible */}});
+$('recap2').innerHTML=recap();show(4);
+$('fallback').hidden=false;$('doneTxt').textContent="Nous n'avons pas pu enregistrer votre demande en ligne. Pas d'inquiétude : envoyez-la directement à l'hôtel avec les boutons ci-dessous (WhatsApp ou e-mail), le message est déjà rédigé.";
+}
+});
 })();
 </script>
 </body>
