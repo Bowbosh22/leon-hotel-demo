@@ -53,10 +53,9 @@
     <form class="wiz" id="wz" novalidate>
       <section class="st" data-st="1" aria-labelledby="h1">
         <h3 id="h1" tabindex="-1">Vos dates de séjour</h3>
-        <div class="row">
-          <label for="b-arr">Arrivée<input id="b-arr" type="date" required></label>
-          <label for="b-dep">Départ<input id="b-dep" type="date" required></label>
-        </div>
+        <div class="cal" id="cal" role="group" aria-label="Choisissez vos dates de séjour"></div>
+        <p class="calsum" id="calsum" aria-live="polite"></p>
+        <input id="b-arr" type="hidden"><input id="b-dep" type="hidden">
         <div class="row">
           <label for="b-pers">Nombre de personnes<input id="b-pers" type="number" min="1" max="10" value="2" required></label>
           <p class="nuits" id="nuits" aria-live="polite"></p>
@@ -119,6 +118,29 @@
 dialog.rph img{max-height:72vh}.rph-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.75rem}.rph-nav p{margin:0}
 @media (max-width:40rem){.opt .oph{flex:none;width:100%;aspect-ratio:16/9}.opt .oi,.opt .ot{width:100%;text-align:left}}
 </style>
+<style id="calcss">
+.cal{position:relative;display:grid;align-items:start;gap:2rem;margin-top:1rem}
+@media(min-width:52rem){.cal{grid-template-columns:1fr 1fr;gap:2.5rem}}
+@media(max-width:51.99rem){.cal .cm:last-child{display:none}}
+.cal .cm{min-width:0}
+.cal .ch{text-align:center;margin-bottom:1rem;font:600 1.05rem/1.2 system-ui,"Inter","Hanken Grotesk",sans-serif;text-transform:capitalize}
+.cal .cw,.cal .cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.cal .cw span{text-align:center;font:500 .75rem system-ui,"Inter",sans-serif;text-transform:uppercase;color:var(--grey);padding:.4rem 0}
+.cal .cg i{display:block}
+.cal .d{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:3.6rem;border:0;background:none;padding:.2rem 0;cursor:pointer;color:var(--ink);font:500 1rem/1.1 system-ui,"Inter","Hanken Grotesk",sans-serif;border-radius:2rem}
+.cal .d small{display:block;margin-top:.2rem;font:500 .62rem/1 system-ui,"Inter",sans-serif;letter-spacing:.01em;color:var(--grey);font-style:normal}
+.cal .d:hover:not(:disabled):not(.s):not(.e){box-shadow:inset 0 0 0 1.5px var(--ink)}
+.cal .d:disabled{color:#b9c2d0;cursor:default}.cal .d:disabled small{display:none}
+.cal .d.r,.cal .d.rh{background:#f2f4f7;border-radius:0}
+.cal .d.s,.cal .d.e{background:var(--ink);color:#fff}.cal .d.s small,.cal .d.e small{color:#cfd8e6}
+.cal .d.s.r{background:var(--ink)}
+.cal .d.t::after{content:"";position:absolute;bottom:.25rem;width:.3rem;height:.3rem;border-radius:50%;background:currentColor;opacity:.6}
+.cal .d:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;z-index:1}
+.cal .cn{position:absolute;top:-.2rem;width:2.6rem;height:2.6rem;align-self:start;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer;font:600 1.1rem "Montserrat",sans-serif;display:grid;place-items:center;z-index:2}
+.cal .cn:disabled{opacity:.3;cursor:default}.cal .cn.cp{left:0}.cal .cn.cx{right:0}
+.calsum{margin:1.2rem 0 0;padding:.8rem 1rem;border:1px solid var(--rule);background:#f1f5fb;font-weight:600}
+.calnote{margin:.7rem 0 0;font-size:.85rem;color:var(--grey)}
+</style>
 </main>
 <a class="wa" href="https://wa.me/?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20une%20chambre%20au%20L%C3%A9on%20Hotel." target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 <aside class="rate" id="rate" aria-label="Réservation directe">
@@ -151,6 +173,35 @@ function upd(){if(arr.value){var m=new Date(arr.value);m.setDate(m.getDate()+1);
 arr.addEventListener('change',function(){if(dep.value&&nights()<1)dep.value='';upd()});dep.addEventListener('change',upd);
 try{var q=new URLSearchParams(location.search);[['arrivee',arr],['depart',dep],['personnes',pers]].forEach(function(m){var v=q.get(m[0]);if(v)m[1].value=v});var c=q.get('chambre');ROOMS.forEach(function(r){if(r.id===c)room=r.id});}catch(e){}
 upd();
+
+/* Calendrier */
+var CALP=85000,calEl=$('cal'),calSum=$('calsum'),vm=null,hov='';
+var MN=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'],WD=['lun.','mar.','mer.','jeu.','ven.','sam.','dim.'];
+function p2(n){return ('0'+n).slice(-2)}
+function addD(v,k){var d=new Date(v+'T00:00:00');d.setDate(d.getDate()+k);return iso(d)}
+function frs(v){return new Date(v+'T00:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}
+function month(y,m){var a=arr.value,b=dep.value,t=iso(today),f=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+ var s='<div class="cm"><div class="ch">'+MN[m]+' '+y+'</div><div class="cw">'+WD.map(function(w){return '<span>'+w+'</span>'}).join('')+'</div><div class="cg">';
+ for(var i=0;i<f;i++)s+='<i></i>';
+ for(var d=1;d<=dim;d++){var v=y+'-'+p2(m+1)+'-'+p2(d),dis=v<t||(a&&!b&&v>addD(a,60)),c='d';
+  if(a&&v===a)c+=' s';if(b&&v===b)c+=' e';if(a&&b&&v>a&&v<b)c+=' r';if(v===t)c+=' t';
+  s+='<button type="button" class="'+c+'" data-v="'+v+'"'+(dis?' disabled':'')+' aria-label="'+fr(v)+''+'" aria-pressed="'+((v===a||v===b)?'true':'false')+'"><span>'+d+'</span>'+''+'</button>';}
+ return s+'</div></div>'}
+function calSumTxt(){var a=arr.value,b=dep.value;
+ calSum.textContent=a&&b?'Arrivée '+frs(a)+'  →  Départ '+frs(b)+' · '+nights()+(nights()>1?' nuits':' nuit'):(a?'Arrivée '+frs(a)+'. Choisissez maintenant votre date de départ.':'Choisissez votre date d\'arrivée.')}
+function calRender(){if(!vm){var b=arr.value?new Date(arr.value+'T00:00:00'):new Date(today);vm=new Date(b.getFullYear(),b.getMonth(),1)}
+ var v2=new Date(vm.getFullYear(),vm.getMonth()+1,1),t0=new Date(today.getFullYear(),today.getMonth(),1);
+ calEl.innerHTML='<button type="button" class="cn cp" data-n="-1" aria-label="Mois précédent"'+(vm<=t0?' disabled':'')+'>←</button><button type="button" class="cn cx" data-n="1" aria-label="Mois suivant">→</button>'+month(vm.getFullYear(),vm.getMonth())+month(v2.getFullYear(),v2.getMonth());
+ calSumTxt()}
+function calPick(v){var a=arr.value,b=dep.value;
+ if(!a||b||v<=a){arr.value=v;dep.value=''}else{dep.value=v}
+ upd();err('e1','');calRender();var f=calEl.querySelector('[data-v="'+v+'"]');if(f)f.focus({preventScroll:true})}
+calEl.addEventListener('click',function(e){var n=e.target.closest('.cn');if(n){vm=new Date(vm.getFullYear(),vm.getMonth()+(+n.getAttribute('data-n')),1);calRender();return}
+ var d=e.target.closest('.d');if(d&&!d.disabled)calPick(d.getAttribute('data-v'))});
+calEl.addEventListener('mouseover',function(e){var d=e.target.closest('.d'),a=arr.value;if(!a||dep.value||!d||d.disabled)return;var v=d.getAttribute('data-v');
+ [].forEach.call(calEl.querySelectorAll('.d'),function(x){var w=x.getAttribute('data-v');x.classList.toggle('rh',w>a&&w<v)})});
+calEl.addEventListener('mouseleave',function(){[].forEach.call(calEl.querySelectorAll('.rh'),function(x){x.classList.remove('rh')})});
+calRender();
 function steps(){var li=$('steps').children;for(var i=0;i<li.length;i++){li[i].className=(i+1<Math.min(st,3)?'ok':'');if(i+1===Math.min(st,3))li[i].setAttribute('aria-current','step');else li[i].removeAttribute('aria-current')}}
 function show(n){st=n;[].forEach.call(form.querySelectorAll('.st'),function(s){s.hidden=(+s.getAttribute('data-st')!==n)});steps();var h=$('h'+n);if(h){h.focus({preventScroll:true});}$('steps').scrollIntoView({behavior:'smooth',block:'start'})}
 function err(id,msg){var e=$(id);e.textContent=msg;e.hidden=!msg;return !msg}
