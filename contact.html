@@ -137,7 +137,7 @@ arr.addEventListener('change',function(){if(dep.value&&nights()<1)dep.value='';u
 try{var q=new URLSearchParams(location.search);[['arrivee',arr],['depart',dep],['personnes',pers]].forEach(function(m){var v=q.get(m[0]);if(v)m[1].value=v});var c=q.get('chambre');ROOMS.forEach(function(r){if(r.id===c)room=r.id});}catch(e){}
 upd();
 
-var PH={'standard':['chambre-standard.jpg'],'excellence':['chambre-excellence.jpg','excellence-2.jpg','excellence-3.jpg','excellence-4.jpg','excellence-5.jpg'],'twin':['chambre-twin.jpg'],'f3':['f3-1.jpg','f3-2.jpg','f3-3.jpg','f3-4.jpg','f3-5.jpg','f3-6.jpg','f3-7.jpg']},lb=$('rph'),li=$('rph-img'),lc=$('rph-cap'),lr=null,lk=0;
+var PH={'standard':['chambre-standard.jpg'],'excellence':['chambre-excellence.jpg'],'twin':['chambre-twin.jpg'],'f3':['f3-1.jpg','f3-2.jpg','f3-3.jpg','f3-4.jpg','f3-5.jpg','f3-6.jpg','f3-7.jpg']},lb=$('rph'),li=$('rph-img'),lc=$('rph-cap'),lr=null,lk=0;
 function lshow(){var r=ROOMS.filter(function(x){return x.id===lr})[0],a=PH[lr];li.src=a[lk];var pf=lr==='f3'?'':'Chambre ';li.alt=pf+r.n+', photo '+(lk+1);lc.textContent=pf+r.n+' · photo '+(lk+1)+' / '+a.length;$('rph-prev').hidden=$('rph-next').hidden=a.length<2}
 function lgo(d){var n=PH[lr].length;lk=(lk+d+n)%n;lshow()}
 $('opts').addEventListener('click',function(e){var b=e.target.closest('.seeph');if(!b)return;e.preventDefault();e.stopPropagation();lr=b.getAttribute('data-room');lk=0;lshow();if(lb.showModal)lb.showModal()},true);
