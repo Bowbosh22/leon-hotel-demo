@@ -254,12 +254,13 @@ $('fallback').hidden=false;$('doneTxt').textContent="Nous n'avons pas pu enregis
 }
 });
 
-var PH={'standard':'s','semi-luxe':'m','semi-grand-luxe':'g','grand-luxe':'a'},lb=$('rph'),li=$('rph-img'),lc=$('rph-cap'),lr=null,lk=0;
-function lshow(){var r=ROOMS.filter(function(x){return x.id===lr})[0];li.src='chambre-'+PH[lr]+(lk+1)+'.jpg';li.alt='Chambre '+r.n+', photo '+(lk+1);lc.textContent='Chambre '+r.n+' · photo '+(lk+1)+' / 6'}
+var PN={'standard':4,'semi-luxe':6,'semi-grand-luxe':6,'grand-luxe':6},PH={'standard':'s','semi-luxe':'m','semi-grand-luxe':'g','grand-luxe':'a'},lb=$('rph'),li=$('rph-img'),lc=$('rph-cap'),lr=null,lk=0;
+function lshow(){var r=ROOMS.filter(function(x){return x.id===lr})[0];li.src='chambre-'+PH[lr]+(lk+1)+'.jpg';li.alt='Chambre '+r.n+', photo '+(lk+1);lc.textContent='Chambre '+r.n+' · photo '+(lk+1)+' / '+PN[lr]}
+function lgo(d){var n=PN[lr];lk=(lk+d+n)%n;lshow()}
 $('opts').addEventListener('click',function(e){var b=e.target.closest('.seeph');if(!b)return;e.preventDefault();e.stopPropagation();lr=b.getAttribute('data-room');lk=0;lshow();if(lb.showModal)lb.showModal()},true);
-$('rph-prev').addEventListener('click',function(){lk=(lk+5)%6;lshow()});$('rph-next').addEventListener('click',function(){lk=(lk+1)%6;lshow()});
+$('rph-prev').addEventListener('click',function(){lgo(-1)});$('rph-next').addEventListener('click',function(){lgo(1)});
 lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
-lb.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){lk=(lk+1)%6;lshow()}if(e.key==='ArrowLeft'){lk=(lk+5)%6;lshow()}});
+lb.addEventListener('keydown',function(e){if(e.key==='ArrowRight')lgo(1);if(e.key==='ArrowLeft')lgo(-1)});
 })();
 </script>
 </body>
