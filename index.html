@@ -94,21 +94,36 @@
       <div class="n"><b>2,1 km</b><span class="mono">O Sympathic · cuisine française</span></div>
     </div>
     <p class="note-s">Une voiture est recommandée pour vos déplacements. Distances indicatives.</p>
+    <div class="trio duo2">
+      <img src="piscine-nuit.jpg" alt="Piscine du Léon Hotel illuminée la nuit" loading="lazy">
+      <img src="salon-orange.jpg" alt="Salon de l'hôtel, canapé orangé" loading="lazy">
+    </div>
   </div>
 </section>
 
-<section class="sec ruled news">
-  <div class="wrap split top">
-    <div><p class="mono">Restons en contact</p><h2>Les nouvelles de l'hôtel</h2><p>Inscrivez-vous pour être informé de nos offres et actualités.</p></div>
-    <form id="nl" novalidate>
-      <div class="row">
-        <label for="nl-nom">Nom<input id="nl-nom" name="nom" autocomplete="name" required></label>
-        <label for="nl-mail">E-mail<input id="nl-mail" name="email" type="email" autocomplete="email" required></label>
-      </div>
-      <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les communications du Léon Hotel et je peux me désinscrire à tout moment.</label>
-      <div><button class="btn" type="submit">S'inscrire</button></div>
-      <p id="nl-msg" class="sent" hidden></p>
-    </form>
+<section class="sec vis" id="visite">
+  <div class="wrap vis-in">
+    <div class="vis-t"><p class="mono">Visite</p><h2>Le Léon Hotel en vidéo</h2><p>Découvrez l'ambiance de l'hôtel : la piscine, les espaces de détente et le restaurant. Appuyez sur lecture quand vous le souhaitez.</p></div>
+    <div class="vis-v">
+      <video id="visV" controls preload="none" playsinline poster="videos/visite-poster.jpg"><source src="videos/visite.mp4" type="video/mp4"></video>
+      <button class="vis-play" id="visP" type="button" aria-label="Lancer la vidéo"><span>▶</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="nlb" aria-labelledby="nl-t">
+  <div class="nlb-ph"><img src="quartier-route.jpg" alt="Route de terre rouge à travers la forêt congolaise" loading="lazy"></div>
+  <div class="nlb-band">
+    <div class="nlb-in">
+      <h2 id="nl-t">Restons en contact</h2>
+      <form id="nl" novalidate>
+        <label for="nl-nom"><span>Nom</span><input id="nl-nom" name="nom" placeholder="Votre nom" autocomplete="name" required></label>
+        <label for="nl-mail"><span>E-mail</span><input id="nl-mail" name="email" type="email" placeholder="Votre e-mail" autocomplete="email" required></label>
+        <button class="btn" type="submit">S'inscrire</button>
+        <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les actualités et offres du Léon Hotel. Désinscription possible à tout moment.</label>
+        <p id="nl-msg" class="sent" hidden></p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -156,5 +171,6 @@ f.addEventListener('submit',function(e){e.preventDefault();
 });})();
 })();
 </script>
+<script>(function(){var v=document.getElementById('visV'),b=document.getElementById('visP');if(!v||!b)return;b.addEventListener('click',function(){v.play();});v.addEventListener('play',function(){b.hidden=true;});v.addEventListener('pause',function(){if(v.ended||v.currentTime===0)b.hidden=false;});v.addEventListener('ended',function(){b.hidden=false;});})();</script>
 </body>
 </html>
