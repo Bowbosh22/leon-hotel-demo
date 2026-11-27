@@ -107,7 +107,7 @@
       </div>
       <label class="check" for="nl-ok"><input id="nl-ok" type="checkbox" required> J'accepte de recevoir les communications du Léon Hotel et je peux me désinscrire à tout moment.</label>
       <div><button class="btn" type="submit">S'inscrire</button></div>
-      <p id="nl-msg" class="sent" hidden>Démo : l'inscription n'est pas encore connectée.</p>
+      <p id="nl-msg" class="sent" hidden></p>
     </form>
   </div>
 </section>
@@ -138,7 +138,22 @@
   function restart(){clearInterval(t);if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){t=setInterval(function(){show((i+1)%qs.length);},8000);}}
   dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);restart();});});
   show(0);restart();
-  document.getElementById('nl').addEventListener('submit',function(e){e.preventDefault();document.getElementById('nl-msg').hidden=false;});
+  (function(){var f=document.getElementById('nl'),m=document.getElementById('nl-msg'),SB='https://eodpoyyxnlpizoidbhax.supabase.co',K='sb_publishable_BxaPcc28yuaHRkW72mw0yA_0iLopb_r';
+function say(t,ok){m.hidden=false;m.textContent=t;m.setAttribute('role','status');m.style.color=ok?'':'#ff8a8a'}
+f.addEventListener('submit',function(e){e.preventDefault();
+ var nom=document.getElementById('nl-nom').value.trim(),mail=document.getElementById('nl-mail').value.trim().toLowerCase(),okc=document.getElementById('nl-ok').checked,b=f.querySelector('button[type=submit]');
+ if(!nom)return say('Indiquez votre nom.');
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))return say('Indiquez une adresse e-mail valide.');
+ if(!okc)return say('Cochez la case pour accepter de recevoir nos communications.');
+ var lab=b.textContent;b.disabled=true;b.textContent='Envoi…';
+ var ctl=typeof AbortController!=='undefined'?new AbortController():null,tm=ctl&&setTimeout(function(){ctl.abort()},15000);
+ fetch(SB+'/rest/v1/abonnes',{method:'POST',headers:{apikey:K,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({nom:nom,email:mail,consentement:true,source:'site'}),signal:ctl?ctl.signal:undefined})
+ .then(function(r){clearTimeout(tm);b.disabled=false;b.textContent=lab;
+  if(r.ok){f.reset();say('Merci '+nom+' ! Votre inscription est bien enregistrée.',true)}
+  else if(r.status===409){f.reset();say('Cette adresse est déjà inscrite. Merci !',true)}
+  else say("L'inscription n'a pas pu être enregistrée. Réessayez dans un instant.")},
+  function(){clearTimeout(tm);b.disabled=false;b.textContent=lab;say("Connexion impossible. Réessayez dans un instant.")});
+});})();
 })();
 </script>
 </body>
