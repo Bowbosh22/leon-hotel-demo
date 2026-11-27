@@ -171,7 +171,7 @@ dialog.rph img{max-height:72vh}.rph-nav{display:flex;align-items:center;justify-
 (function(){
 var WA='',MAIL='contact@leon-hotel-brazzaville.com';
 var SB_URL='https://eodpoyyxnlpizoidbhax.supabase.co',SB_KEY='sb_publishable_BxaPcc28yuaHRkW72mw0yA_0iLopb_r';
-var BF=12500,XO=[{id:'bf',n:'Petit-déjeuner supplémentaire',d:'12 500 FCFA par nuit, pour 2 personnes',p:12500,night:true},{id:'tr',n:'Transfert Beach – aéroport',d:'Tarif indicatif, à confirmer',p:10000},{id:'veh',n:'Location de véhicule Jetour T2',d:'Tarif indicatif, à confirmer',p:100000},{id:'bat',n:'Affrètement de bateau vers Kinshasa',d:'Tarif indicatif, à confirmer',p:130000}],sel={},fromRoom=false,ROOMS=[{id:'standard',n:'Standard',p:85000},{id:'excellence',n:'Excellence',p:100000},{id:'superieure',n:'Supérieure',p:130000},{id:'f3',n:'Appartement F3',p:150000}];
+var BF=12500,XO=[{id:'bf',img:'option-petit-dejeuner.jpg',n:'Petit-déjeuner supplémentaire',d:'12 500 FCFA par nuit, pour 2 personnes',p:12500,night:true},{id:'tr',img:'option-transfert.jpg',n:'Transfert Beach – aéroport',d:'Tarif indicatif, à confirmer',p:10000},{id:'veh',img:'option-vehicule.jpg',n:'Location de véhicule Jetour T2',d:'Tarif indicatif, à confirmer',p:100000},{id:'bat',img:'option-bateau.jpg',n:'Affrètement de bateau vers Kinshasa',d:'Tarif indicatif, à confirmer',p:130000}],sel={},fromRoom=false,ROOMS=[{id:'standard',n:'Standard',p:85000},{id:'excellence',n:'Excellence',p:100000},{id:'superieure',n:'Supérieure',p:130000},{id:'f3',n:'Appartement F3',p:150000}];
 var $=function(i){return document.getElementById(i)};
 var st=1,room=null,form=$('wz'),arr=$('b-arr'),dep=$('b-dep'),pers=$('b-pers');
 function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f')}
@@ -229,9 +229,9 @@ function cart(){var r=R(),n=nights(),h='<p class="hd">'+r.n+'</p><p class="sb">'
  h+='<div class="tot"><span>Total estimé</span><span>'+fmt(tot(r))+' FCFA</span></div>';$('cart').innerHTML='<h4>Votre séjour</h4>'+h}
 var bfInit=false;
 function xopts(){var n=nights();if(!bfInit){bfInit=true;sel.bf=+pers.value===2}
- $('xopts').innerHTML=XO.map(function(o){return '<label class="xo'+(sel[o.id]?' on':'')+'"><input type="checkbox" data-x="'+o.id+'"'+(sel[o.id]?' checked':'')+'><span><b>'+o.n+'</b><small>'+o.d+(o.night&&n>1?' · '+n+' nuits':'')+'</small></span><span class="xp">'+fmt(o.p*(o.night?n:1))+' FCFA</span></label>'}).join('');
+ $('xopts').innerHTML=XO.map(function(o){var on=!!sel[o.id];return '<div class="xo'+(on?' on':'')+'"><div class="xi"><img src="'+o.img+'" alt="" loading="lazy" onerror="this.remove()"></div><div class="xt"><h4>'+o.n+'</h4><p>'+o.d+(o.night&&n>1?' · '+n+' nuits':'')+'</p></div><div class="xr"><p class="xp">'+fmt(o.p*(o.night?n:1))+' FCFA</p><button type="button" class="add" data-x="'+o.id+'" aria-pressed="'+on+'">'+(on?'Ajouté ✓':'Ajouter')+'</button></div></div>'}).join('');
  $('sub3').textContent='Ajoutez ce dont vous avez besoin : le récapitulatif se met à jour à droite.';cart()}
-$('xopts').addEventListener('change',function(e){var k=e.target.getAttribute('data-x');if(!k)return;sel[k]=e.target.checked;e.target.closest('.xo').classList.toggle('on',e.target.checked);cart()});
+$('xopts').addEventListener('click',function(e){var b=e.target.closest('.add');if(!b)return;var k=b.getAttribute('data-x');sel[k]=!sel[k];b.setAttribute('aria-pressed',!!sel[k]);b.textContent=sel[k]?'Ajouté ✓':'Ajouter';b.closest('.xo').classList.toggle('on',!!sel[k]);cart()});
 function chosenBox(){var b=$('chosen');if(!fromRoom||!room){b.hidden=true;$('next1').textContent='Choisir ma chambre';return}var r=R(),ph={'standard':'chambre-s1.jpg','excellence':'chambre-e1.jpg','superieure':'chambre-p1.jpg','f3':'f3-1.jpg'}[r.id];b.hidden=false;b.innerHTML='<img src="'+ph+'" alt=""><p><b>'+r.n+'</b><br>'+fmt(r.p)+' FCFA / nuit</p><a href="#" id="chg">Changer de chambre</a>';$('next1').textContent='Continuer'}
 $('chosen').addEventListener('click',function(e){if(e.target.id==='chg'){e.preventDefault();fromRoom=false;chosenBox()}});
 chosenBox();

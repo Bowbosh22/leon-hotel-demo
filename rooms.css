@@ -130,3 +130,22 @@
 .rs .ctl button{width:3rem;height:2.4rem;border:0;background:transparent;color:var(--ink);font-size:1.6rem;cursor:pointer;line-height:1}
 .rs .ctl button:hover{opacity:.55}
 .wrap.rooms{max-width:104rem}
+
+/* réservation intégrée au site : plus de cadre carte */
+.wiz{background:none;border:0;padding:0}
+.xgrid{grid-template-columns:1.7fr 1fr;gap:clamp(1.5rem,4vw,4rem)}
+.xopts{gap:0}
+.wiz .xo{display:grid;grid-template-columns:clamp(8rem,22vw,17rem) 1fr auto;gap:1.4rem;align-items:center;border:0;border-top:1px solid var(--rule);background:none;outline:0;padding:1.4rem 0;cursor:default}
+.wiz .xo:last-child{border-bottom:1px solid var(--rule)}
+.wiz .xo.on{background:none;outline:0}
+.xo .xi{aspect-ratio:4/3;background:var(--soft);overflow:hidden}
+.xo .xi img{width:100%;height:100%;object-fit:cover;display:block}
+.xo .xt h4{font:700 1.15rem var(--display);margin:0 0 .4rem;text-transform:none;letter-spacing:0}
+.xo .xt p{margin:0;color:var(--grey);font-size:.95rem}
+.xo .xr{text-align:right;display:grid;gap:.8rem;justify-items:end}
+.xo .xp{margin:0;font:800 1.15rem var(--display)}
+.xo .add{border:1px solid var(--ink);background:#fff;color:var(--ink);padding:.7rem 1.4rem;font:700 .8rem var(--display);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-width:9rem}
+.xo .add:hover,.xo.on .add{background:var(--ink);color:#fff}
+.cart.card{border:0;background:none;padding:0 0 0 clamp(1rem,3vw,2.4rem);border-left:1px solid var(--rule);border-radius:0}
+@media(max-width:52rem){.xgrid{grid-template-columns:1fr}.cart.card{border-left:0;border-top:1px solid var(--rule);padding:1.4rem 0 0}.wiz .xo{grid-template-columns:7rem 1fr;gap:1rem}.xo .xr{grid-column:1/-1;grid-template-columns:1fr auto;align-items:center;justify-items:start;text-align:left}}
+#reserver .wrap.bkw{max-width:84rem}
