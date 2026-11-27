@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Abonnés — Léon Hotel</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+<script src="config.js"></script>
+<script src="store.js"></script>
+<script>if(!Auth.isIn())location.replace("admin.html?next=abonnes.html");</script>
+</head>
+<body>
+<div class="app adm abo">
+  <div id="hdr" data-active="abo"></div>
+  <h1 class="ttl">Abonnés à la newsletter</h1>
+  <p class="sub">Personnes inscrites depuis le site, avec leur accord. Exportez la liste pour envoyer vos messages depuis votre outil d'e-mailing (lien de désinscription obligatoire).</p>
+  <input type="search" id="q" class="srch" placeholder="Rechercher : nom ou e-mail" aria-label="Rechercher un abonné" autocomplete="off">
+  <p class="sub" id="cnt"></p>
+  <p class="abo-acts"><button type="button" class="act pri" id="csv">Exporter en CSV</button><button type="button" class="act" id="copy">Copier les e-mails</button></p>
+  <div id="list"></div>
+  <div id="none" class="card empty" hidden><p><b>Aucun abonné pour l'instant.</b></p><p class="sub">Les inscriptions du formulaire de la page d'accueil apparaîtront ici.</p></div>
+  <p class="sub" id="err" role="alert" hidden></p>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="menu.js"></script>
+<script src="abonnes.js"></script>
+</body>
+</html>
