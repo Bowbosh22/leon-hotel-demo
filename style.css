@@ -529,3 +529,14 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 .vis-play span{width:5rem;height:5rem;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;padding-left:.3rem;background:rgba(12,31,58,.45);transition:transform .2s,background .2s}
 .vis-play:hover span,.vis-play:focus-visible span{transform:scale(1.08);background:#1a8f33;border-color:#1a8f33}
 @media (max-width:60rem){.vis-in{grid-template-columns:1fr;gap:1.5rem}}
+
+/* vidéo verticale : affichée en entier, sans rognage */
+.vis-in{grid-template-columns:1fr 1fr}
+.vis-v{justify-self:center;width:min(100%,24rem);aspect-ratio:9/16;max-height:82vh}
+.vis-v video{width:100%;height:100%;aspect-ratio:9/16;object-fit:contain}
+@media (max-width:60rem){.vis-in{grid-template-columns:1fr}.vis-v{width:min(100%,22rem)}}
+
+/* 3 photos : plus compactes, façon Oyster Box */
+.trio,.trio.duo2{grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;width:min(100vw - 2.5rem,96rem);position:relative;left:50%;transform:translateX(-50%)}
+.trio img,.trio.duo2 img{aspect-ratio:1/1;max-height:30rem;height:auto}
+@media (max-width:40rem){.trio,.trio.duo2{grid-template-columns:1fr;width:100%;left:0;transform:none;gap:1rem}.trio img,.trio.duo2 img{aspect-ratio:4/3;max-height:none}}
