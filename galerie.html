@@ -17,13 +17,9 @@
 /* effet de défilement : les photos apparaissent au fur et à mesure */
 .gallery.fx button{opacity:0;transform:translateY(3.2rem) scale(.96);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms);will-change:opacity,transform}
 .gallery.fx button.in{opacity:1;transform:none}
-.gallery.fx button .ph{display:block;overflow:hidden;background:var(--soft)}
-.gallery.fx button img{transform:scale(1.12);transition:transform 1.4s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
-.gallery.fx button.in img{transform:scale(1)}
-.gallery.fx button.in:hover img{transform:scale(1.04);transition-delay:0ms;transition-duration:.6s}
 .gallery.fx span.mono{opacity:0;transition:opacity .8s ease .35s}
 .gallery.fx button.in span.mono{opacity:1}
-@media (prefers-reduced-motion:reduce){.gallery.fx button,.gallery.fx button img,.gallery.fx span.mono{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.gallery.fx button,.gallery.fx span.mono{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body class="">
@@ -89,7 +85,6 @@ lb.addEventListener('click',function(e){if(e.target===lb)lb.close();});})();
 <script>
 (function(){var g=document.getElementById('gal');if(!g||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
 var bs=[].slice.call(g.querySelectorAll('button'));
-bs.forEach(function(b){var im=b.querySelector('img'),w=document.createElement('span');w.className='ph';b.insertBefore(w,im);w.appendChild(im);});
 g.classList.add('fx');
 var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(!e.isIntersecting)return;e.target.style.setProperty('--d',(n++*120)+'ms');e.target.classList.add('in');io.unobserve(e.target);});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
 bs.forEach(function(b){io.observe(b);});})();
