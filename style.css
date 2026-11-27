@@ -521,7 +521,7 @@ body.home:not(.scrolled) .rate{opacity:0;transform:translateY(12px);pointer-even
 .vis{padding-bottom:0}
 .vis-in{display:grid;grid-template-columns:.8fr 1.4fr;gap:3rem;align-items:center}
 .vis-t h2{margin:.4rem 0 1.2rem}
-.vis-t p:last-child{color:var(--grey);max-width:30rem}
+.vis-t p:not(.mono){color:var(--grey);max-width:30rem;margin:0 0 .8rem}
 .vis-v{position:relative;background:#000}
 .vis-v video{width:100%;aspect-ratio:16/9;display:block;background:#000;object-fit:cover}
 .vis-play{position:absolute;inset:0;border:0;background:rgba(12,31,58,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff}
